@@ -1,8 +1,10 @@
 import React from "react";
 
+import { StyledHeader } from "../lib/Styling";
+
 const Header = () => {
   return (
-    <header>This is a header</header>
+    <StyledHeader>This is a header</StyledHeader>
   );
 };
 

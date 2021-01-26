@@ -5,6 +5,7 @@ import { useHistory } from 'react-router-dom';
 import { user } from "../reducers/user";
 import { StyledSection } from "../lib/Styling";
 import { StyledTitle } from "../lib/Styling";
+import { StyledSubTitle } from "../lib/Styling";
 import { StyledText } from "../lib/Styling";
 import { StyledForm } from "../lib/Styling";
 import { StyledLabel } from "../lib/Styling";
@@ -20,8 +21,8 @@ const SignUp = ({ USERS_URL }) => {
   const [response, setResponse] = useState(true);
 
   const handleCredentials = (credentials) => {
-    localStorage.setItem("sessionToken", credentials.accessToken);
-    localStorage.setItem("sessionId", credentials.userId);
+    localStorage.setItem("localToken", credentials.accessToken);
+    localStorage.setItem("localId", credentials.userId);
     dispatch(user.actions.setAccessToken({ accessToken: credentials.accessToken }));
     dispatch(user.actions.setUserId({ userId: credentials.userId }));
   };
@@ -55,8 +56,8 @@ const SignUp = ({ USERS_URL }) => {
   return (
     <StyledSection>
       <StyledTitle>Registration page</StyledTitle>
+      <StyledSubTitle>Please sign up below.</StyledSubTitle>
       <StyledForm onSubmit={handleSignUp}>
-        <StyledText>Please sign up below.</StyledText>
         <StyledLabel>
           Email:
           <StyledInput
@@ -79,8 +80,8 @@ const SignUp = ({ USERS_URL }) => {
           </StyledInput>
         </StyledLabel>
         <StyledButton type="submit">Sign up</StyledButton>
-        {!response && <StyledText>You are already registered, please login <StyledLink to={"/"}>here</StyledLink>.</StyledText>}
-        {!!response && <StyledText>Already registered? Please login <StyledLink to={"/"}>here</StyledLink>.</StyledText>}
+        {!response && <StyledText>You are already registered, please login <StyledLink to={"/login"}>here</StyledLink>.</StyledText>}
+        {!!response && <StyledText>Already registered? Please login <StyledLink to={"/login"}>here</StyledLink>.</StyledText>}
       </StyledForm>
     </StyledSection>
   );

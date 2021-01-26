@@ -1,7 +1,16 @@
 import styled from "styled-components/macro";
 import { Link } from "react-router-dom";
 
+export const StyledHeader = styled.header`
+  text-align: center;
+  font-size: 16px;
+`;
+
 export const StyledTitle = styled.h1`
+  text-align: center;
+`;
+
+export const StyledSubTitle = styled.h3`
   text-align: center;
 `;
 
@@ -65,3 +74,7 @@ export const StyledButton = styled.button`
   }
 `;
 
+export const StyledFooter = styled.footer`
+  text-align: center;
+  font-size: 12px;
+`;

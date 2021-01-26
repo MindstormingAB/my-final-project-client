@@ -7,8 +7,10 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 import { user } from "./reducers/user";
 import Header from "./components/Header";
+import StartPage from "./components/StartPage";
 import Signup from "./components/SignUp";
 import Login from "./components/Login";
+import Dashboard from "./components/Dashboard";
 // import UserDetails from "./components/UserDetails";
 // import Seizures from "./components/Seizures";
 // import Contacts from "./components/Contacts";
@@ -34,10 +36,16 @@ const App = () => {
       <Provider store={store}>
         <Switch>
           <Route path="/" exact>
-            <Login LOGIN_URL={LOGIN_URL} USERS_URL={USERS_URL} />
+            <StartPage />
+          </Route>
+          <Route path="/login" exact>
+            <Login LOGIN_URL={LOGIN_URL} />
           </Route>
           <Route path="/signup" exact>
             <Signup USERS_URL={USERS_URL} />
+          </Route>
+          <Route path="/dashboard" exact>
+            <Dashboard USERS_URL={USERS_URL} />
           </Route>
           {/* <Route path="/userdetails" exact>
             <UserDetails USERS_URL={USERS_URL} />
