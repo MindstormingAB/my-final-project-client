@@ -8,12 +8,10 @@ export const StyledBrowserRouter = styled(BrowserRouter)`
 `;
 
 export const StyledProvider = styled(Provider)`
-  padding: 3rem 0 2rem 0;
+  padding-bottom: 2rem;
 `;
 
 export const StyledHeader = styled.header`
-  position: absolute;
-  top: 0;
   width: 100%;
   height: 3rem;
   padding: 10px;
@@ -85,6 +83,7 @@ export const StyledButton = styled.button`
   /* color: #03324c; */
   color: #2b4b87;
   background-image: linear-gradient(#b1ccda 49%, #96b4c5 51%);
+  /* background-image: linear-gradient(grey 49%, #96b4c5 51%); */
   transition: color 0.3s, background-image 0.5s, ease-in-out;
 
   &:hover {

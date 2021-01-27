@@ -1,16 +1,18 @@
 import React from "react";
 
-import ProfileButton from "./ProfileButton";
+import NavigationButton from "./NavigationButton";
 import LogoutButton from "./LogoutButton";
 
 import { StyledSection } from "../lib/Styling";
-import { StyledText } from "../lib/Styling";
+import { StyledSubTitle } from "../lib/Styling";
 
 const Dashboard = () => {
   return (
     <StyledSection>
-      <StyledText>This is your dashboard</StyledText>
-      <ProfileButton />
+      <StyledSubTitle>This is your dashboard</StyledSubTitle>
+      <NavigationButton route="profile" label="Profile" />
+      <NavigationButton route="contacts" label="Contacts" />
+      <NavigationButton route="seizures" label="Seizures" />
       <LogoutButton />
     </StyledSection>
   );

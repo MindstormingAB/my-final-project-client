@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 
 import { user } from "../reducers/user";
 import { StyledSection } from "../lib/Styling";
-import { StyledTitle } from "../lib/Styling";
+// import { StyledTitle } from "../lib/Styling";
 import { StyledSubTitle } from "../lib/Styling";
 import { StyledText } from "../lib/Styling";
 import { StyledForm } from "../lib/Styling";
@@ -55,7 +55,7 @@ const SignUp = ({ USERS_URL }) => {
 
   return (
     <StyledSection>
-      <StyledTitle>Registration page</StyledTitle>
+      {/* <StyledTitle>Registration page</StyledTitle> */}
       <StyledSubTitle>Please sign up below.</StyledSubTitle>
       <StyledForm onSubmit={handleSignUp}>
         <StyledLabel>

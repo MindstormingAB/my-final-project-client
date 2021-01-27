@@ -5,8 +5,8 @@ import { useHistory } from 'react-router-dom';
 import { user } from "../reducers/user";
 
 import { StyledSection } from "../lib/Styling";
-import { StyledTitle } from "../lib/Styling";
-// import { StyledSubTitle } from "../lib/Styling";
+// import { StyledTitle } from "../lib/Styling";
+import { StyledSubTitle } from "../lib/Styling";
 import { StyledText } from "../lib/Styling";
 import { StyledForm } from "../lib/Styling";
 import { StyledLabel } from "../lib/Styling";
@@ -57,8 +57,8 @@ const Login = ({ LOGIN_URL }) => {
 
   return (
     <StyledSection>
-      <StyledTitle>Login page</StyledTitle>
-      <StyledText>Please enter your credentials below.</StyledText>
+      {/* <StyledTitle>Login page</StyledTitle> */}
+      <StyledSubTitle>Please enter your credentials below.</StyledSubTitle>
       <StyledForm onSubmit={handleLogin}>
         <StyledLabel>
           Email:
