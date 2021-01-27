@@ -4,7 +4,7 @@ import { StyledFooter } from "../lib/Styling";
 
 const Footer = () => {
   return (
-    <StyledFooter>This is a footer</StyledFooter>
+    <StyledFooter>Application developed and designed by Sandrine Elander</StyledFooter>
   )
 };
 

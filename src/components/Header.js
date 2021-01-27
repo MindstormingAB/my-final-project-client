@@ -4,7 +4,7 @@ import { StyledHeader } from "../lib/Styling";
 
 const Header = () => {
   return (
-    <StyledHeader>This is a header</StyledHeader>
+    <StyledHeader>Epilepsy App</StyledHeader>
   );
 };
 

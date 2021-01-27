@@ -1,7 +1,9 @@
 import React from "react";
 
-import NavigationButton from "./NavigationButton";
-import LogoutButton from "./LogoutButton";
+import Dashboard from "./Dashboard";
+import Login from "./Login";
+// import NavigationButton from "./NavigationButton";
+// import LogoutButton from "./LogoutButton";
 
 import { StyledSection } from "../lib/Styling";
 import { StyledTitle } from "../lib/Styling";
@@ -13,22 +15,25 @@ const StartPage = () => {
 
   return (
     <StyledSection>
-      <StyledTitle>{localFirstName
-        ? `Welcome ${localFirstName}!`
-        : "Welcome!"}
-      </StyledTitle>
-      <StyledText>Description of the application</StyledText>
-      <StyledText>Description of the application</StyledText>
-      <StyledText>Description of the application</StyledText>
-      <StyledText>Description of the application</StyledText>
-      <StyledText>Description of the application</StyledText>
       {!localToken
-        ? <NavigationButton route="login" label="Login/Signup" />
+        ? (
+          <>
+            <StyledTitle>
+              {localFirstName
+                ? `Welcome ${localFirstName}!`
+                : "Welcome!"}
+            </StyledTitle>
+            <StyledText>Description of the application</StyledText>
+            <Login />
+            {/* < NavigationButton route="login" label="Login/Signup" /> */}
+          </>
+        )
         : (
           <>
-            <StyledText>You can access your dasboard by clicking on the button below.</StyledText>
-            <NavigationButton route="dashboard" label="Dashboard" />
-            <LogoutButton />
+            {/* <StyledText>You can access your dasboard by clicking on the button below.</StyledText>
+            <NavigationButton route="dashboard" label="Dashboard" /> */}
+            <Dashboard />
+            {/* <LogoutButton /> */}
           </>
         )}
     </StyledSection>

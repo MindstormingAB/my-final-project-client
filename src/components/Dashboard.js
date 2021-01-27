@@ -3,19 +3,16 @@ import React from "react";
 import ProfileButton from "./ProfileButton";
 import LogoutButton from "./LogoutButton";
 
-const Dashboard = () => {
-  const localFirstName = localStorage.getItem("localFirstName");
+import { StyledSection } from "../lib/Styling";
+import { StyledText } from "../lib/Styling";
 
+const Dashboard = () => {
   return (
-    <section>
-      <h1>Max and Sandrine's app</h1>
-      {localFirstName && <h3>Welcome {localFirstName}!</h3>}
-      {!localFirstName && <h3>Welcome!</h3>}
-      <p>You are logged in.</p>
-      <p>You can access your profile by clicking on the button below.</p>
+    <StyledSection>
+      <StyledText>This is your dashboard</StyledText>
       <ProfileButton />
       <LogoutButton />
-    </section>
+    </StyledSection>
   );
 };
 

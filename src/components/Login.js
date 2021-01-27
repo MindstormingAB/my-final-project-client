@@ -6,7 +6,7 @@ import { user } from "../reducers/user";
 
 import { StyledSection } from "../lib/Styling";
 import { StyledTitle } from "../lib/Styling";
-import { StyledSubTitle } from "../lib/Styling";
+// import { StyledSubTitle } from "../lib/Styling";
 import { StyledText } from "../lib/Styling";
 import { StyledForm } from "../lib/Styling";
 import { StyledLabel } from "../lib/Styling";
@@ -48,7 +48,7 @@ const Login = ({ LOGIN_URL }) => {
       })
       .then((json) => {
         handleCredentials(json);
-        history.push("/dasboard");
+        history.push("/");
         setEmail("");
         setPassword("");
       })
@@ -58,7 +58,7 @@ const Login = ({ LOGIN_URL }) => {
   return (
     <StyledSection>
       <StyledTitle>Login page</StyledTitle>
-      <StyledSubTitle>Please enter your credentials below.</StyledSubTitle>
+      <StyledText>Please enter your credentials below.</StyledText>
       <StyledForm onSubmit={handleLogin}>
         <StyledLabel>
           Email:
