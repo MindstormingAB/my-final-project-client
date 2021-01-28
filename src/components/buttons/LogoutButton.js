@@ -2,9 +2,9 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from 'react-router-dom';
 
-import { user } from "../reducers/user";
+import { user } from "../../reducers/user";
 
-import { StyledButton } from "../lib/Styling";
+import { StyledButton } from "../../lib/Styling";
 
 const LogoutButton = () => {
   const dispatch = useDispatch();

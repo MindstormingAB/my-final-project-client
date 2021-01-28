@@ -1,7 +1,7 @@
 import React from "react";
 
-import { StyledCard } from "../lib/Styling";
-import { StyledCardText } from "../lib/Styling";
+import { StyledCard } from "../../lib/Styling";
+import { StyledCardText } from "../../lib/Styling";
 
 const Contact = ({ contact }) => {
   return (

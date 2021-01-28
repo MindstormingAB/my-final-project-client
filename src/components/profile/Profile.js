@@ -1,10 +1,10 @@
 import React from "react";
 
-import NavigationButton from "./NavigationButton";
+import NavigationButton from "../buttons/NavigationButton";
 
-import { StyledSection } from "../lib/Styling";
-import { StyledSubTitle } from "../lib/Styling";
-import { StyledText } from "../lib/Styling";
+import { StyledSection } from "../../lib/Styling";
+import { StyledSubTitle } from "../../lib/Styling";
+import { StyledText } from "../../lib/Styling";
 
 const Profile = () => {
   return (

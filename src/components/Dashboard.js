@@ -1,7 +1,7 @@
 import React from "react";
 
-import NavigationButton from "./NavigationButton";
-import LogoutButton from "./LogoutButton";
+import NavigationButton from "./buttons/NavigationButton";
+import LogoutButton from "./buttons/LogoutButton";
 
 import { StyledSection } from "../lib/Styling";
 import { StyledSubTitle } from "../lib/Styling";

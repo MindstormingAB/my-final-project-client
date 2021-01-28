@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 
 import Contact from "./Contact";
-import NavigationButton from "./NavigationButton";
+import NavigationButton from "../buttons/NavigationButton";
 
-import { StyledSection } from "../lib/Styling";
-import { StyledSubTitle } from "../lib/Styling";
-import { StyledText } from "../lib/Styling";
+import { StyledSection } from "../../lib/Styling";
+import { StyledSubTitle } from "../../lib/Styling";
+import { StyledText } from "../../lib/Styling";
 
 const Contacts = ({ CONTACTS_URL }) => {
   const localToken = localStorage.getItem("localToken");

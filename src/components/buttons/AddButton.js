@@ -1,7 +1,7 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
 
-import { StyledButton } from "../lib/Styling";
+import { StyledButton } from "../../lib/Styling";
 
 const NavigationButton = ({ route, label }) => {
   const history = useHistory();

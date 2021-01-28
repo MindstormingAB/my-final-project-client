@@ -9,12 +9,12 @@ import { user } from "./reducers/user";
 
 import Header from "./components/Header";
 import StartPage from "./components/StartPage";
-import Signup from "./components/SignUp";
-import Login from "./components/Login";
+import Signup from "./components/authentication/SignUp";
+import Login from "./components/authentication/Login";
 import Dashboard from "./components/Dashboard";
-import Profile from "./components/Profile";
-import Seizures from "./components/Seizures";
-import Contacts from "./components/Contacts";
+import Profile from "./components/profile/Profile";
+import Seizures from "./components/seizures/Seizures";
+import Contacts from "./components/contacts/Contacts";
 import Footer from "./components/Footer";
 
 import { StyledBrowserRouter } from "./lib/Styling";

@@ -1,13 +1,14 @@
 import React from "react";
+import moment from "moment";
 
-import { StyledCard } from "../lib/Styling";
-import { StyledCardText } from "../lib/Styling";
+import { StyledCard } from "../../lib/Styling";
+import { StyledCardText } from "../../lib/Styling";
 
 const Seizure = ({ seizure }) => {
   return (
     <StyledCard type={seizure.contactType}>
       <StyledCardText left>Date:</StyledCardText>
-      <StyledCardText>{seizure.seizureDate}</StyledCardText>
+      <StyledCardText>{moment(seizure.seizureDate).format("ddd DD MMM HH:mm")}</StyledCardText>
       <StyledCardText left>Length:</StyledCardText>
       <StyledCardText>{seizure.seizureLength.hours}h {seizure.seizureLength.minutes}m {seizure.seizureLength.seconds}s</StyledCardText>
       <StyledCardText left>Seizure type:</StyledCardText>
