@@ -22,8 +22,15 @@ const SignUp = ({ USERS_URL }) => {
   const handleCredentials = (credentials) => {
     localStorage.setItem("localToken", credentials.accessToken);
     localStorage.setItem("localId", credentials.userId);
+    localStorage.setItem("localFirstName", credentials.firstName);
     dispatch(user.actions.setAccessToken({ accessToken: credentials.accessToken }));
     dispatch(user.actions.setUserId({ userId: credentials.userId }));
+    dispatch(user.actions.setEmail({ email: credentials.email }));
+    dispatch(user.actions.setFirstName({ firstName: credentials.firstName }));
+    dispatch(user.actions.setSurname({ surname: credentials.surname }));
+    dispatch(user.actions.setBirthDate({ birthDate: credentials.birthDate }));
+    dispatch(user.actions.setSeizures({ seizures: credentials.seizures }));
+    dispatch(user.actions.setContacts({ contacts: credentials.contacts }));
   };
 
   const handleSignUp = (event) => {
@@ -44,8 +51,9 @@ const SignUp = ({ USERS_URL }) => {
         return res.json();
       })
       .then((json) => {
+        console.log(json);
         handleCredentials(json);
-        history.push("/");
+        history.push("/dashboard");
         setEmail("");
         setPassword("");
       })

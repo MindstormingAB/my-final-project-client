@@ -1,4 +1,7 @@
 import React, { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
+
+import { user } from "../../reducers/user";
 
 import Seizure from "./Seizure";
 import NavigationButton from "../buttons/NavigationButton";
@@ -8,6 +11,7 @@ import { StyledSubTitle } from "../../lib/Styling";
 import { StyledText } from "../../lib/Styling";
 
 const Seizures = ({ SEIZURES_URL }) => {
+  const dispatch = useDispatch();
   const localToken = localStorage.getItem("localToken");
   const localId = localStorage.getItem("localId");
   const [seizures, setSeizures] = useState([]);
@@ -21,6 +25,7 @@ const Seizures = ({ SEIZURES_URL }) => {
       .then(json => {
         console.log(json);
         setSeizures(json);
+        dispatch(user.actions.setSeizures({ seizures: json }));
       })
       .catch(error => console.error(error));
     // eslint-disable-next-line

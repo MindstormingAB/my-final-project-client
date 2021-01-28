@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
+import { useHistory } from 'react-router-dom';
 
 import { user } from "../../reducers/user";
 
@@ -14,6 +15,7 @@ import { StyledLink } from "../../lib/Styling";
 
 const Login = ({ LOGIN_URL }) => {
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -22,8 +24,15 @@ const Login = ({ LOGIN_URL }) => {
   const handleCredentials = (credentials) => {
     localStorage.setItem("localToken", credentials.accessToken);
     localStorage.setItem("localId", credentials.userId);
+    localStorage.setItem("localFirstName", credentials.firstName);
     dispatch(user.actions.setAccessToken({ accessToken: credentials.accessToken }));
     dispatch(user.actions.setUserId({ userId: credentials.userId }));
+    dispatch(user.actions.setEmail({ email: credentials.email }));
+    dispatch(user.actions.setFirstName({ firstName: credentials.firstName }));
+    dispatch(user.actions.setSurname({ surname: credentials.surname }));
+    dispatch(user.actions.setBirthDate({ birthDate: credentials.birthDate }));
+    dispatch(user.actions.setSeizures({ seizures: credentials.seizures }));
+    dispatch(user.actions.setContacts({ contacts: credentials.contacts }));
   };
 
   const handleLogin = (event) => {
@@ -44,8 +53,9 @@ const Login = ({ LOGIN_URL }) => {
         return res.json();
       })
       .then((json) => {
+        console.log(json);
         handleCredentials(json);
-        window.location.reload();
+        history.push("/dashboard");
         setEmail("");
         setPassword("");
       })

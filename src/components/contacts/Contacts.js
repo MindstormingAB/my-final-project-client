@@ -1,4 +1,7 @@
 import React, { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
+
+import { user } from "../../reducers/user";
 
 import Contact from "./Contact";
 import NavigationButton from "../buttons/NavigationButton";
@@ -8,6 +11,7 @@ import { StyledSubTitle } from "../../lib/Styling";
 import { StyledText } from "../../lib/Styling";
 
 const Contacts = ({ CONTACTS_URL }) => {
+  const dispatch = useDispatch();
   const localToken = localStorage.getItem("localToken");
   const localId = localStorage.getItem("localId");
   const [contacts, setContacts] = useState([]);
@@ -21,6 +25,7 @@ const Contacts = ({ CONTACTS_URL }) => {
       .then(json => {
         console.log(json);
         setContacts(json);
+        dispatch(user.actions.setContacts({ contacts: json }));
       })
       .catch(error => console.error(error));
     // eslint-disable-next-line
