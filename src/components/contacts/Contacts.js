@@ -23,7 +23,6 @@ const Contacts = ({ CONTACTS_URL }) => {
     })
       .then(response => response.json())
       .then(json => {
-        console.log(json);
         setContacts(json);
         dispatch(user.actions.setContacts({ contacts: json }));
       })

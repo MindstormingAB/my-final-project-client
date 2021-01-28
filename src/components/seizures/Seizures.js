@@ -23,7 +23,6 @@ const Seizures = ({ SEIZURES_URL }) => {
     })
       .then(response => response.json())
       .then(json => {
-        console.log(json);
         setSeizures(json);
         dispatch(user.actions.setSeizures({ seizures: json }));
       })

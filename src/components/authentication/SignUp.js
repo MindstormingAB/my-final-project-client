@@ -51,7 +51,6 @@ const SignUp = ({ USERS_URL }) => {
         return res.json();
       })
       .then((json) => {
-        console.log(json);
         handleCredentials(json);
         history.push("/dashboard");
         setEmail("");

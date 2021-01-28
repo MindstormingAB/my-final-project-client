@@ -47,7 +47,7 @@ const App = () => {
             <Dashboard USERDATA_URL={USERDATA_URL} />
           </Route>
           <Route path="/profile" exact>
-            <Profile USERS_URL={USERS_URL} />
+            <Profile USERDATA_URL={USERDATA_URL} />
           </Route>
           <Route path="/seizures" exact>
             <Seizures SEIZURES_URL={SEIZURES_URL} />
