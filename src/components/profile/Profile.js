@@ -50,7 +50,7 @@ const Profile = ({ USERDATA_URL }) => {
         <StyledCardText left>Email:</StyledCardText>
         <StyledCardText>{email}</StyledCardText>
         <StyledCardText left>Birth date</StyledCardText>
-        <StyledCardText>{moment(birthDate).format("ddd DD MMM YYYY")}</StyledCardText>
+        <StyledCardText>{!birthDate ? "" : moment(birthDate).format("ddd DD MMM YYYY")}</StyledCardText>
       </StyledCard>
       <NavigationButton route="" label="Back" />
     </StyledSection>
