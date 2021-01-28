@@ -9,7 +9,7 @@ import { StyledSection } from "../lib/Styling";
 import { StyledTitle } from "../lib/Styling";
 import { StyledText } from "../lib/Styling";
 
-const StartPage = () => {
+const StartPage = ({ LOGIN_URL }) => {
   const localToken = localStorage.getItem("localToken");
   const localFirstName = localStorage.getItem("localFirstName");
 
@@ -24,7 +24,7 @@ const StartPage = () => {
                 : "Welcome!"}
             </StyledTitle>
             <StyledText>Description of the application</StyledText>
-            <Login />
+            <Login LOGIN_URL={LOGIN_URL} />
             {/* < NavigationButton route="login" label="Login/Signup" /> */}
           </>
         )

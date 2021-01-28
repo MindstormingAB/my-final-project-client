@@ -23,8 +23,8 @@ import { StyledProvider } from "./lib/Styling";
 // import logo from './logo.svg';
 import './App.css';
 
-// const BASE_URL = "http://localhost:8080/";
-const BASE_URL = "https://ep-app-api.herokuapp.com/";
+const BASE_URL = "http://localhost:8080/";
+// const BASE_URL = "https://ep-app-api.herokuapp.com/";
 const USERS_URL = `${BASE_URL}users`;
 const LOGIN_URL = `${BASE_URL}sessions`;
 const SEIZURES_URL = `${BASE_URL}seizures`;
@@ -40,7 +40,7 @@ const App = () => {
       <StyledProvider store={store}>
         <Switch>
           <Route path="/" exact>
-            <StartPage />
+            <StartPage LOGIN_URL={LOGIN_URL} />
           </Route>
           <Route path="/login" exact>
             <Login LOGIN_URL={LOGIN_URL} />

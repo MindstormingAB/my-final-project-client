@@ -1,11 +1,9 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { useHistory } from 'react-router-dom';
 
 import { user } from "../reducers/user";
 
 import { StyledSection } from "../lib/Styling";
-// import { StyledTitle } from "../lib/Styling";
 import { StyledSubTitle } from "../lib/Styling";
 import { StyledText } from "../lib/Styling";
 import { StyledForm } from "../lib/Styling";
@@ -16,7 +14,6 @@ import { StyledLink } from "../lib/Styling";
 
 const Login = ({ LOGIN_URL }) => {
   const dispatch = useDispatch();
-  const history = useHistory();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -48,7 +45,7 @@ const Login = ({ LOGIN_URL }) => {
       })
       .then((json) => {
         handleCredentials(json);
-        history.push("/");
+        window.location.reload();
         setEmail("");
         setPassword("");
       })
@@ -57,7 +54,6 @@ const Login = ({ LOGIN_URL }) => {
 
   return (
     <StyledSection>
-      {/* <StyledTitle>Login page</StyledTitle> */}
       <StyledSubTitle>Please enter your credentials below.</StyledSubTitle>
       <StyledForm onSubmit={handleLogin}>
         <StyledLabel>
