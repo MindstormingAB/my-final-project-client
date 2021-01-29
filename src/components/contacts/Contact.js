@@ -1,11 +1,11 @@
 import React from "react";
 
-import { StyledCard } from "../../lib/Styling";
+import { StyledCardWithGrid } from "../../lib/Styling";
 import { StyledCardText } from "../../lib/Styling";
 
 const Contact = ({ contact }) => {
   return (
-    <StyledCard type={contact.contactType}>
+    <StyledCardWithGrid type={contact.contactType}>
       <StyledCardText left>First Name:</StyledCardText>
       <StyledCardText>{contact.contactFirstName}</StyledCardText>
       <StyledCardText left>Surname:</StyledCardText>
@@ -14,7 +14,7 @@ const Contact = ({ contact }) => {
       <StyledCardText>{contact.contactPhoneNumber}</StyledCardText>
       <StyledCardText left>Relation:</StyledCardText>
       <StyledCardText>{contact.contactCategory}</StyledCardText>
-    </StyledCard>
+    </StyledCardWithGrid>
   );
 };
 

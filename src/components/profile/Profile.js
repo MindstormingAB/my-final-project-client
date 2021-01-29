@@ -1,22 +1,23 @@
 import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import moment from "moment";
+import { useDispatch } from "react-redux";
 
 import { user } from "../../reducers/user";
+import { useToggle } from "../../reducers/reusable";
 
+import ProfileCard from "./ProfileCard";
+import ProfileEdit from "./ProfileEdit";
 import NavigationButton from "../buttons/NavigationButton";
 
 import { StyledSection } from "../../lib/Styling";
 import { StyledSubTitle } from "../../lib/Styling";
 import { StyledText } from "../../lib/Styling";
-import { StyledCard } from "../../lib/Styling";
-import { StyledCardText } from "../../lib/Styling";
+import { StyledButton } from "../../lib/Styling";
 
 const Profile = ({ USERDATA_URL }) => {
   const dispatch = useDispatch();
   const localToken = localStorage.getItem("localToken");
   const localId = localStorage.getItem("localId");
-  const { email, firstName, surname, birthDate } = useSelector((store) => store.user.profile);
+  const [editMode, toggleEditMode] = useToggle();
 
   useEffect(() => {
     fetch(USERDATA_URL, {
@@ -42,17 +43,15 @@ const Profile = ({ USERDATA_URL }) => {
     <StyledSection>
       <StyledSubTitle>Profile</StyledSubTitle>
       <StyledText>This is where you can update your profile</StyledText>
-      <StyledCard>
-        <StyledCardText left>First name:</StyledCardText>
-        <StyledCardText>{firstName}</StyledCardText>
-        <StyledCardText left>Surname:</StyledCardText>
-        <StyledCardText>{surname}</StyledCardText>
-        <StyledCardText left>Email:</StyledCardText>
-        <StyledCardText>{email}</StyledCardText>
-        <StyledCardText left>Birth date</StyledCardText>
-        <StyledCardText>{!birthDate ? "" : moment(birthDate).format("ddd DD MMM YYYY")}</StyledCardText>
-      </StyledCard>
-      <NavigationButton route="" label="Back" />
+      {editMode
+        ? <ProfileEdit USERDATA_URL={USERDATA_URL} toggleEditMode={toggleEditMode} />
+        : (
+          <>
+            <ProfileCard />
+            <StyledButton onClick={toggleEditMode}>Edit</StyledButton>
+            <NavigationButton route="" label="Back" />
+          </>
+        )}
     </StyledSection>
   )
 };

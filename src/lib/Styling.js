@@ -112,13 +112,16 @@ export const StyledLink = styled(Link)`
 `;
 
 export const StyledCard = styled.section`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
   box-shadow: 2px 2px 2px ${PALETTE.color6};
   padding: 10px;
   margin-bottom: 20px;
   border: 1px solid ${PALETTE.color6};
   border-radius: 25px;
+`;
+
+export const StyledCardWithGrid = styled(StyledCard)`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
 `;
 
 export const StyledCardText = styled.p`
