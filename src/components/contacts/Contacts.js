@@ -37,6 +37,7 @@ const Contacts = ({ CONTACTS_URL }) => {
       {contacts.map(contact => {
         return (<Contact key={contact._id} contact={contact} CONTACTS_URL={CONTACTS_URL} ></Contact>)
       })}
+      <NavigationButton route="contacts/add" label="Add" />
       <NavigationButton route="" label="Back" />
     </StyledSection>
   )
