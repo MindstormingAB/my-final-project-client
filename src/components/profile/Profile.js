@@ -5,7 +5,7 @@ import { user } from "../../reducers/user";
 import { useToggle } from "../../reducers/reusable";
 
 import ProfileCard from "./ProfileCard";
-import ProfileEdit from "./ProfileEdit";
+import ProfileForm from "./ProfileForm";
 import NavigationButton from "../buttons/NavigationButton";
 
 import { StyledSection } from "../../lib/Styling";
@@ -44,7 +44,7 @@ const Profile = ({ USERDATA_URL }) => {
       <StyledSubTitle>Profile</StyledSubTitle>
       <StyledText>This is where you can update your profile</StyledText>
       {editMode
-        ? <ProfileEdit USERDATA_URL={USERDATA_URL} toggleEditMode={toggleEditMode} />
+        ? <ProfileForm USERDATA_URL={USERDATA_URL} toggleEditMode={toggleEditMode} />
         : (
           <>
             <ProfileCard />

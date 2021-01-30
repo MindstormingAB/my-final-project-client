@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+// import { useDispatch, useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 
 import { user } from "../../reducers/user";
@@ -15,6 +16,7 @@ const Contacts = ({ CONTACTS_URL }) => {
   const localToken = localStorage.getItem("localToken");
   const localId = localStorage.getItem("localId");
   const [contacts, setContacts] = useState([]);
+  // const contacts = useSelector((store) => store.user.contacts);
 
   useEffect(() => {
     fetch(CONTACTS_URL, {
@@ -35,7 +37,7 @@ const Contacts = ({ CONTACTS_URL }) => {
       <StyledSubTitle>Contacts</StyledSubTitle>
       <StyledText>This is where you can store your important contacts</StyledText>
       {contacts.map(contact => {
-        return (<Contact key={contact._id} contact={contact}></Contact>)
+        return (<Contact key={contact._id} contact={contact} CONTACTS_URL={CONTACTS_URL} ></Contact>)
       })}
       <NavigationButton route="" label="Back" />
     </StyledSection>

@@ -5,9 +5,8 @@ import moment from "moment";
 import { user } from "../../reducers/user";
 
 import { StyledButton, StyledCard, StyledForm, StyledInput, StyledLabel } from "../../lib/Styling";
-// import { StyledCardText } from "../../lib/Styling";
 
-const ProfileEdit = ({ USERDATA_URL, toggleEditMode }) => {
+const ProfileForm = ({ USERDATA_URL, toggleEditMode }) => {
   const localToken = localStorage.getItem("localToken");
   const localId = localStorage.getItem("localId");
   const currentEmail = useSelector((store) => store.user.profile.email);
@@ -39,7 +38,6 @@ const ProfileEdit = ({ USERDATA_URL, toggleEditMode }) => {
         dispatch(user.actions.setContacts({ contacts: json.contacts }));
       })
       .catch(error => console.error(error));
-    // eslint-disable-next-line
   };
 
   const handleEdit = (event) => {
@@ -51,13 +49,6 @@ const ProfileEdit = ({ USERDATA_URL, toggleEditMode }) => {
     })
       .then(retrieveUserData())
       .then(toggleEditMode())
-    // .then((res) => res.json())
-    // .then((json) => {
-    //   handleProfileData(json);
-    //   console.log(json);
-    //   toggleEditMode();
-    // })
-    // .catch((error) => console.error(error))
   };
 
   return (
@@ -108,4 +99,4 @@ const ProfileEdit = ({ USERDATA_URL, toggleEditMode }) => {
   )
 };
 
-export default ProfileEdit;
+export default ProfileForm;
