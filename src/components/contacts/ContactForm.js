@@ -59,7 +59,7 @@ const ContactForm = ({ CONTACTS_URL, contact, toggleEditMode }) => {
             required
             value={type}
             onChange={event => setType(event.target.value)} >
-            <option value={type} selected disabled>{type}</option>
+            <option defaultValue={type} disabled>{type}</option>
             {contactTypes.map(type => {
               return (<option key={type.name} value={type.name}>{type.name}</option>)
             })}
@@ -98,7 +98,7 @@ const ContactForm = ({ CONTACTS_URL, contact, toggleEditMode }) => {
             required
             value={category}
             onChange={event => setCategory(event.target.value)} >
-            <option value={category} selected disabled>{category}</option>
+            <option defaultValue={category} disabled>{category}</option>
             {contactTypes.find(item => item.name === type).categories.map(category => {
               return (<option key={category} value={category}>{category}</option>)
             })}

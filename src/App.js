@@ -12,7 +12,7 @@ import Dashboard from "./components/Dashboard";
 import Profile from "./components/profile/Profile";
 import Seizures from "./components/seizures/Seizures";
 import Contacts from "./components/contacts/Contacts";
-import ContactRegistration from "./components/contacts/ContactForm";
+import ContactRegistration from "./components/contacts/ContactRegistration";
 import Footer from "./components/Footer";
 
 import { StyledBrowserRouter } from "./lib/Styling";
