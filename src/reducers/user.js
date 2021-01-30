@@ -1,16 +1,24 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  login: {
-    accessToken: "",
-    userId: ""
-  },
   profile: {
+    accessToken: "",
+    userId: "",
     email: "",
     firstName: "",
     surname: "",
     birthDate: null
   },
+  // login: {
+  //   accessToken: "",
+  //   userId: ""
+  // },
+  // profile: {
+  //   email: "",
+  //   firstName: "",
+  //   surname: "",
+  //   birthDate: null
+  // },
   seizures: [],
   contacts: []
 };
@@ -21,12 +29,20 @@ export const user = createSlice({
   reducers: {
     setAccessToken: (state, action) => {
       const { accessToken } = action.payload;
-      state.login.accessToken = accessToken;
+      state.profile.accessToken = accessToken;
     },
     setUserId: (state, action) => {
       const { userId } = action.payload;
-      state.login.userId = userId;
+      state.profile.userId = userId;
     },
+    // setAccessToken: (state, action) => {
+    //   const { accessToken } = action.payload;
+    //   state.login.accessToken = accessToken;
+    // },
+    // setUserId: (state, action) => {
+    //   const { userId } = action.payload;
+    //   state.login.userId = userId;
+    // },
     setEmail: (state, action) => {
       const { email } = action.payload;
       state.profile.email = email;
@@ -52,10 +68,10 @@ export const user = createSlice({
       state.contacts = contacts;
     },
     deleteAccessToken: (state, action) => {
-      state.login.accessToken = "";
+      state.profile.accessToken = "";
     },
     deleteUserId: (state, action) => {
-      state.login.userId = "";
+      state.profile.userId = "";
     },
   }
 });

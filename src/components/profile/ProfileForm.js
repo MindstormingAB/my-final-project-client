@@ -36,6 +36,7 @@ const ProfileForm = ({ USERDATA_URL, toggleEditMode }) => {
         dispatch(user.actions.setBirthDate({ birthDate: json.birthDate }));
         dispatch(user.actions.setSeizures({ seizures: json.seizures }));
         dispatch(user.actions.setContacts({ contacts: json.contacts }));
+        localStorage.setItem("localFirstName", json.firstName);
       })
       .catch(error => console.error(error));
   };

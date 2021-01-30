@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-// import { useDispatch, useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 
 import { user } from "../../reducers/user";
@@ -16,7 +15,6 @@ const Contacts = ({ CONTACTS_URL }) => {
   const localToken = localStorage.getItem("localToken");
   const localId = localStorage.getItem("localId");
   const [contacts, setContacts] = useState([]);
-  // const contacts = useSelector((store) => store.user.contacts);
 
   useEffect(() => {
     fetch(CONTACTS_URL, {
