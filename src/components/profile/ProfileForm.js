@@ -13,13 +13,13 @@ const ProfileForm = ({ USERDATA_URL, toggleEditMode }) => {
   const currentFirstName = useSelector((store) => store.user.profile.firstName);
   const currentSurname = useSelector((store) => store.user.profile.surname);
   const currentBirthDate = useSelector((store) => store.user.profile.birthDate);
-  const formatedBirthDate = moment(currentBirthDate).format("YYYY-MM-DD");
+  const formattedBirthDate = moment(currentBirthDate).format("YYYY-MM-DD");
   const dispatch = useDispatch();
 
   const [email, setEmail] = useState(currentEmail);
   const [firstName, setFirstName] = useState(currentFirstName);
   const [surname, setSurname] = useState(currentSurname);
-  const [birthDate, setBirthDate] = useState(formatedBirthDate);
+  const [birthDate, setBirthDate] = useState(formattedBirthDate);
 
   const retrieveUserData = () => {
     fetch(USERDATA_URL, {

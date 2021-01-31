@@ -35,8 +35,9 @@ const Seizures = ({ SEIZURES_URL }) => {
       <StyledSubTitle>Seizures</StyledSubTitle>
       <StyledText>This is where you can keep track of your seizures</StyledText>
       {seizures.map(seizure => {
-        return (<Seizure key={seizure._id} seizure={seizure}></Seizure>)
+        return (<Seizure key={seizure._id} seizure={seizure} SEIZURES_URL={SEIZURES_URL}></Seizure>)
       })}
+      <NavigationButton route="seizures/add" label="Add" />
       <NavigationButton route="" label="Back" />
     </StyledSection>
   )

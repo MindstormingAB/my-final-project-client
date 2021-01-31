@@ -148,7 +148,7 @@ export const StyledCardLabel = styled.label`
 
 export const StyledCardInput = styled.input`
   font-size: 12px;
-  height: 21px;
+  min-height: 21px;
   width: 130px;
   margin: 0 5px 5px 5px;
   /* text-align: right; */

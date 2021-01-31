@@ -12,6 +12,7 @@ import Login from "./components/authentication/Login";
 import Dashboard from "./components/Dashboard";
 import Profile from "./components/profile/Profile";
 import Seizures from "./components/seizures/Seizures";
+import SeizureRegistration from "./components/seizures/SeizureRegistration";
 import Contacts from "./components/contacts/Contacts";
 import ContactRegistration from "./components/contacts/ContactRegistration";
 import Footer from "./components/Footer";
@@ -50,6 +51,9 @@ const App = () => {
           </Route>
           <Route path="/seizures" exact>
             <Seizures SEIZURES_URL={SEIZURES_URL} />
+          </Route>
+          <Route path="/seizures/add" exact>
+            <SeizureRegistration SEIZURES_URL={SEIZURES_URL} />
           </Route>
           <Route path="/contacts" exact>
             <Contacts CONTACTS_URL={CONTACTS_URL} />
