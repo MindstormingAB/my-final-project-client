@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import swal from "sweetalert";
 
 import { InvertedStyledCardButton, StyledCardSelect, StyledCardWithGrid, StyledForm, StyledCardInput, StyledCardLabel } from "../../lib/Styling";
 
@@ -41,13 +42,24 @@ const ContactForm = ({ CONTACTS_URL, contact, toggleEditMode }) => {
 
   const handleEdit = (event) => {
     event.preventDefault();
-    fetch(CONTACTS_URL, {
-      method: "PATCH",
-      body: JSON.stringify({ contactType: type, contactFirstName: firstName, contactSurname: surname, contactPhoneNumber: phoneNumber, contactCategory: category }),
-      headers: { "Content-Type": "application/json", Authorization: localToken, userId: localId, contactId: contactId },
+    swal({
+      title: "Are you sure?",
+      text: "You are about to save changes for this contact.",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
     })
-      .then(window.location.reload())
-      .then(toggleEditMode())
+      .then((willSave) => {
+        if (willSave) {
+          fetch(CONTACTS_URL, {
+            method: "PATCH",
+            body: JSON.stringify({ contactType: type, contactFirstName: firstName, contactSurname: surname, contactPhoneNumber: phoneNumber, contactCategory: category }),
+            headers: { "Content-Type": "application/json", Authorization: localToken, userId: localId, contactId: contactId },
+          })
+            .then(window.location.reload())
+            .then(toggleEditMode())
+        }
+      })
   };
 
   return (
@@ -55,7 +67,7 @@ const ContactForm = ({ CONTACTS_URL, contact, toggleEditMode }) => {
       <StyledCardWithGrid>
         <StyledCardLabel htmlFor="type">
           Type:
-          </StyledCardLabel>
+        </StyledCardLabel>
         <StyledCardSelect
           id="type"
           required
@@ -68,7 +80,7 @@ const ContactForm = ({ CONTACTS_URL, contact, toggleEditMode }) => {
         </StyledCardSelect>
         <StyledCardLabel htmlFor="firstname">
           First name:
-          </StyledCardLabel>
+        </StyledCardLabel>
         <StyledCardInput
           id="firstname"
           minLength="2"
@@ -78,7 +90,7 @@ const ContactForm = ({ CONTACTS_URL, contact, toggleEditMode }) => {
         </StyledCardInput>
         <StyledCardLabel htmlFor="surname">
           Surname:
-          </StyledCardLabel>
+        </StyledCardLabel>
         <StyledCardInput
           id="surname"
           minLength="2"
@@ -88,7 +100,7 @@ const ContactForm = ({ CONTACTS_URL, contact, toggleEditMode }) => {
         </StyledCardInput>
         <StyledCardLabel htmlFor="phonenumber">
           Phone Number:
-          </StyledCardLabel>
+        </StyledCardLabel>
         <StyledCardInput
           id="phonenumber"
           minLength="2"
@@ -98,7 +110,7 @@ const ContactForm = ({ CONTACTS_URL, contact, toggleEditMode }) => {
         </StyledCardInput>
         <StyledCardLabel htmlFor="relation">
           Relation:
-          </StyledCardLabel>
+        </StyledCardLabel>
         <StyledCardSelect
           id="relation"
           required
@@ -109,8 +121,8 @@ const ContactForm = ({ CONTACTS_URL, contact, toggleEditMode }) => {
             return (<option key={category} value={category}>{category}</option>)
           })}
         </StyledCardSelect>
-        <InvertedStyledCardButton type="submit">Save</InvertedStyledCardButton>
         <InvertedStyledCardButton onClick={toggleEditMode}>Cancel</InvertedStyledCardButton>
+        <InvertedStyledCardButton type="submit">Save</InvertedStyledCardButton>
       </StyledCardWithGrid>
     </StyledForm>
   )

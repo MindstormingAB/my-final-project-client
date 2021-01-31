@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
+import swal from "sweetalert";
 
 import { user } from "../../reducers/user";
 import { useToggle } from "../../reducers/reusable";
@@ -41,11 +42,22 @@ const Profile = ({ USERDATA_URL }) => {
 
   const handleDeleteUser = (event) => {
     event.preventDefault();
-    fetch(USERDATA_URL, {
-      method: "DELETE",
-      headers: { "Content-Type": "application/json", Authorization: localToken, userId: localId },
+    swal({
+      title: "Are you sure?",
+      text: "Once deleted, you will not be able to recover your user data",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
     })
-      .then(window.location.reload())
+      .then((willDelete) => {
+        if (willDelete) {
+          fetch(USERDATA_URL, {
+            method: "DELETE",
+            headers: { "Content-Type": "application/json", Authorization: localToken, userId: localId },
+          })
+            .then(window.location.reload())
+        }
+      })
   };
 
   return (
@@ -58,7 +70,7 @@ const Profile = ({ USERDATA_URL }) => {
           <>
             <ProfileCard />
             <StyledButton onClick={toggleEditMode}>Edit</StyledButton>
-            <StyledButton onClick={handleDeleteUser}>Delete</StyledButton>
+            <StyledButton onClick={handleDeleteUser}>Delete account</StyledButton>
             <NavigationButton route="" label="Back" />
           </>
         )}

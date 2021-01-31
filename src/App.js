@@ -16,8 +16,8 @@ import Contacts from "./components/contacts/Contacts";
 import ContactRegistration from "./components/contacts/ContactRegistration";
 import Footer from "./components/Footer";
 
-const BASE_URL = "http://localhost:8080/";
-// const BASE_URL = "https://ep-app-api.herokuapp.com/";
+// const BASE_URL = "http://localhost:8080/";
+const BASE_URL = "https://ep-app-api.herokuapp.com/";
 const USERS_URL = `${BASE_URL}users`;
 const LOGIN_URL = `${BASE_URL}sessions`;
 const USERDATA_URL = `${BASE_URL}userdata`;

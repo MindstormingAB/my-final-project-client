@@ -130,7 +130,7 @@ export const StyledCardWithGrid = styled(StyledCard)`
 
 export const StyledCardText = styled.p`
   font-size: 12px;
-  height: 21px;
+  min-height: 21px;
   width: 130px;
   margin: 5px;
   /* text-align: ${props => props.left ? "left" : "right"}; */

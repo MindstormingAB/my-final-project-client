@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 
 import NavigationButton from "../buttons/NavigationButton";
 
-import { StyledSection, StyledButton, StyledCard, StyledForm, StyledInput, StyledLabel } from "../../lib/Styling";
+import { StyledSection, StyledButton, StyledForm, StyledCardInput, StyledCardLabel, StyledSubTitle, StyledText, StyledCardWithGrid, StyledCardSelect } from "../../lib/Styling";
 
 const ContactRegistration = ({ CONTACTS_URL }) => {
   const contactTypes = [
@@ -48,62 +48,74 @@ const ContactRegistration = ({ CONTACTS_URL }) => {
 
   return (
     <StyledSection>
+      <StyledSubTitle>Add a new contact</StyledSubTitle>
+      <StyledText>Fill the form below to register a new contact</StyledText>
       <StyledForm onSubmit={handleEdit}>
-        <StyledCard>
-          <StyledLabel>
+        <StyledCardWithGrid>
+          <StyledCardLabel htmlFor="type">
             Type:
-            <select
-              required
-              value={type}
-              onChange={event => setType(event.target.value)} >
-              <option value="" selected disabled>Choose a type</option>
-              {contactTypes.map(type => {
-                return (<option key={type.name} value={type.name}>{type.name}</option>)
-              })}
-            </select>
-          </StyledLabel>
-          <StyledLabel>
+          </StyledCardLabel>
+          <StyledCardSelect
+            id="type"
+            required
+            value={type}
+            onChange={event => setType(event.target.value)} >
+            <option value="" selected disabled>Choose a type</option>
+            {contactTypes.map(type => {
+              return (<option key={type.name} value={type.name}>{type.name}</option>)
+            })}
+          </StyledCardSelect>
+          <StyledCardLabel htmlFor="firstname">
             First name:
-            <StyledInput
-              minLength="2"
-              type="text"
-              value={firstName}
-              onChange={event => setFirstName(event.target.value)} >
-            </StyledInput>
-          </StyledLabel>
-          <StyledLabel>
+          </StyledCardLabel>
+          <StyledCardInput
+            id="firstname"
+            minLength="2"
+            type="text"
+            value={firstName}
+            onChange={event => setFirstName(event.target.value)} >
+          </StyledCardInput>
+          <StyledCardLabel htmlFor="surname">
             Surname:
-            <StyledInput
-              minLength="2"
-              type="text"
-              value={surname}
-              onChange={event => setSurname(event.target.value)} >
-            </StyledInput>
-          </StyledLabel>
-          <StyledLabel>
+          </StyledCardLabel>
+          <StyledCardInput
+            id="surname"
+            minLength="2"
+            type="text"
+            value={surname}
+            onChange={event => setSurname(event.target.value)} >
+          </StyledCardInput>
+          <StyledCardLabel htmlFor="phonenumber">
             Phone Number:
-            <StyledInput
-              minLength="2"
-              type="tel"
-              value={phoneNumber}
-              onChange={event => setPhoneNumber(event.target.value)} >
-            </StyledInput>
-          </StyledLabel>
+          </StyledCardLabel>
+          <StyledCardInput
+            id="phonenumber"
+            minLength="2"
+            type="tel"
+            value={phoneNumber}
+            onChange={event => setPhoneNumber(event.target.value)} >
+          </StyledCardInput>
           {!type && (
-            <StyledLabel>
-              Relation:
-              <select
+            <>
+              <StyledCardLabel htmlFor="norelation">
+                Relation:
+              </StyledCardLabel>
+              <StyledCardSelect
+                id="norelation"
                 required
                 value={category}
                 onChange={event => setCategory(event.target.value)} >
                 <option value="" selected disabled>Choose a type first!</option>
-              </select>
-            </StyledLabel>
+              </StyledCardSelect>
+            </>
           )}
           {type && (
-            <StyledLabel>
-              Relation:
-              <select
+            <>
+              <StyledCardLabel htmlFor="relation">
+                Relation:
+              </StyledCardLabel>
+              <StyledCardSelect
+                id="relation"
                 required
                 value={category}
                 onChange={event => setCategory(event.target.value)} >
@@ -111,67 +123,13 @@ const ContactRegistration = ({ CONTACTS_URL }) => {
                 {contactTypes.find(item => item.name === type).categories.map(category => {
                   return (<option key={category} value={category}>{category}</option>)
                 })}
-              </select>
-            </StyledLabel>
+              </StyledCardSelect>
+            </>
           )}
-        </StyledCard>
+        </StyledCardWithGrid>
         <StyledButton type="submit">Save</StyledButton>
         <NavigationButton route="contacts" label="Cancel" />
       </StyledForm>
-      {/* <StyledForm onSubmit={handleEdit}>
-        <StyledCard>
-          <StyledLabel>
-            Type:
-            <select
-              required
-              value={type}
-              onChange={event => setType(event.target.value)} >
-              <option defaultValue="" disabled>{type}</option>
-              {contactTypes.map(type => {
-                return (<option key={type.name} value={type.name}>{type.name}</option>)
-              })}
-            </select>
-          </StyledLabel>
-          <StyledLabel>
-            First name:
-            <StyledInput
-              minLength="2"
-              type="text"
-              value={firstName}
-              onChange={event => setFirstName(event.target.value)} >
-            </StyledInput>
-          </StyledLabel>
-          <StyledLabel>
-            Surname:
-            <StyledInput
-              minLength="2"
-              type="text"
-              value={surname}
-              onChange={event => setSurname(event.target.value)} >
-            </StyledInput>
-          </StyledLabel>
-          <StyledLabel>
-            Phone Number:
-            <StyledInput
-              minLength="2"
-              type="tel"
-              value={phoneNumber}
-              onChange={event => setPhoneNumber(event.target.value)} >
-            </StyledInput>
-          </StyledLabel>
-          <StyledLabel>
-            Relation:
-            <select
-              required
-              value={category}
-              onChange={event => setCategory(event.target.value)} >
-              <option defaultvalue="" disabled>{category}</option>
-            </select>
-          </StyledLabel>
-        </StyledCard>
-        <StyledButton type="submit">Save</StyledButton>
-        <StyledButton onClick={history.push("/contacts")}>Cancel</StyledButton>
-      </StyledForm> */}
     </StyledSection>
   )
 };
