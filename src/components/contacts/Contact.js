@@ -4,11 +4,24 @@ import { useToggle } from "../../reducers/reusable";
 
 import ContactForm from "./ContactForm";
 
-import { StyledButton, StyledCardWithGrid } from "../../lib/Styling";
+import { StyledCardButton, StyledCardWithGrid } from "../../lib/Styling";
 import { StyledCardText } from "../../lib/Styling";
 
 const Contact = ({ contact, CONTACTS_URL }) => {
   const [editMode, toggleEditMode] = useToggle();
+  const localToken = localStorage.getItem("localToken");
+  const localId = localStorage.getItem("localId");
+  const contactId = contact._id;
+
+  const handleDeleteContact = (event) => {
+    event.preventDefault();
+    fetch(CONTACTS_URL, {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json", Authorization: localToken, userId: localId, contactId: contactId },
+    })
+      .then(window.location.reload())
+  };
+
   return (
     <>
       {editMode
@@ -25,7 +38,8 @@ const Contact = ({ contact, CONTACTS_URL }) => {
             <StyledCardText>{contact.contactPhoneNumber}</StyledCardText>
             <StyledCardText left>Relation:</StyledCardText>
             <StyledCardText>{contact.contactCategory}</StyledCardText>
-            <StyledButton onClick={toggleEditMode}>Edit</StyledButton>
+            <StyledCardButton onClick={toggleEditMode}>Edit</StyledCardButton>
+            <StyledCardButton onClick={handleDeleteContact}>Delete</StyledCardButton>
           </StyledCardWithGrid>
         )
       }

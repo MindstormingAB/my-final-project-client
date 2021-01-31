@@ -39,6 +39,15 @@ const Profile = ({ USERDATA_URL }) => {
     // eslint-disable-next-line
   }, []);
 
+  const handleDeleteUser = (event) => {
+    event.preventDefault();
+    fetch(USERDATA_URL, {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json", Authorization: localToken, userId: localId },
+    })
+      .then(window.location.reload())
+  };
+
   return (
     <StyledSection>
       <StyledSubTitle>Profile</StyledSubTitle>
@@ -49,6 +58,7 @@ const Profile = ({ USERDATA_URL }) => {
           <>
             <ProfileCard />
             <StyledButton onClick={toggleEditMode}>Edit</StyledButton>
+            <StyledButton onClick={handleDeleteUser}>Delete</StyledButton>
             <NavigationButton route="" label="Back" />
           </>
         )}

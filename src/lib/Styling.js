@@ -1,21 +1,11 @@
 import styled from "styled-components/macro";
-import { BrowserRouter, Link } from "react-router-dom";
-import { Provider } from "react-redux";
+import { Link } from "react-router-dom";
 
 import { PALETTE } from "./constants";
 
-export const StyledBrowserRouter = styled(BrowserRouter)`
-  position: relative;
-  min-height: 100vh;
-`;
-
-export const StyledProvider = styled(Provider)`
-  padding-bottom: 2rem;
-`;
-
 export const StyledHeader = styled.header`
+  flex-shrink: 0;
   width: 100%;
-  height: 3rem;
   padding: 10px;
   font-family: "Lato", sans-serif;
   font-size: 20px;
@@ -24,11 +14,16 @@ export const StyledHeader = styled.header`
   text-align: center;
 `;
 
+export const StyledSection = styled.section`
+  flex: 1 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  `;
+
 export const StyledFooter = styled.footer`
-  position: absolute;
-  bottom: 0;
+  flex-shrink: 0;
   width: 100%;
-  height: 2rem;
   padding: 8px;
   background: ${PALETTE.color2};
   font-family: "Lato", sans-serif;
@@ -49,12 +44,6 @@ export const StyledText = styled.p`
   margin: 0 0 16px 0;
   text-align: center;
 `;
-
-export const StyledSection = styled.section`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  `;
 
 export const StyledForm = styled.form`
   display: flex;
@@ -78,6 +67,7 @@ export const StyledButton = styled.button`
   font-size: inherit;
   width: 150px;
   height: 30px;
+  justify-self: center;
   border-radius: 25px;
   border: none;
   margin-bottom: 16px;
@@ -94,6 +84,20 @@ export const StyledButton = styled.button`
     background-image: linear-gradient(${PALETTE.color2} 45%, ${PALETTE.color1} 55%);
     /* background-image: linear-gradient(#335b71 45%, #03324c 55%); */
   }
+`;
+
+export const StyledCardButton = styled(StyledButton)`
+  width: 100px;
+  margin-bottom: 0px;
+`;
+
+export const InvertedStyledCardButton = styled(StyledCardButton)`
+  color: ${PALETTE.color5};
+  background-image: linear-gradient(${PALETTE.color8} 45%, ${PALETTE.color3} 55%);
+  
+  &:hover {
+    color: ${PALETTE.color5};
+    background-image: linear-gradient(${PALETTE.color2} 45%, ${PALETTE.color1} 55%);}
 `;
 
 export const StyledLink = styled(Link)`
@@ -126,8 +130,38 @@ export const StyledCardWithGrid = styled(StyledCard)`
 
 export const StyledCardText = styled.p`
   font-size: 12px;
-  width: 100px;
+  height: 21px;
+  width: 130px;
   margin: 5px;
-  text-align: ${props => props.left ? "left" : "right"};
-  color: ${props => props.left ? "grey" : "black"};
+  /* text-align: ${props => props.left ? "left" : "right"}; */
+  color: ${props => props.left ? `${PALETTE.color6}` : `${PALETTE.color1}`};
+`;
+
+export const StyledCardLabel = styled.label`
+  font-size: 12px;
+  height: 21px;
+  width: 130px;
+  margin: 5px;
+  /* text-align: left; */
+  color: ${PALETTE.color6};
+`;
+
+export const StyledCardInput = styled.input`
+  font-size: 12px;
+  height: 21px;
+  width: 130px;
+  margin: 0 5px 5px 5px;
+  /* text-align: right; */
+  color: ${PALETTE.color1};
+  border: 1px solid ${PALETTE.color6};
+`;
+
+export const StyledCardSelect = styled.select`
+  font-size: 12px;
+  height: 21px;
+  width: 130px;
+  margin: 0 5px 5px 5px;
+  /* text-align: right; */
+  color: ${PALETTE.color1};
+  border: 1px solid ${PALETTE.color6};
 `;

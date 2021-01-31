@@ -1,6 +1,7 @@
 import React from "react";
+import { Provider } from "react-redux";
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
-import { Switch, Route, Redirect } from 'react-router-dom';
+import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 
 import { user } from "./reducers/user";
 
@@ -15,11 +16,8 @@ import Contacts from "./components/contacts/Contacts";
 import ContactRegistration from "./components/contacts/ContactRegistration";
 import Footer from "./components/Footer";
 
-import { StyledBrowserRouter } from "./lib/Styling";
-import { StyledProvider } from "./lib/Styling";
-
-// const BASE_URL = "http://localhost:8080/";
-const BASE_URL = "https://ep-app-api.herokuapp.com/";
+const BASE_URL = "http://localhost:8080/";
+// const BASE_URL = "https://ep-app-api.herokuapp.com/";
 const USERS_URL = `${BASE_URL}users`;
 const LOGIN_URL = `${BASE_URL}sessions`;
 const USERDATA_URL = `${BASE_URL}userdata`;
@@ -31,9 +29,9 @@ const store = configureStore({ reducer });
 
 const App = () => {
   return (
-    <StyledBrowserRouter>
+    <BrowserRouter>
       <Header />
-      <StyledProvider store={store}>
+      <Provider store={store}>
         <Switch>
           <Route path="/" exact>
             <StartPage LOGIN_URL={LOGIN_URL} USERDATA_URL={USERDATA_URL} />
@@ -64,9 +62,9 @@ const App = () => {
           </Route>
           <Redirect to="/404"></Redirect>
         </Switch>
-      </StyledProvider>
+      </Provider>
       <Footer />
-    </StyledBrowserRouter>
+    </BrowserRouter>
   );
 }
 
