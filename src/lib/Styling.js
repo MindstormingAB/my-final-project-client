@@ -125,7 +125,7 @@ export const StyledCard = styled.section`
 
 export const StyledCardWithGrid = styled(StyledCard)`
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: auto auto;
 `;
 
 export const StyledCardText = styled.p`
@@ -164,4 +164,10 @@ export const StyledCardSelect = styled.select`
   /* text-align: right; */
   color: ${PALETTE.color1};
   border: 1px solid ${PALETTE.color6};
+`;
+
+export const StyledDurationInput = styled(StyledCardInput)`
+  width: 35px;
+  margin: 0px;
+  text-align: right;
 `;

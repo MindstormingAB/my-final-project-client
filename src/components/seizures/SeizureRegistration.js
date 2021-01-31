@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 
 import NavigationButton from "../buttons/NavigationButton";
 
-import { StyledSection, StyledButton, StyledForm, StyledCardInput, StyledCardLabel, StyledSubTitle, StyledText, StyledCardWithGrid, StyledCardSelect, StyledCardText } from "../../lib/Styling";
+import { StyledSection, StyledButton, StyledForm, StyledCardInput, StyledCardLabel, StyledSubTitle, StyledText, StyledCardWithGrid, StyledCardSelect, StyledCardText, StyledDurationInput } from "../../lib/Styling";
 
 const SeizureRegistration = ({ SEIZURES_URL }) => {
   const seizureTypes = [
@@ -87,30 +87,33 @@ const SeizureRegistration = ({ SEIZURES_URL }) => {
             value={date}
             onChange={event => setDate(event.target.value)} >
           </StyledCardInput>
-          <StyledCardText>Duration</StyledCardText>
+          <StyledCardText left>Duration</StyledCardText>
           <StyledCardText>
-            <StyledCardInput
+            <StyledDurationInput
               aria-label="hours"
               type="number"
               value={lengthHours}
               onChange={event => setLengthHours(event.target.value)}
             >
-            </StyledCardInput>
-            <StyledCardInput
+            </StyledDurationInput>
+          h
+          <StyledDurationInput
               aria-label="minutes"
               type="number"
               value={lengthMinutes}
               onChange={event => setLengthMinutes(event.target.value)}
             >
-            </StyledCardInput>
-            <StyledCardInput
+            </StyledDurationInput>
+          m
+          <StyledDurationInput
               aria-label="seconds"
               type="number"
               value={lengthSeconds}
               onChange={event => setLengthSeconds(event.target.value)}
             >
-            </StyledCardInput>
-          </StyledCardText>
+            </StyledDurationInput>
+          s
+        </StyledCardText>
           <StyledCardLabel htmlFor="type">
             Type:
           </StyledCardLabel>
