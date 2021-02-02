@@ -4,7 +4,7 @@ import moment from "moment";
 
 import { user } from "../../reducers/user";
 
-import { StyledButton, StyledForm, StyledCardInput, StyledCardLabel, StyledCardWithGrid } from "../../lib/Styling";
+import { StyledButton, StyledForm, StyledCardInput, StyledCardLabel, StyledCard, StyledGrid } from "../../lib/Styling";
 
 const ProfileForm = ({ USERDATA_URL, toggleEditMode }) => {
   const localToken = localStorage.getItem("localToken");
@@ -54,52 +54,54 @@ const ProfileForm = ({ USERDATA_URL, toggleEditMode }) => {
 
   return (
     <StyledForm onSubmit={handleEdit}>
-      <StyledCardWithGrid>
-        <StyledCardLabel htmlFor="email">
-          Email:
+      <StyledCard>
+        <StyledGrid>
+          <StyledCardLabel htmlFor="email">
+            Email:
         </StyledCardLabel>
-        <StyledCardInput
-          id="email"
-          required
-          minLength="5"
-          type="email"
-          value={email}
-          name="email"
-          onChange={event => setEmail(event.target.value)} >
-        </StyledCardInput>
-        <StyledCardLabel htmlFor="firstname">
-          First name:
+          <StyledCardInput
+            id="email"
+            required
+            minLength="5"
+            type="email"
+            value={email}
+            name="email"
+            onChange={event => setEmail(event.target.value)} >
+          </StyledCardInput>
+          <StyledCardLabel htmlFor="firstname">
+            First name:
           </StyledCardLabel>
-        <StyledCardInput
-          id="firstname"
-          minLength="2"
-          type="text"
-          value={firstName}
-          onChange={event => setFirstName(event.target.value)} >
-        </StyledCardInput>
-        <StyledCardLabel htmlFor="surname">
-          Surname:
+          <StyledCardInput
+            id="firstname"
+            minLength="2"
+            type="text"
+            value={firstName}
+            onChange={event => setFirstName(event.target.value)} >
+          </StyledCardInput>
+          <StyledCardLabel htmlFor="surname">
+            Surname:
           </StyledCardLabel>
-        <StyledCardInput
-          id="surname"
-          minLength="2"
-          type="text"
-          value={surname}
-          onChange={event => setSurname(event.target.value)} >
-        </StyledCardInput>
-        <StyledCardLabel htmlFor="birthdate">
-          Birth Date:
+          <StyledCardInput
+            id="surname"
+            minLength="2"
+            type="text"
+            value={surname}
+            onChange={event => setSurname(event.target.value)} >
+          </StyledCardInput>
+          <StyledCardLabel htmlFor="birthdate">
+            Birth Date:
           </StyledCardLabel>
-        <StyledCardInput
-          id="birthdate"
-          minLength="2"
-          type="date"
-          value={birthDate}
-          onChange={event => setBirthDate(event.target.value)} >
-        </StyledCardInput>
-      </StyledCardWithGrid>
-      <StyledButton type="submit">Save</StyledButton>
-      <StyledButton onClick={toggleEditMode}>Cancel</StyledButton>
+          <StyledCardInput
+            id="birthdate"
+            minLength="2"
+            type="date"
+            value={birthDate}
+            onChange={event => setBirthDate(event.target.value)} >
+          </StyledCardInput>
+        </StyledGrid>
+        <StyledButton small accent onClick={toggleEditMode}>Cancel</StyledButton>
+        <StyledButton small accent type="submit">Save</StyledButton>
+      </StyledCard>
     </StyledForm>
   )
 };

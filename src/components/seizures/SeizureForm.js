@@ -5,7 +5,7 @@ import moment from "moment";
 
 import { user } from "../../reducers/user";
 
-import { InvertedStyledCardButton, StyledCardSelect, StyledCardWithGrid, StyledForm, StyledCardInput, StyledCardLabel, StyledCardText, StyledDurationInput } from "../../lib/Styling";
+import { StyledButton, StyledCardSelect, StyledCard, StyledForm, StyledCardInput, StyledCardLabel, StyledCardText, StyledDurationInput, StyledGrid } from "../../lib/Styling";
 
 const SeizureForm = ({ SEIZURES_URL, seizure, toggleEditMode }) => {
   const dispatch = useDispatch()
@@ -99,77 +99,79 @@ const SeizureForm = ({ SEIZURES_URL, seizure, toggleEditMode }) => {
 
   return (
     <StyledForm onSubmit={handleEdit}>
-      <StyledCardWithGrid>
-        <StyledCardLabel htmlFor="date">
-          Birth Date:
+      <StyledCard>
+        <StyledGrid>
+          <StyledCardLabel htmlFor="date">
+            Birth Date:
           </StyledCardLabel>
-        <StyledCardInput
-          id="date"
-          type="datetime-local"
-          value={date}
-          onChange={event => setDate(event.target.value)} >
-        </StyledCardInput>
-        <StyledCardText left>Duration</StyledCardText>
-        <StyledCardText>
-          <StyledDurationInput
-            aria-label="hours"
-            type="number"
-            value={lengthHours}
-            onChange={event => setLengthHours(event.target.value)}
-          >
-          </StyledDurationInput>
+          <StyledCardInput
+            id="date"
+            type="datetime-local"
+            value={date}
+            onChange={event => setDate(event.target.value)} >
+          </StyledCardInput>
+          <StyledCardText left>Duration</StyledCardText>
+          <StyledCardText>
+            <StyledDurationInput
+              aria-label="hours"
+              type="number"
+              value={lengthHours}
+              onChange={event => setLengthHours(event.target.value)}
+            >
+            </StyledDurationInput>
           h
           <StyledDurationInput
-            aria-label="minutes"
-            type="number"
-            value={lengthMinutes}
-            onChange={event => setLengthMinutes(event.target.value)}
-          >
-          </StyledDurationInput>
+              aria-label="minutes"
+              type="number"
+              value={lengthMinutes}
+              onChange={event => setLengthMinutes(event.target.value)}
+            >
+            </StyledDurationInput>
           m
           <StyledDurationInput
-            aria-label="seconds"
-            type="number"
-            value={lengthSeconds}
-            onChange={event => setLengthSeconds(event.target.value)}
-          >
-          </StyledDurationInput>
+              aria-label="seconds"
+              type="number"
+              value={lengthSeconds}
+              onChange={event => setLengthSeconds(event.target.value)}
+            >
+            </StyledDurationInput>
           s
         </StyledCardText>
-        <StyledCardLabel htmlFor="type">
-          Type:
+          <StyledCardLabel htmlFor="type">
+            Type:
           </StyledCardLabel>
-        <StyledCardSelect
-          id="type"
-          required
-          value={type}
-          onChange={event => setType(event.target.value)} >
-          <option value="" disabled>Choose a type</option>
-          {seizureTypes.map(type => {
-            return (<option key={type.name} value={type.name}>{type.name}</option>)
-          })}
-        </StyledCardSelect>
-        <StyledCardLabel htmlFor="trigger">
-          Trigger:
+          <StyledCardSelect
+            id="type"
+            required
+            value={type}
+            onChange={event => setType(event.target.value)} >
+            <option value="" disabled>Choose a type</option>
+            {seizureTypes.map(type => {
+              return (<option key={type.name} value={type.name}>{type.name}</option>)
+            })}
+          </StyledCardSelect>
+          <StyledCardLabel htmlFor="trigger">
+            Trigger:
           </StyledCardLabel>
-        <StyledCardInput
-          id="trigger"
-          type="text"
-          value={trigger}
-          onChange={event => setTrigger(event.target.value)} >
-        </StyledCardInput>
-        <StyledCardLabel htmlFor="comment">
-          Comment:
+          <StyledCardInput
+            id="trigger"
+            type="text"
+            value={trigger}
+            onChange={event => setTrigger(event.target.value)} >
+          </StyledCardInput>
+          <StyledCardLabel htmlFor="comment">
+            Comment:
           </StyledCardLabel>
-        <StyledCardInput
-          id="comment"
-          type="text"
-          value={comment}
-          onChange={event => setComment(event.target.value)} >
-        </StyledCardInput>
-        <InvertedStyledCardButton onClick={toggleEditMode}>Cancel</InvertedStyledCardButton>
-        <InvertedStyledCardButton type="submit">Save</InvertedStyledCardButton>
-      </StyledCardWithGrid>
+          <StyledCardInput
+            id="comment"
+            type="text"
+            value={comment}
+            onChange={event => setComment(event.target.value)} >
+          </StyledCardInput>
+        </StyledGrid>
+        <StyledButton small accent onClick={toggleEditMode}>Cancel</StyledButton>
+        <StyledButton small accent type="submit">Save</StyledButton>
+      </StyledCard>
     </StyledForm>
   )
 };

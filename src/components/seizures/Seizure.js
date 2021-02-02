@@ -6,7 +6,7 @@ import { useToggle } from "../../reducers/reusable";
 
 import SeizureForm from "./SeizureForm";
 
-import { StyledCardButton, StyledCardWithGrid } from "../../lib/Styling";
+import { StyledButton, StyledCard, StyledGrid } from "../../lib/Styling";
 import { StyledCardText } from "../../lib/Styling";
 
 const Seizure = ({ seizure, SEIZURES_URL }) => {
@@ -40,20 +40,22 @@ const Seizure = ({ seizure, SEIZURES_URL }) => {
       {editMode
         ? <SeizureForm SEIZURES_URL={SEIZURES_URL} seizure={seizure} toggleEditMode={toggleEditMode} />
         : (
-          <StyledCardWithGrid>
-            <StyledCardText left>Date:</StyledCardText>
-            <StyledCardText>{moment(seizure.seizureDate).format("ddd DD MMM HH:mm")}</StyledCardText>
-            <StyledCardText left>Length:</StyledCardText>
-            <StyledCardText>{seizure.seizureLength.hours}h {seizure.seizureLength.minutes}m {seizure.seizureLength.seconds}s</StyledCardText>
-            <StyledCardText left>Seizure type:</StyledCardText>
-            <StyledCardText>{seizure.seizureType}</StyledCardText>
-            <StyledCardText left>Trigger:</StyledCardText>
-            <StyledCardText>{seizure.seizureTrigger}</StyledCardText>
-            <StyledCardText left>Comment:</StyledCardText>
-            <StyledCardText>{seizure.seizureComment}</StyledCardText>
-            <StyledCardButton onClick={handleDeleteSeizure}>Delete</StyledCardButton>
-            <StyledCardButton onClick={toggleEditMode}>Edit</StyledCardButton>
-          </StyledCardWithGrid>
+          <StyledCard>
+            <StyledGrid>
+              <StyledCardText left>Date:</StyledCardText>
+              <StyledCardText>{moment(seizure.seizureDate).format("ddd DD MMM HH:mm")}</StyledCardText>
+              <StyledCardText left>Duration:</StyledCardText>
+              <StyledCardText>{seizure.seizureLength.hours}h {seizure.seizureLength.minutes}m {seizure.seizureLength.seconds}s</StyledCardText>
+              <StyledCardText left>Type:</StyledCardText>
+              <StyledCardText>{seizure.seizureType}</StyledCardText>
+              <StyledCardText left>Trigger:</StyledCardText>
+              <StyledCardText>{seizure.seizureTrigger}</StyledCardText>
+              <StyledCardText left>Comment:</StyledCardText>
+              <StyledCardText>{seizure.seizureComment}</StyledCardText>
+            </StyledGrid>
+            <StyledButton small onClick={handleDeleteSeizure}>Delete</StyledButton>
+            <StyledButton small onClick={toggleEditMode}>Edit</StyledButton>
+          </StyledCard>
         )
       }
     </>

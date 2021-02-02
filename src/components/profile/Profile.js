@@ -61,20 +61,22 @@ const Profile = ({ USERDATA_URL }) => {
   };
 
   return (
-    <StyledSection>
-      <StyledSubTitle>Profile</StyledSubTitle>
-      <StyledText>This is where you can update your profile</StyledText>
-      {editMode
-        ? <ProfileForm USERDATA_URL={USERDATA_URL} toggleEditMode={toggleEditMode} />
-        : (
-          <>
-            <ProfileCard />
-            <StyledButton onClick={toggleEditMode}>Edit</StyledButton>
-            <NavigationButton route="" label="Back" />
-            <StyledButton onClick={handleDeleteUser}>Delete account</StyledButton>
-          </>
-        )}
-    </StyledSection>
+    <>
+      <StyledSection>
+        <StyledSubTitle>Profile</StyledSubTitle>
+        <StyledText>This is where you can update your profile</StyledText>
+        {editMode
+          ? <ProfileForm USERDATA_URL={USERDATA_URL} toggleEditMode={toggleEditMode} />
+          : (
+            <>
+              <ProfileCard />
+              <StyledButton onClick={toggleEditMode}>Edit</StyledButton>
+              <NavigationButton route="" label="Back" />
+            </>
+          )}
+      </StyledSection>
+      {!editMode && <StyledButton accent onClick={handleDeleteUser}>Delete account</StyledButton>}
+    </>
   )
 };
 

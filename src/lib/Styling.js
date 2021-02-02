@@ -65,24 +65,25 @@ export const StyledInput = styled.input`
 export const StyledButton = styled.button`
   font-family: inherit;
   font-size: inherit;
-  width: 150px;
+  width: ${props => props.small ? "100px" : "150px"};
   height: 30px;
   justify-self: center;
+  align-self: center;
   border-radius: 25px;
   border: none;
-  margin-bottom: 16px;
-  /* box-shadow: 2px 2px 2px #888888; */
+  margin: ${props => props.small ? "5px 10px" : "0 0 16px 0"};
   box-shadow: 2px 2px 2px ${PALETTE.color6};
-  /* color: #03324c; */
-  color: ${PALETTE.color1};
+  color: ${props => props.accent
+    ? `${PALETTE.color3}`
+    : `${PALETTE.color1}`};
   background-image: linear-gradient(${PALETTE.color7} 45%, ${PALETTE.color6} 55%);
-  /* background-image: linear-gradient(#b1ccda 49%, #96b4c5 51%); */
   transition: color 0.3s, background-image 0.5s, ease-in-out;
-
+  
   &:hover {
     color: ${PALETTE.color5};
-    background-image: linear-gradient(${PALETTE.color2} 45%, ${PALETTE.color1} 55%);
-    /* background-image: linear-gradient(#335b71 45%, #03324c 55%); */
+    background-image: ${props => props.accent
+    ? `linear-gradient(${PALETTE.color8} 45%, ${PALETTE.color3} 55%)`
+    : `linear-gradient(${PALETTE.color2} 45%, ${PALETTE.color1} 55%)`};
   }
 `;
 
@@ -116,40 +117,48 @@ export const StyledLink = styled(Link)`
 `;
 
 export const StyledCard = styled.section`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   box-shadow: 2px 2px 2px ${PALETTE.color6};
   padding: 10px;
+  width: 302px;
   margin-bottom: 20px;
   border: 1px solid ${PALETTE.color6};
   border-radius: 25px;
 `;
 
+export const StyledGrid = styled.div`
+  display: grid;
+  grid-template-columns: 35% 65%;
+`;
+
 export const StyledCardWithGrid = styled(StyledCard)`
   display: grid;
-  grid-template-columns: auto auto;
+  grid-template-columns: 35% 65%;
 `;
 
 export const StyledCardText = styled.p`
   font-size: 12px;
   min-height: 21px;
-  width: 130px;
+  width: ${props => props.left ? "88px" : "172px"};
   margin: 5px;
-  /* text-align: ${props => props.left ? "left" : "right"}; */
-  color: ${props => props.left ? `${PALETTE.color6}` : `${PALETTE.color1}`};
+  color: ${props => props.left ? `${PALETTE.color9}` : `${PALETTE.color1}`};
 `;
 
 export const StyledCardLabel = styled.label`
   font-size: 12px;
   height: 21px;
-  width: 130px;
+  width: 88px;
   margin: 5px;
   /* text-align: left; */
-  color: ${PALETTE.color6};
+  color: ${PALETTE.color9};
 `;
 
 export const StyledCardInput = styled.input`
   font-size: 12px;
   min-height: 21px;
-  width: 130px;
+  width: 172px;
   margin: 0 5px 5px 5px;
   /* text-align: right; */
   color: ${PALETTE.color1};
@@ -158,8 +167,8 @@ export const StyledCardInput = styled.input`
 
 export const StyledCardSelect = styled.select`
   font-size: 12px;
-  height: 21px;
-  width: 130px;
+  height: 26px;
+  width: 172px;
   margin: 0 5px 5px 5px;
   /* text-align: right; */
   color: ${PALETTE.color1};
@@ -167,7 +176,11 @@ export const StyledCardSelect = styled.select`
 `;
 
 export const StyledDurationInput = styled(StyledCardInput)`
-  width: 35px;
-  margin: 0px;
+  width: 41px;
+  margin: 0 2px 0 8px;
   text-align: right;
+
+  &:first-child{
+    margin: 0 2px 0 0;
+  }
 `;

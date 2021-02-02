@@ -52,13 +52,13 @@ const App = () => {
             <Seizures SEIZURES_URL={SEIZURES_URL} USERDATA_URL={USERDATA_URL} />
           </Route>
           <Route path="/contacts" exact>
-            <Contacts CONTACTS_URL={CONTACTS_URL} />
+            <Contacts CONTACTS_URL={CONTACTS_URL} USERDATA_URL={USERDATA_URL} />
           </Route>
           <Route path="/contacts/add" exact>
             <ContactRegistration CONTACTS_URL={CONTACTS_URL} />
           </Route>
           <Route path="/404">
-            <StartPage LOGIN_URL={LOGIN_URL} />
+            <StartPage LOGIN_URL={LOGIN_URL} USERDATA_URL={USERDATA_URL} />
           </Route>
           <Redirect to="/404"></Redirect>
         </Switch>
