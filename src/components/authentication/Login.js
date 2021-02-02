@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { useHistory } from 'react-router-dom';
 
-import { user } from "../../reducers/user";
+import { storeCredentials } from "../../reducers/reusable";
+import { storeUserData } from "../../reducers/reusable";
 
 import { StyledSection } from "../../lib/Styling";
 import { StyledSubTitle } from "../../lib/Styling";
@@ -13,27 +13,12 @@ import { StyledInput } from "../../lib/Styling";
 import { StyledButton } from "../../lib/Styling";
 import { StyledLink } from "../../lib/Styling";
 
-const Login = ({ LOGIN_URL }) => {
+const Login = ({ LOGIN_URL, toggleLoggedIn }) => {
   const dispatch = useDispatch();
-  const history = useHistory();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [response, setResponse] = useState(true);
-
-  const handleCredentials = (credentials) => {
-    localStorage.setItem("localToken", credentials.accessToken);
-    localStorage.setItem("localId", credentials.userId);
-    localStorage.setItem("localFirstName", credentials.firstName);
-    dispatch(user.actions.setAccessToken({ accessToken: credentials.accessToken }));
-    dispatch(user.actions.setUserId({ userId: credentials.userId }));
-    dispatch(user.actions.setEmail({ email: credentials.email }));
-    dispatch(user.actions.setFirstName({ firstName: credentials.firstName }));
-    dispatch(user.actions.setSurname({ surname: credentials.surname }));
-    dispatch(user.actions.setBirthDate({ birthDate: credentials.birthDate }));
-    dispatch(user.actions.setSeizures({ seizures: credentials.seizures }));
-    dispatch(user.actions.setContacts({ contacts: credentials.contacts }));
-  };
 
   const handleLogin = (event) => {
     event.preventDefault();
@@ -53,10 +38,11 @@ const Login = ({ LOGIN_URL }) => {
         return res.json();
       })
       .then((json) => {
-        handleCredentials(json);
-        history.push("/dashboard");
+        storeCredentials(json);
+        dispatch(storeUserData(json));
         setEmail("");
         setPassword("");
+        toggleLoggedIn();
       })
       .catch((error) => console.error(error))
   };

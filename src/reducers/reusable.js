@@ -13,6 +13,25 @@ export const useToggle = (initialValue = false) => {
   return [value, toggle];
 };
 
+export const storeCredentials = (json) => {
+  localStorage.setItem("localToken", json.accessToken);
+  localStorage.setItem("localId", json.userId);
+  localStorage.setItem("localFirstName", json.firstName);
+};
+
+export const storeUserData = (json) => {
+  return (dispatch) => {
+    dispatch(user.actions.setAccessToken({ accessToken: json.accessToken }));
+    dispatch(user.actions.setUserId({ userId: json.userId }));
+    dispatch(user.actions.setEmail({ email: json.email }));
+    dispatch(user.actions.setFirstName({ firstName: json.firstName }));
+    dispatch(user.actions.setSurname({ surname: json.surname }));
+    dispatch(user.actions.setBirthDate({ birthDate: json.birthDate }));
+    dispatch(user.actions.setSeizures({ seizures: json.seizures }));
+    dispatch(user.actions.setContacts({ contacts: json.contacts }));
+  }
+};
+
 export const retrieveContactData = (CONTACTS_URL, localToken, localId) => {
   return (dispatch) => {
     dispatch(ui.actions.setLoading(true));

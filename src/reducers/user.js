@@ -9,16 +9,6 @@ const initialState = {
     surname: "",
     birthDate: null
   },
-  // login: {
-  //   accessToken: "",
-  //   userId: ""
-  // },
-  // profile: {
-  //   email: "",
-  //   firstName: "",
-  //   surname: "",
-  //   birthDate: null
-  // },
   seizures: [],
   contacts: []
 };
@@ -35,14 +25,6 @@ export const user = createSlice({
       const { userId } = action.payload;
       state.profile.userId = userId;
     },
-    // setAccessToken: (state, action) => {
-    //   const { accessToken } = action.payload;
-    //   state.login.accessToken = accessToken;
-    // },
-    // setUserId: (state, action) => {
-    //   const { userId } = action.payload;
-    //   state.login.userId = userId;
-    // },
     setEmail: (state, action) => {
       const { email } = action.payload;
       state.profile.email = email;
@@ -84,6 +66,10 @@ export const user = createSlice({
         }
       });
       state.seizures = updatedSeizuresList;
+    },
+    deleteSeizure: (state, action) => {
+      const remainingSeizures = state.seizures.filter((item) => item._id !== action.payload._id);
+      state.seizures = remainingSeizures;
     },
     deleteAccessToken: (state, action) => {
       state.profile.accessToken = "";

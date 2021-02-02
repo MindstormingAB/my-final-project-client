@@ -104,15 +104,12 @@ export const InvertedStyledCardButton = styled(StyledCardButton)`
 export const StyledLink = styled(Link)`
   text-decoration: none;
   padding: 1px;
-  color: white;
-  background-image: linear-gradient(${PALETTE.color2} 45%, ${PALETTE.color1} 55%);
-  /* background-image: linear-gradient(#335b71 45%, #03324c 55%); */
+  color: ${PALETTE.color3};
   transition: color 0.3s, background-image 0.5s, ease-in-out;
   
   &:hover {
-    /* background-image: linear-gradient(#b1ccda 49%, #96b4c5 51%); */
-    background-image: linear-gradient(${PALETTE.color7} 45%, ${PALETTE.color6} 55%);
-    color: #03324c;
+    color: ${PALETTE.color5};
+    background-image: linear-gradient(${PALETTE.color8} 45%, ${PALETTE.color3} 55%)
   }
 `;
 
@@ -151,7 +148,6 @@ export const StyledCardLabel = styled.label`
   height: 21px;
   width: 88px;
   margin: 5px;
-  /* text-align: left; */
   color: ${PALETTE.color9};
 `;
 
@@ -160,7 +156,6 @@ export const StyledCardInput = styled.input`
   min-height: 21px;
   width: 172px;
   margin: 0 5px 5px 5px;
-  /* text-align: right; */
   color: ${PALETTE.color1};
   border: 1px solid ${PALETTE.color6};
 `;
@@ -170,7 +165,6 @@ export const StyledCardSelect = styled.select`
   height: 26px;
   width: 172px;
   margin: 0 5px 5px 5px;
-  /* text-align: right; */
   color: ${PALETTE.color1};
   border: 1px solid ${PALETTE.color6};
 `;

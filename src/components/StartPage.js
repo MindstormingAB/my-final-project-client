@@ -5,13 +5,15 @@ import NavigationButton from "./buttons/NavigationButton";
 import ReloadButton from "./buttons/ReloadButton";
 import LogoutButton from "./buttons/LogoutButton";
 
+import { useToggle } from "../reducers/reusable";
+
 import { StyledSection } from "../lib/Styling";
 import { StyledTitle } from "../lib/Styling";
 import { StyledText } from "../lib/Styling";
 
 const StartPage = ({ LOGIN_URL, USERDATA_URL }) => {
-  const localToken = localStorage.getItem("localToken");
   const localFirstName = localStorage.getItem("localFirstName");
+  const [loggedIn, toggleLoggedIn] = useToggle();
 
   return (
     <StyledSection>
@@ -21,10 +23,10 @@ const StartPage = ({ LOGIN_URL, USERDATA_URL }) => {
           : "Welcome!"}
       </StyledTitle>
       <StyledText>Description of the application</StyledText>
-      {!localToken
+      {!loggedIn
         ? (
           <>
-            <Login LOGIN_URL={LOGIN_URL} />
+            <Login LOGIN_URL={LOGIN_URL} toggleLoggedIn={toggleLoggedIn} />
           </>
         )
         : (
