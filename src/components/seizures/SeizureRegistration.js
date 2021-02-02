@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import { useHistory } from 'react-router-dom';
+import { useDispatch } from "react-redux";
 
-import NavigationButton from "../buttons/NavigationButton";
+import { user } from "../../reducers/user";
 
-import { StyledSection, StyledButton, StyledForm, StyledCardInput, StyledCardLabel, StyledSubTitle, StyledText, StyledCardWithGrid, StyledCardSelect, StyledCardText, StyledDurationInput } from "../../lib/Styling";
+import { StyledSection, StyledForm, StyledCardInput, StyledCardLabel, StyledCardWithGrid, StyledCardSelect, StyledCardText, StyledDurationInput, InvertedStyledCardButton } from "../../lib/Styling";
 
-const SeizureRegistration = ({ SEIZURES_URL }) => {
+const SeizureRegistration = ({ SEIZURES_URL, toggleCreationMode }) => {
   const seizureTypes = [
     {
       name: "absence",
@@ -44,8 +44,7 @@ const SeizureRegistration = ({ SEIZURES_URL }) => {
       description: "seizure starting in one part of the brain as a focal seizure but evolving into a generalized seizure when spreading to both sides of the brain"
     }
   ];
-
-  const history = useHistory();
+  const dispatch = useDispatch();
   const localToken = localStorage.getItem("localToken");
   const localId = localStorage.getItem("localId");
   const [date, setDate] = useState("");
@@ -69,13 +68,13 @@ const SeizureRegistration = ({ SEIZURES_URL }) => {
       }),
       headers: { "Content-Type": "application/json", Authorization: localToken, userId: localId },
     })
-      .then(history.push("/seizures"))
+      .then(response => response.json())
+      .then(json => dispatch(user.actions.addSeizure(json)));
+    toggleCreationMode();
   };
 
   return (
     <StyledSection>
-      <StyledSubTitle>Add a new seizure</StyledSubTitle>
-      <StyledText>Fill the form below to register a new seizure</StyledText>
       <StyledForm onSubmit={handleEdit}>
         <StyledCardWithGrid>
           <StyledCardLabel htmlFor="date">
@@ -145,9 +144,9 @@ const SeizureRegistration = ({ SEIZURES_URL }) => {
             value={comment}
             onChange={event => setComment(event.target.value)} >
           </StyledCardInput>
+          <InvertedStyledCardButton onClick={toggleCreationMode}>Cancel</InvertedStyledCardButton>
+          <InvertedStyledCardButton type="submit">Save</InvertedStyledCardButton>
         </StyledCardWithGrid>
-        <StyledButton type="submit">Save</StyledButton>
-        <NavigationButton route="seizures" label="Cancel" />
       </StyledForm>
     </StyledSection>
   )

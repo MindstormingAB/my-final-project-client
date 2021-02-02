@@ -1,10 +1,14 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import swal from "sweetalert";
 import moment from "moment";
+
+import { user } from "../../reducers/user";
 
 import { InvertedStyledCardButton, StyledCardSelect, StyledCardWithGrid, StyledForm, StyledCardInput, StyledCardLabel, StyledCardText, StyledDurationInput } from "../../lib/Styling";
 
 const SeizureForm = ({ SEIZURES_URL, seizure, toggleEditMode }) => {
+  const dispatch = useDispatch()
   const seizureTypes = [
     {
       name: "absence",
@@ -43,26 +47,38 @@ const SeizureForm = ({ SEIZURES_URL, seizure, toggleEditMode }) => {
       description: "seizure starting in one part of the brain as a focal seizure but evolving into a generalized seizure when spreading to both sides of the brain"
     }
   ];
-
   const localToken = localStorage.getItem("localToken");
   const localId = localStorage.getItem("localId");
   const seizureId = seizure._id;
-  const currentDate = seizure.seizureDate;
-  const currentLengthHours = seizure.seizureLength.hours;
-  const currentLengthMinutes = seizure.seizureLength.minutes;
-  const currentLengthSeconds = seizure.seizureLength.seconds;
-  const currentType = seizure.seizureType;
-  const currentTrigger = seizure.seizureTrigger;
-  const currentComment = seizure.seizureComment;
-  const formattedDate = moment(currentDate).format("YYYY-MM-DDTHH:mm");
 
-  const [date, setDate] = useState(formattedDate);
-  const [lengthHours, setLengthHours] = useState(currentLengthHours);
-  const [lengthMinutes, setLengthMinutes] = useState(currentLengthMinutes);
-  const [lengthSeconds, setLengthSeconds] = useState(currentLengthSeconds);
-  const [type, setType] = useState(currentType);
-  const [trigger, setTrigger] = useState(currentTrigger);
-  const [comment, setComment] = useState(currentComment);
+  const [date, setDate] = useState(moment(seizure.seizureDate).format("YYYY-MM-DDTHH:mm"));
+  const [lengthHours, setLengthHours] = useState(seizure.seizureLength.hours);
+  const [lengthMinutes, setLengthMinutes] = useState(seizure.seizureLength.minutes);
+  const [lengthSeconds, setLengthSeconds] = useState(seizure.seizureLength.seconds);
+  const [type, setType] = useState(seizure.seizureType);
+  const [trigger, setTrigger] = useState(seizure.seizureTrigger);
+  const [comment, setComment] = useState(seizure.seizureComment);
+
+  const updatedSeizure = { seizureId, date, lengthHours, lengthMinutes, lengthSeconds, type, trigger, comment }
+
+  const updateSeizure = () => {
+    fetch(SEIZURES_URL, {
+      method: "PATCH",
+      body: JSON.stringify({
+        seizureLength: {
+          hours: lengthHours,
+          minutes: lengthMinutes,
+          seconds: lengthSeconds
+        },
+        seizureType: type,
+        seizureTrigger: trigger,
+        seizureComment: comment
+      }),
+      headers: { "Content-Type": "application/json", Authorization: localToken, userId: localId, seizureId: updatedSeizure.seizureId },
+    })
+      .then(response => response.json())
+      .then(json => dispatch(user.actions.updateSeizure(json)));
+  };
 
   const handleEdit = (event) => {
     event.preventDefault();
@@ -75,19 +91,8 @@ const SeizureForm = ({ SEIZURES_URL, seizure, toggleEditMode }) => {
     })
       .then((willSave) => {
         if (willSave) {
-          fetch(SEIZURES_URL, {
-            method: "PATCH",
-            body: JSON.stringify({
-              seizureDate: date,
-              seizureLength: { hours: lengthHours, minutes: lengthMinutes, seconds: lengthSeconds },
-              seizureType: type,
-              seizureTrigger: trigger,
-              seizureComment: comment
-            }),
-            headers: { "Content-Type": "application/json", Authorization: localToken, userId: localId, seizureId: seizureId },
-          })
-            .then(window.location.reload())
-            .then(toggleEditMode())
+          updateSeizure();
+          toggleEditMode();
         }
       })
   };

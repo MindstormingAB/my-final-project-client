@@ -70,8 +70,8 @@ const Profile = ({ USERDATA_URL }) => {
           <>
             <ProfileCard />
             <StyledButton onClick={toggleEditMode}>Edit</StyledButton>
-            <StyledButton onClick={handleDeleteUser}>Delete account</StyledButton>
             <NavigationButton route="" label="Back" />
+            <StyledButton onClick={handleDeleteUser}>Delete account</StyledButton>
           </>
         )}
     </StyledSection>

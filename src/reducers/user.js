@@ -67,6 +67,24 @@ export const user = createSlice({
       const { contacts } = action.payload;
       state.contacts = contacts;
     },
+    addSeizure: (state, action) => {
+      const newSeizure = action.payload;
+      const newSeizuresList = [newSeizure, ...state.seizures];
+      state.seizures = newSeizuresList;
+    },
+    updateSeizure: (state, action) => {
+      const updatedSeizuresList = state.seizures.map((item) => {
+        if (item._id !== action.payload._id) {
+          return item
+        } else {
+          return {
+            ...item,
+            ...action.payload
+          }
+        }
+      });
+      state.seizures = updatedSeizuresList;
+    },
     deleteAccessToken: (state, action) => {
       state.profile.accessToken = "";
     },
