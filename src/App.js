@@ -6,7 +6,6 @@ import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import { user } from "./reducers/user";
 
 import Header from "./components/Header";
-import StartPage from "./components/StartPage";
 import Signup from "./components/authentication/SignUp";
 import Login from "./components/authentication/Login";
 import Dashboard from "./components/Dashboard";
@@ -34,7 +33,7 @@ const App = () => {
       <Provider store={store}>
         <Switch>
           <Route path="/" exact>
-            <StartPage LOGIN_URL={LOGIN_URL} USERDATA_URL={USERDATA_URL} />
+            <Login LOGIN_URL={LOGIN_URL} USERDATA_URL={USERDATA_URL} />
           </Route>
           <Route path="/login" exact>
             <Login LOGIN_URL={LOGIN_URL} />
@@ -58,7 +57,7 @@ const App = () => {
             <ContactRegistration CONTACTS_URL={CONTACTS_URL} />
           </Route>
           <Route path="/404">
-            <StartPage LOGIN_URL={LOGIN_URL} USERDATA_URL={USERDATA_URL} />
+            <Login LOGIN_URL={LOGIN_URL} USERDATA_URL={USERDATA_URL} />
           </Route>
           <Redirect to="/404"></Redirect>
         </Switch>
