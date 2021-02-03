@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 
+import { fetchUserData } from "../../reducers/reusable";
 import { storeCredentials } from "../../reducers/reusable";
 import { storeUserData } from "../../reducers/reusable";
 
@@ -28,20 +29,10 @@ const Login = ({ LOGIN_URL, USERDATA_URL }) => {
 
   useEffect(() => {
     if (!storedFirstName && localFirstName) {
-      fetchUserData();
+      dispatch(fetchUserData(USERDATA_URL, localToken, localId));
     }
     // eslint-disable-next-line
   }, []);
-
-  const fetchUserData = () => {
-    fetch(USERDATA_URL, {
-      method: "GET",
-      headers: { Authorization: localToken, userId: localId },
-    })
-      .then(response => response.json())
-      .then(json => dispatch(storeUserData(json)))
-      .catch(error => console.error(error))
-  };
 
   const handleLogin = (event) => {
     event.preventDefault();

@@ -1,8 +1,9 @@
 import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import swal from "sweetalert";
 
-import { user } from "../../reducers/user";
+import { fetchUserData } from "../../reducers/reusable";
+// import { user } from "../../reducers/user";
 import { useToggle } from "../../reducers/reusable";
 
 import ProfileCard from "./ProfileCard";
@@ -18,27 +19,35 @@ const Profile = ({ USERDATA_URL }) => {
   const dispatch = useDispatch();
   const localToken = localStorage.getItem("localToken");
   const localId = localStorage.getItem("localId");
+  const storedFirstName = useSelector((store) => store.user.profile.firstName);
   const [editMode, toggleEditMode] = useToggle();
 
   useEffect(() => {
-    fetch(USERDATA_URL, {
-      method: "GET",
-      headers: { Authorization: localToken, userId: localId },
-    })
-      .then(response => response.json())
-      .then(json => {
-        dispatch(user.actions.setAccessToken({ accessToken: json.accessToken }));
-        dispatch(user.actions.setUserId({ userId: json.userId }));
-        dispatch(user.actions.setEmail({ email: json.email }));
-        dispatch(user.actions.setFirstName({ firstName: json.firstName }));
-        dispatch(user.actions.setSurname({ surname: json.surname }));
-        dispatch(user.actions.setBirthDate({ birthDate: json.birthDate }));
-        dispatch(user.actions.setSeizures({ seizures: json.seizures }));
-        dispatch(user.actions.setContacts({ contacts: json.contacts }));
-      })
-      .catch(error => console.error(error));
+    if (!storedFirstName) {
+      dispatch(fetchUserData(USERDATA_URL, localToken, localId));
+    }
     // eslint-disable-next-line
   }, []);
+
+  // useEffect(() => {
+  //   fetch(USERDATA_URL, {
+  //     method: "GET",
+  //     headers: { Authorization: localToken, userId: localId },
+  //   })
+  //     .then(response => response.json())
+  //     .then(json => {
+  //       dispatch(user.actions.setAccessToken({ accessToken: json.accessToken }));
+  //       dispatch(user.actions.setUserId({ userId: json.userId }));
+  //       dispatch(user.actions.setEmail({ email: json.email }));
+  //       dispatch(user.actions.setFirstName({ firstName: json.firstName }));
+  //       dispatch(user.actions.setSurname({ surname: json.surname }));
+  //       dispatch(user.actions.setBirthDate({ birthDate: json.birthDate }));
+  //       dispatch(user.actions.setSeizures({ seizures: json.seizures }));
+  //       dispatch(user.actions.setContacts({ contacts: json.contacts }));
+  //     })
+  //     .catch(error => console.error(error));
+  //   // eslint-disable-next-line
+  // }, []);
 
   const handleDeleteUser = (event) => {
     event.preventDefault();

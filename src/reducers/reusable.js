@@ -32,6 +32,19 @@ export const storeUserData = (json) => {
   }
 };
 
+export const fetchUserData = (USERDATA_URL, localToken, localId) => {
+  return (dispatch) => {
+    dispatch(ui.actions.setLoading(true));
+    fetch(USERDATA_URL, {
+      method: "GET",
+      headers: { Authorization: localToken, userId: localId },
+    })
+      .then(response => response.json())
+      .then(json => dispatch(storeUserData(json)))
+      .catch(error => console.error(error))
+  }
+};
+
 export const retrieveContactData = (CONTACTS_URL, localToken, localId) => {
   return (dispatch) => {
     dispatch(ui.actions.setLoading(true));
