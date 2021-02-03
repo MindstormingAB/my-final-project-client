@@ -19,6 +19,17 @@ export const storeCredentials = (json) => {
   localStorage.setItem("localFirstName", json.firstName);
 };
 
+export const storeUserProfile = (json) => {
+  return (dispatch) => {
+    dispatch(user.actions.setAccessToken({ accessToken: json.accessToken }));
+    dispatch(user.actions.setUserId({ userId: json.userId }));
+    dispatch(user.actions.setEmail({ email: json.email }));
+    dispatch(user.actions.setFirstName({ firstName: json.firstName }));
+    dispatch(user.actions.setSurname({ surname: json.surname }));
+    dispatch(user.actions.setBirthDate({ birthDate: json.birthDate }));
+  }
+};
+
 export const storeUserData = (json) => {
   return (dispatch) => {
     dispatch(user.actions.setAccessToken({ accessToken: json.accessToken }));

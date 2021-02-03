@@ -1,7 +1,9 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import moment from "moment";
 import swal from "sweetalert";
 
+import { user } from "../../reducers/user";
 import { useToggle } from "../../reducers/reusable";
 
 import SeizureForm from "./SeizureForm";
@@ -10,6 +12,7 @@ import { StyledButton, StyledCard, StyledGrid } from "../../lib/Styling";
 import { StyledCardText } from "../../lib/Styling";
 
 const Seizure = ({ seizure, SEIZURES_URL }) => {
+  const dispatch = useDispatch()
   const [editMode, toggleEditMode] = useToggle();
   const localToken = localStorage.getItem("localToken");
   const localId = localStorage.getItem("localId");
@@ -30,7 +33,11 @@ const Seizure = ({ seizure, SEIZURES_URL }) => {
             method: "DELETE",
             headers: { "Content-Type": "application/json", Authorization: localToken, userId: localId, seizureId: seizureId },
           })
-            .then(window.location.reload())
+          dispatch(user.actions.deleteSeizure(seizure));
+          swal({
+            title: "Entry deleted",
+            icon: "success",
+          })
         }
       })
   };

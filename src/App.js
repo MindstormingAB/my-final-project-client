@@ -6,13 +6,11 @@ import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import { user } from "./reducers/user";
 
 import Header from "./components/Header";
-import Signup from "./components/authentication/SignUp";
 import Login from "./components/authentication/Login";
 import Dashboard from "./components/Dashboard";
 import Profile from "./components/profile/Profile";
 import Seizures from "./components/seizures/Seizures";
 import Contacts from "./components/contacts/Contacts";
-import ContactRegistration from "./components/contacts/ContactRegistration";
 import Footer from "./components/Footer";
 
 // const BASE_URL = "http://localhost:8080/";
@@ -33,13 +31,10 @@ const App = () => {
       <Provider store={store}>
         <Switch>
           <Route path="/" exact>
-            <Login LOGIN_URL={LOGIN_URL} USERDATA_URL={USERDATA_URL} />
+            <Login LOGIN_URL={LOGIN_URL} USERDATA_URL={USERDATA_URL} USERS_URL={USERS_URL} />
           </Route>
           <Route path="/login" exact>
             <Login LOGIN_URL={LOGIN_URL} />
-          </Route>
-          <Route path="/signup" exact>
-            <Signup USERS_URL={USERS_URL} />
           </Route>
           <Route path="/dashboard" exact>
             <Dashboard USERDATA_URL={USERDATA_URL} />
@@ -52,9 +47,6 @@ const App = () => {
           </Route>
           <Route path="/contacts" exact>
             <Contacts CONTACTS_URL={CONTACTS_URL} USERDATA_URL={USERDATA_URL} />
-          </Route>
-          <Route path="/contacts/add" exact>
-            <ContactRegistration CONTACTS_URL={CONTACTS_URL} />
           </Route>
           <Route path="/404">
             <Login LOGIN_URL={LOGIN_URL} USERDATA_URL={USERDATA_URL} />

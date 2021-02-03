@@ -59,7 +59,7 @@ const SeizureForm = ({ SEIZURES_URL, seizure, toggleEditMode }) => {
   const [trigger, setTrigger] = useState(seizure.seizureTrigger);
   const [comment, setComment] = useState(seizure.seizureComment);
 
-  const updatedSeizure = { seizureId, date, lengthHours, lengthMinutes, lengthSeconds, type, trigger, comment }
+  const updatedSeizure = { seizureId, date, lengthHours, lengthMinutes, lengthSeconds, type, trigger, comment };
 
   const updateSeizure = () => {
     fetch(SEIZURES_URL, {

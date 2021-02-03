@@ -1,5 +1,4 @@
 import styled from "styled-components/macro";
-import { Link } from "react-router-dom";
 
 import { PALETTE } from "./constants";
 
@@ -92,27 +91,6 @@ export const StyledCardButton = styled(StyledButton)`
   margin-bottom: 0px;
 `;
 
-export const InvertedStyledCardButton = styled(StyledCardButton)`
-  color: ${PALETTE.color5};
-  background-image: linear-gradient(${PALETTE.color8} 45%, ${PALETTE.color3} 55%);
-  
-  &:hover {
-    color: ${PALETTE.color5};
-    background-image: linear-gradient(${PALETTE.color2} 45%, ${PALETTE.color1} 55%);}
-`;
-
-export const StyledLink = styled(Link)`
-  text-decoration: none;
-  padding: 1px;
-  color: ${PALETTE.color3};
-  transition: color 0.3s, background-image 0.5s, ease-in-out;
-  
-  &:hover {
-    color: ${PALETTE.color5};
-    background-image: linear-gradient(${PALETTE.color8} 45%, ${PALETTE.color3} 55%)
-  }
-`;
-
 export const StyledCard = styled.section`
   display: flex;
   flex-wrap: wrap;
@@ -126,11 +104,6 @@ export const StyledCard = styled.section`
 `;
 
 export const StyledGrid = styled.div`
-  display: grid;
-  grid-template-columns: 35% 65%;
-`;
-
-export const StyledCardWithGrid = styled(StyledCard)`
   display: grid;
   grid-template-columns: 35% 65%;
 `;

@@ -6,6 +6,7 @@ import { user } from "../../reducers/user";
 import { StyledSection, StyledForm, StyledCardInput, StyledCardLabel, StyledCard, StyledCardSelect, StyledCardText, StyledDurationInput, StyledButton, StyledGrid } from "../../lib/Styling";
 
 const SeizureRegistration = ({ SEIZURES_URL, toggleCreationMode }) => {
+  const dispatch = useDispatch();
   const seizureTypes = [
     {
       name: "absence",
@@ -44,7 +45,6 @@ const SeizureRegistration = ({ SEIZURES_URL, toggleCreationMode }) => {
       description: "seizure starting in one part of the brain as a focal seizure but evolving into a generalized seizure when spreading to both sides of the brain"
     }
   ];
-  const dispatch = useDispatch();
   const localToken = localStorage.getItem("localToken");
   const localId = localStorage.getItem("localId");
   const [date, setDate] = useState("");

@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 
-import { user } from "../../reducers/user";
+import { fetchUserData } from "../../reducers/reusable";
 import { useToggle } from "../../reducers/reusable";
 
 import Seizure from "./Seizure";
@@ -18,34 +18,15 @@ const Seizures = ({ SEIZURES_URL, USERDATA_URL }) => {
   const [creationMode, toggleCreationMode] = useToggle();
   const localToken = localStorage.getItem("localToken");
   const localId = localStorage.getItem("localId");
-  const storedFirstName = useSelector((store) => store.user.profile.firstName);
+  const storedId = useSelector((store) => store.user.profile.userId);
   const seizures = useSelector((store) => store.user.seizures);
 
   useEffect(() => {
-    if (!storedFirstName) {
-      fetchUserData();
+    if (!storedId && localId) {
+      dispatch(fetchUserData(USERDATA_URL, localToken, localId));
     }
     // eslint-disable-next-line
   }, []);
-
-  const fetchUserData = () => {
-    fetch(USERDATA_URL, {
-      method: "GET",
-      headers: { Authorization: localToken, userId: localId },
-    })
-      .then(response => response.json())
-      .then(json => {
-        dispatch(user.actions.setAccessToken({ accessToken: json.accessToken }));
-        dispatch(user.actions.setUserId({ userId: json.userId }));
-        dispatch(user.actions.setEmail({ email: json.email }));
-        dispatch(user.actions.setFirstName({ firstName: json.firstName }));
-        dispatch(user.actions.setSurname({ surname: json.surname }));
-        dispatch(user.actions.setBirthDate({ birthDate: json.birthDate }));
-        dispatch(user.actions.setSeizures({ seizures: json.seizures }));
-        dispatch(user.actions.setContacts({ contacts: json.contacts }));
-      })
-      .catch(error => console.error(error));
-  };
 
   return (
     <StyledSection>

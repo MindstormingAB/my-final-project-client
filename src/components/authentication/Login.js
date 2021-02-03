@@ -5,6 +5,8 @@ import { useSelector } from "react-redux";
 import { fetchUserData } from "../../reducers/reusable";
 import { storeCredentials } from "../../reducers/reusable";
 import { storeUserData } from "../../reducers/reusable";
+import { storeUserProfile } from "../../reducers/reusable";
+import { useToggle } from "../../reducers/reusable";
 
 import { StyledSection, StyledTitle } from "../../lib/Styling";
 import { StyledSubTitle } from "../../lib/Styling";
@@ -13,22 +15,22 @@ import { StyledForm } from "../../lib/Styling";
 import { StyledLabel } from "../../lib/Styling";
 import { StyledInput } from "../../lib/Styling";
 import { StyledButton } from "../../lib/Styling";
-import { StyledLink } from "../../lib/Styling";
 import StartPage from "../StartPage";
 
-const Login = ({ LOGIN_URL, USERDATA_URL }) => {
+const Login = ({ LOGIN_URL, USERDATA_URL, USERS_URL }) => {
   const dispatch = useDispatch();
   const localToken = localStorage.getItem("localToken");
   const localId = localStorage.getItem("localId");
   const localFirstName = localStorage.getItem("localFirstName");
-  const storedFirstName = useSelector((store) => store.user.profile.firstName);
+  const storedId = useSelector((store) => store.user.profile.userId);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [response, setResponse] = useState(true);
+  const [signUpMode, toggleSignUpMode] = useToggle();
 
   useEffect(() => {
-    if (!storedFirstName && localFirstName) {
+    if (!storedId && localId) {
       dispatch(fetchUserData(USERDATA_URL, localToken, localId));
     }
     // eslint-disable-next-line
@@ -60,6 +62,33 @@ const Login = ({ LOGIN_URL, USERDATA_URL }) => {
       .catch((error) => console.error(error))
   };
 
+  const handleSignUp = (event) => {
+    event.preventDefault();
+    toggleSignUpMode();
+    fetch(USERS_URL, {
+      method: "POST",
+      body: JSON.stringify({ email, password }),
+      headers: { "Content-Type": "application/json" },
+    })
+      .then((res) => {
+        if (!res.ok) {
+          setResponse(false);
+          setEmail("");
+          setPassword("");
+          // eslint-disable-next-line
+          throw "Something went wrong";
+        }
+        return res.json();
+      })
+      .then((json) => {
+        storeCredentials(json);
+        dispatch(storeUserProfile(json));
+        setEmail("");
+        setPassword("");
+      })
+      .catch((error) => console.error(error))
+  };
+
   return (
     <StyledSection>
       <StyledTitle>
@@ -72,7 +101,7 @@ const Login = ({ LOGIN_URL, USERDATA_URL }) => {
         ? (
           <>
             <StyledSubTitle>Please enter your credentials below.</StyledSubTitle>
-            <StyledForm onSubmit={handleLogin}>
+            <StyledForm >
               <StyledLabel>
                 Email:
                   <StyledInput
@@ -94,9 +123,11 @@ const Login = ({ LOGIN_URL, USERDATA_URL }) => {
                   onChange={event => setPassword(event.target.value)} >
                 </StyledInput>
               </StyledLabel>
-              <StyledButton type="submit">Login</StyledButton>
-              {!response && <StyledText>Incorrect credentials, please try again.</StyledText>}
-              <StyledText>Not registered yet? Please sign up <StyledLink to={"/signup"}>here</StyledLink>.</StyledText>
+              <StyledButton type="submit" onClick={handleLogin}>Login</StyledButton>
+              {(!response && !signUpMode) && <StyledText>Incorrect credentials, please try again.</StyledText>}
+              <StyledText>Not registered yet? Please sign up below.</StyledText>
+              <StyledButton type="submit" onClick={handleSignUp}>Sign up</StyledButton>
+              {(!response && signUpMode) && <StyledText>You are already registered, please login above.</StyledText>}
             </StyledForm>
           </>
         )

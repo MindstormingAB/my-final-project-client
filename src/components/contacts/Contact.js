@@ -1,14 +1,17 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import swal from "sweetalert";
 
+import { user } from "../../reducers/user";
 import { useToggle } from "../../reducers/reusable";
 
 import ContactForm from "./ContactForm";
 
-import { StyledCardButton, StyledCardWithGrid } from "../../lib/Styling";
+import { StyledButton, StyledCard, StyledGrid } from "../../lib/Styling";
 import { StyledCardText } from "../../lib/Styling";
 
 const Contact = ({ contact, CONTACTS_URL }) => {
+  const dispatch = useDispatch()
   const [editMode, toggleEditMode] = useToggle();
   const localToken = localStorage.getItem("localToken");
   const localId = localStorage.getItem("localId");
@@ -29,7 +32,11 @@ const Contact = ({ contact, CONTACTS_URL }) => {
             method: "DELETE",
             headers: { "Content-Type": "application/json", Authorization: localToken, userId: localId, contactId: contactId },
           })
-            .then(window.location.reload())
+          dispatch(user.actions.deleteContact(contact));
+          swal({
+            title: "Entry deleted",
+            icon: "success",
+          })
         }
       })
   };
@@ -39,20 +46,22 @@ const Contact = ({ contact, CONTACTS_URL }) => {
       {editMode
         ? <ContactForm CONTACTS_URL={CONTACTS_URL} contact={contact} toggleEditMode={toggleEditMode} />
         : (
-          <StyledCardWithGrid>
-            <StyledCardText left>Type:</StyledCardText>
-            <StyledCardText>{contact.contactType}</StyledCardText>
-            <StyledCardText left>First Name:</StyledCardText>
-            <StyledCardText>{contact.contactFirstName}</StyledCardText>
-            <StyledCardText left>Surname:</StyledCardText>
-            <StyledCardText>{contact.contactSurname}</StyledCardText>
-            <StyledCardText left>Phone Number:</StyledCardText>
-            <StyledCardText>{contact.contactPhoneNumber}</StyledCardText>
-            <StyledCardText left>Relation:</StyledCardText>
-            <StyledCardText>{contact.contactCategory}</StyledCardText>
-            <StyledCardButton onClick={handleDeleteContact}>Delete</StyledCardButton>
-            <StyledCardButton onClick={toggleEditMode}>Edit</StyledCardButton>
-          </StyledCardWithGrid>
+          <StyledCard>
+            <StyledGrid>
+              <StyledCardText left>Type:</StyledCardText>
+              <StyledCardText>{contact.contactType}</StyledCardText>
+              <StyledCardText left>First Name:</StyledCardText>
+              <StyledCardText>{contact.contactFirstName}</StyledCardText>
+              <StyledCardText left>Surname:</StyledCardText>
+              <StyledCardText>{contact.contactSurname}</StyledCardText>
+              <StyledCardText left>Phone Number:</StyledCardText>
+              <StyledCardText>{contact.contactPhoneNumber}</StyledCardText>
+              <StyledCardText left>Relation:</StyledCardText>
+              <StyledCardText>{contact.contactCategory}</StyledCardText>
+            </StyledGrid>
+            <StyledButton onClick={handleDeleteContact}>Delete</StyledButton>
+            <StyledButton onClick={toggleEditMode}>Edit</StyledButton>
+          </StyledCard>
         )
       }
     </>

@@ -1,9 +1,10 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from 'react-router-dom';
 import swal from "sweetalert";
 
 import { fetchUserData } from "../../reducers/reusable";
-// import { user } from "../../reducers/user";
+import { user } from "../../reducers/user";
 import { useToggle } from "../../reducers/reusable";
 
 import ProfileCard from "./ProfileCard";
@@ -17,37 +18,18 @@ import { StyledButton } from "../../lib/Styling";
 
 const Profile = ({ USERDATA_URL }) => {
   const dispatch = useDispatch();
+  const history = useHistory();
   const localToken = localStorage.getItem("localToken");
   const localId = localStorage.getItem("localId");
-  const storedFirstName = useSelector((store) => store.user.profile.firstName);
+  const storedId = useSelector((store) => store.user.profile.userId);
   const [editMode, toggleEditMode] = useToggle();
 
   useEffect(() => {
-    if (!storedFirstName) {
+    if (!storedId && localId) {
       dispatch(fetchUserData(USERDATA_URL, localToken, localId));
     }
     // eslint-disable-next-line
   }, []);
-
-  // useEffect(() => {
-  //   fetch(USERDATA_URL, {
-  //     method: "GET",
-  //     headers: { Authorization: localToken, userId: localId },
-  //   })
-  //     .then(response => response.json())
-  //     .then(json => {
-  //       dispatch(user.actions.setAccessToken({ accessToken: json.accessToken }));
-  //       dispatch(user.actions.setUserId({ userId: json.userId }));
-  //       dispatch(user.actions.setEmail({ email: json.email }));
-  //       dispatch(user.actions.setFirstName({ firstName: json.firstName }));
-  //       dispatch(user.actions.setSurname({ surname: json.surname }));
-  //       dispatch(user.actions.setBirthDate({ birthDate: json.birthDate }));
-  //       dispatch(user.actions.setSeizures({ seizures: json.seizures }));
-  //       dispatch(user.actions.setContacts({ contacts: json.contacts }));
-  //     })
-  //     .catch(error => console.error(error));
-  //   // eslint-disable-next-line
-  // }, []);
 
   const handleDeleteUser = (event) => {
     event.preventDefault();
@@ -63,8 +45,15 @@ const Profile = ({ USERDATA_URL }) => {
           fetch(USERDATA_URL, {
             method: "DELETE",
             headers: { "Content-Type": "application/json", Authorization: localToken, userId: localId },
+          });
+          dispatch(user.actions.deleteAccessToken());
+          dispatch(user.actions.deleteUserId());
+          localStorage.clear();
+          history.push("/");
+          swal({
+            title: "User deleted",
+            icon: "success",
           })
-            .then(window.location.reload())
         }
       })
   };

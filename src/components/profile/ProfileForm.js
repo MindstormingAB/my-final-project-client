@@ -1,55 +1,49 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import swal from "sweetalert";
 import moment from "moment";
 
-import { user } from "../../reducers/user";
+import { storeUserProfile } from "../../reducers/reusable";
+import { storeCredentials } from "../../reducers/reusable";
 
 import { StyledButton, StyledForm, StyledCardInput, StyledCardLabel, StyledCard, StyledGrid } from "../../lib/Styling";
 
 const ProfileForm = ({ USERDATA_URL, toggleEditMode }) => {
+  const dispatch = useDispatch();
   const localToken = localStorage.getItem("localToken");
   const localId = localStorage.getItem("localId");
-  const currentEmail = useSelector((store) => store.user.profile.email);
-  const currentFirstName = useSelector((store) => store.user.profile.firstName);
-  const currentSurname = useSelector((store) => store.user.profile.surname);
-  const currentBirthDate = useSelector((store) => store.user.profile.birthDate);
-  const formattedBirthDate = moment(currentBirthDate).format("YYYY-MM-DD");
-  const dispatch = useDispatch();
 
-  const [email, setEmail] = useState(currentEmail);
-  const [firstName, setFirstName] = useState(currentFirstName);
-  const [surname, setSurname] = useState(currentSurname);
-  const [birthDate, setBirthDate] = useState(formattedBirthDate);
-
-  const retrieveUserData = () => {
-    fetch(USERDATA_URL, {
-      method: "GET",
-      headers: { Authorization: localToken, userId: localId },
-    })
-      .then(response => response.json())
-      .then(json => {
-        dispatch(user.actions.setAccessToken({ accessToken: json.accessToken }));
-        dispatch(user.actions.setUserId({ userId: json.userId }));
-        dispatch(user.actions.setEmail({ email: json.email }));
-        dispatch(user.actions.setFirstName({ firstName: json.firstName }));
-        dispatch(user.actions.setSurname({ surname: json.surname }));
-        dispatch(user.actions.setBirthDate({ birthDate: json.birthDate }));
-        dispatch(user.actions.setSeizures({ seizures: json.seizures }));
-        dispatch(user.actions.setContacts({ contacts: json.contacts }));
-        localStorage.setItem("localFirstName", json.firstName);
-      })
-      .catch(error => console.error(error));
-  };
+  const [email, setEmail] = useState(useSelector((store) => store.user.profile.email));
+  const [firstName, setFirstName] = useState(useSelector((store) => store.user.profile.firstName));
+  const [surname, setSurname] = useState(useSelector((store) => store.user.profile.surname));
+  const [birthDate, setBirthDate] = useState(moment(useSelector((store) => store.user.profile.birthDate)).format("YYYY-MM-DD"));
 
   const handleEdit = (event) => {
     event.preventDefault();
-    fetch(USERDATA_URL, {
-      method: "PATCH",
-      body: JSON.stringify({ email, firstName, surname, birthDate }),
-      headers: { "Content-Type": "application/json", Authorization: localToken, userId: localId },
+    swal({
+      title: "Are you sure?",
+      text: "You are about to update your profile.",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
     })
-      .then(retrieveUserData())
-      .then(toggleEditMode())
+      .then((willSave) => {
+        if (willSave) {
+          fetch(USERDATA_URL, {
+            method: "PATCH",
+            body: JSON.stringify({ email, firstName, surname, birthDate }),
+            headers: { "Content-Type": "application/json", Authorization: localToken, userId: localId },
+          })
+            .then(response => response.json())
+            .then(json => {
+              console.log(json);
+              storeCredentials(json);
+              dispatch(storeUserProfile(json));
+            })
+            .catch((error) => console.error(error));
+          toggleEditMode();
+        }
+      })
   };
 
   return (
@@ -92,6 +86,7 @@ const ProfileForm = ({ USERDATA_URL, toggleEditMode }) => {
             Birth Date:
           </StyledCardLabel>
           <StyledCardInput
+            required
             id="birthdate"
             minLength="2"
             type="date"
