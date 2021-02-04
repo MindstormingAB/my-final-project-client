@@ -25,6 +25,9 @@ const Profile = ({ USERDATA_URL }) => {
   const [editMode, toggleEditMode] = useToggle();
 
   useEffect(() => {
+    if (!localId) {
+      history.push("/");
+    }
     if (!storedId && localId) {
       dispatch(fetchUserData(USERDATA_URL, localToken, localId));
     }

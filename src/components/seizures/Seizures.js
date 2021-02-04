@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from 'react-router-dom';
 
 import { fetchUserData } from "../../reducers/reusable";
 import { useToggle } from "../../reducers/reusable";
@@ -15,6 +15,7 @@ import { StyledText } from "../../lib/Styling";
 
 const Seizures = ({ SEIZURES_URL, USERDATA_URL }) => {
   const dispatch = useDispatch();
+  const history = useHistory();
   const [creationMode, toggleCreationMode] = useToggle();
   const localToken = localStorage.getItem("localToken");
   const localId = localStorage.getItem("localId");
@@ -22,6 +23,9 @@ const Seizures = ({ SEIZURES_URL, USERDATA_URL }) => {
   const seizures = useSelector((store) => store.user.seizures);
 
   useEffect(() => {
+    if (!localId) {
+      history.push("/");
+    }
     if (!storedId && localId) {
       dispatch(fetchUserData(USERDATA_URL, localToken, localId));
     }

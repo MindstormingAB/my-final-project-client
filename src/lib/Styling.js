@@ -13,6 +13,23 @@ export const StyledHeader = styled.header`
   text-align: center;
 `;
 
+export const StyledNav = styled.nav`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 16px;
+  margin-top: 10px;
+
+  & a {
+    color: rgb(255, 255, 255);
+    opacity: 0.5;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+`;
+
 export const StyledSection = styled.section`
   flex: 1 0 auto;
   display: flex;

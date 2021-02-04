@@ -1,10 +1,15 @@
 import React from "react";
 
+import Navbar from "./Navbar";
+
 import { StyledHeader } from "../lib/Styling";
 
 const Header = () => {
   return (
-    <StyledHeader>Epilepsy App</StyledHeader>
+    <StyledHeader>
+      Epilepsy App
+      <Navbar />
+    </StyledHeader>
   );
 };
 

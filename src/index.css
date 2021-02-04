@@ -10,12 +10,14 @@ body,
   height: 100%;
   --color1: #1a2c5b; /*dark blue*/
   --color2: #2b4b87; /*regular blue*/
-  --color3: #6a1b9a; /* dark purple*/
+  /* --color3: #6a1b9a; dark purple */
+  --color3: #431488; /* dark purple*/
   --color4: #b8dff0; /*light blue*/
   --color5: #ffffff; /*white*/
   --color6: #c0c0c0; /*silver*/
   --color7: #e5e5e5; /*light grey*/
-  --color8: #7b1fc2; /*regular purple*/
+  /* --color8: #7b1fc2; regular purple */
+  --color8: #6a26cd; /*regular purple*/
   --color9: #808080; /*grey*/
 }
 
@@ -34,4 +36,28 @@ textarea {
   font-style: normal;
   color: var(--color1);
   background-color: var(--color5);
+}
+
+a {
+  text-decoration: none;
+}
+
+a:link {
+  /* color: var(--color5); */
+  color: #6a26cd
+}
+
+a:hover {
+  /* color: var(--color5); */
+  color: #431488
+}
+
+a:active {
+  /* color: var(--color5); */
+  color: #6a26cd
+}
+
+a:visited {
+  /* color: var(--color5); */
+  color: #6a26cd
 }

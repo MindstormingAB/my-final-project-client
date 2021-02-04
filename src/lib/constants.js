@@ -3,7 +3,8 @@ export const PALETTE = {
   // color2: "#3e4e88",
   color2: "#2b4b87", // regular blue
   // color3: "#7971ea",
-  color3: "#6a1b9a", // dark purple
+  // color3: "#6a1b9a", // dark purple
+  color3: "#431488", // dark purple
   // color8: "#ab47bc", // light purple
   color4: "#b8dff0", // light blue
   color5: "#ffffff", // white
@@ -12,6 +13,7 @@ export const PALETTE = {
   color7: "#e5e5e5", // light grey
   // color7: "#d3d3d3", // gainsboro
   // color8: "#ba68c8", // light purple
-  color8: "#7b1fc2", // regular purple
+  // color8: "#7b1fc2", // regular purple
+  color8: "#6a26cd", // regular purple
   color9: "#808080", // grey
 };
