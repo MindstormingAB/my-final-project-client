@@ -1,17 +1,16 @@
 import React from "react";
 
-import NavigationButton from "./buttons/NavigationButton";
 import ReloadButton from "./buttons/ReloadButton";
 import LogoutButton from "./buttons/LogoutButton";
+import { StyledSection, StyledText } from "../lib/Styling";
 
 const StartPage = ({ USERDATA_URL }) => {
 
   return (
     <>
-      <NavigationButton route="profile" label="Profile" />
-      <NavigationButton route="dashboard" label="Dashboard" />
-      <NavigationButton route="contacts" label="Contacts" />
-      <NavigationButton route="seizures" label="Seizures" />
+      <StyledSection>
+        <StyledText>Monitor your seizures and take control over your epilepsy!</StyledText>
+      </StyledSection>
       <ReloadButton USERDATA_URL={USERDATA_URL} />
       <LogoutButton />
     </>

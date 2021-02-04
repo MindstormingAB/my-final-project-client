@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 
-import { user } from "../../reducers/user";
+import { registerContact } from "../../reducers/reusable";
 
 import { StyledSection, StyledButton, StyledForm, StyledCardInput, StyledCardLabel, StyledCard, StyledCardSelect, StyledGrid } from "../../lib/Styling";
 
@@ -35,20 +35,11 @@ const ContactRegistration = ({ CONTACTS_URL, toggleCreationMode }) => {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [category, setCategory] = useState("");
 
+  const newContact = { type, firstName, surname, phoneNumber, category };
+
   const handleEdit = (event) => {
     event.preventDefault();
-    fetch(CONTACTS_URL, {
-      method: "POST",
-      body: JSON.stringify({
-        contactType: type,
-        contactFirstName: firstName,
-        contactSurname: surname,
-        contactPhoneNumber: phoneNumber, contactCategory: category
-      }),
-      headers: { "Content-Type": "application/json", Authorization: localToken, userId: localId },
-    })
-      .then(response => response.json())
-      .then(json => dispatch(user.actions.addContact(json)));
+    dispatch(registerContact(CONTACTS_URL, localToken, localId, newContact));
     toggleCreationMode();
   };
 

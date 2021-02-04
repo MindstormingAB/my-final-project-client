@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import swal from "sweetalert";
 
-import { user } from "../../reducers/user";
+import { deleteContact } from "../../reducers/reusable";
 import { useToggle } from "../../reducers/reusable";
 
 import ContactForm from "./ContactForm";
@@ -28,17 +28,13 @@ const Contact = ({ contact, CONTACTS_URL }) => {
     })
       .then((willDelete) => {
         if (willDelete) {
-          fetch(CONTACTS_URL, {
-            method: "DELETE",
-            headers: { "Content-Type": "application/json", Authorization: localToken, userId: localId, contactId: contactId },
-          })
-          dispatch(user.actions.deleteContact(contact));
+          dispatch(deleteContact(CONTACTS_URL, localToken, localId, contactId));
           swal({
             title: "Entry deleted",
             icon: "success",
-          })
-        }
-      })
+          });
+        };
+      });
   };
 
   return (
@@ -59,8 +55,8 @@ const Contact = ({ contact, CONTACTS_URL }) => {
               <StyledCardText left>Relation:</StyledCardText>
               <StyledCardText>{contact.contactCategory}</StyledCardText>
             </StyledGrid>
-            <StyledButton onClick={handleDeleteContact}>Delete</StyledButton>
-            <StyledButton onClick={toggleEditMode}>Edit</StyledButton>
+            <StyledButton small onClick={handleDeleteContact}>Delete</StyledButton>
+            <StyledButton small onClick={toggleEditMode}>Edit</StyledButton>
           </StyledCard>
         )
       }

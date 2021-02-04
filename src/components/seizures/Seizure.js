@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import moment from "moment";
 import swal from "sweetalert";
 
-import { user } from "../../reducers/user";
+import { deleteSeizure } from "../../reducers/reusable";
 import { useToggle } from "../../reducers/reusable";
 
 import SeizureForm from "./SeizureForm";
@@ -29,17 +29,13 @@ const Seizure = ({ seizure, SEIZURES_URL }) => {
     })
       .then((willDelete) => {
         if (willDelete) {
-          fetch(SEIZURES_URL, {
-            method: "DELETE",
-            headers: { "Content-Type": "application/json", Authorization: localToken, userId: localId, seizureId: seizureId },
-          })
-          dispatch(user.actions.deleteSeizure(seizure));
+          dispatch(deleteSeizure(SEIZURES_URL, localToken, localId, seizureId));
           swal({
             title: "Entry deleted",
             icon: "success",
-          })
-        }
-      })
+          });
+        };
+      });
   };
 
   return (

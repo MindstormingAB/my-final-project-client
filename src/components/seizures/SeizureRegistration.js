@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 
-import { user } from "../../reducers/user";
+import { registerSeizure } from "../../reducers/reusable";
 
 import { StyledSection, StyledForm, StyledCardInput, StyledCardLabel, StyledCard, StyledCardSelect, StyledCardText, StyledDurationInput, StyledButton, StyledGrid } from "../../lib/Styling";
 
@@ -55,21 +55,11 @@ const SeizureRegistration = ({ SEIZURES_URL, toggleCreationMode }) => {
   const [trigger, setTrigger] = useState("");
   const [comment, setComment] = useState("");
 
+  const newSeizure = { date, lengthHours, lengthMinutes, lengthSeconds, type, trigger, comment };
+
   const handleEdit = (event) => {
     event.preventDefault();
-    fetch(SEIZURES_URL, {
-      method: "POST",
-      body: JSON.stringify({
-        seizureDate: date,
-        seizureLength: { hours: lengthHours, minutes: lengthMinutes, seconds: lengthSeconds },
-        seizureType: type,
-        seizureTrigger: trigger,
-        seizureComment: comment
-      }),
-      headers: { "Content-Type": "application/json", Authorization: localToken, userId: localId },
-    })
-      .then(response => response.json())
-      .then(json => dispatch(user.actions.addSeizure(json)));
+    dispatch(registerSeizure(SEIZURES_URL, localToken, localId, newSeizure));
     toggleCreationMode();
   };
 

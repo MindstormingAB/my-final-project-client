@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import swal from "sweetalert";
 import moment from "moment";
 
-import { user } from "../../reducers/user";
+import { updateSeizure } from "../../reducers/reusable";
 
 import { StyledButton, StyledCardSelect, StyledCard, StyledForm, StyledCardInput, StyledCardLabel, StyledCardText, StyledDurationInput, StyledGrid } from "../../lib/Styling";
 
@@ -61,25 +61,6 @@ const SeizureForm = ({ SEIZURES_URL, seizure, toggleEditMode }) => {
 
   const updatedSeizure = { seizureId, date, lengthHours, lengthMinutes, lengthSeconds, type, trigger, comment };
 
-  const updateSeizure = () => {
-    fetch(SEIZURES_URL, {
-      method: "PATCH",
-      body: JSON.stringify({
-        seizureLength: {
-          hours: lengthHours,
-          minutes: lengthMinutes,
-          seconds: lengthSeconds
-        },
-        seizureType: type,
-        seizureTrigger: trigger,
-        seizureComment: comment
-      }),
-      headers: { "Content-Type": "application/json", Authorization: localToken, userId: localId, seizureId: updatedSeizure.seizureId },
-    })
-      .then(response => response.json())
-      .then(json => dispatch(user.actions.updateSeizure(json)));
-  };
-
   const handleEdit = (event) => {
     event.preventDefault();
     swal({
@@ -91,7 +72,7 @@ const SeizureForm = ({ SEIZURES_URL, seizure, toggleEditMode }) => {
     })
       .then((willSave) => {
         if (willSave) {
-          updateSeizure();
+          dispatch(updateSeizure(SEIZURES_URL, localToken, localId, updatedSeizure));
           toggleEditMode();
         }
       })

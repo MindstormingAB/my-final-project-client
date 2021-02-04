@@ -19,7 +19,7 @@ const LogoutButton = () => {
   };
 
   return (
-    <StyledButton onClick={handleLogout}>Logout</StyledButton>
+    <StyledButton accent onClick={handleLogout}>Logout</StyledButton>
   );
 };
 

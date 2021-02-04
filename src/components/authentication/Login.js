@@ -96,10 +96,10 @@ const Login = ({ LOGIN_URL, USERDATA_URL, USERS_URL }) => {
           ? `Welcome ${localFirstName}!`
           : "Welcome!"}
       </StyledTitle>
-      <StyledText>Description of the application</StyledText>
       {!localToken
         ? (
           <>
+            <StyledText>Start monitoring your seizures and take control over your epilepsy!</StyledText>
             <StyledSubTitle>Please enter your credentials below.</StyledSubTitle>
             <StyledForm >
               <StyledLabel>
@@ -131,7 +131,7 @@ const Login = ({ LOGIN_URL, USERDATA_URL, USERS_URL }) => {
             </StyledForm>
           </>
         )
-        : <StartPage />}
+        : <StartPage USERDATA_URL={USERDATA_URL} />}
     </StyledSection>
   );
 };

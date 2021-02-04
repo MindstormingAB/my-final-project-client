@@ -3,8 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import swal from "sweetalert";
 import moment from "moment";
 
-import { storeUserProfile } from "../../reducers/reusable";
-import { storeCredentials } from "../../reducers/reusable";
+import { updateProfile } from "../../reducers/reusable";
 
 import { StyledButton, StyledForm, StyledCardInput, StyledCardLabel, StyledCard, StyledGrid } from "../../lib/Styling";
 
@@ -18,6 +17,8 @@ const ProfileForm = ({ USERDATA_URL, toggleEditMode }) => {
   const [surname, setSurname] = useState(useSelector((store) => store.user.profile.surname));
   const [birthDate, setBirthDate] = useState(moment(useSelector((store) => store.user.profile.birthDate)).format("YYYY-MM-DD"));
 
+  const updatedProfile = { email, firstName, surname, birthDate };
+
   const handleEdit = (event) => {
     event.preventDefault();
     swal({
@@ -29,18 +30,7 @@ const ProfileForm = ({ USERDATA_URL, toggleEditMode }) => {
     })
       .then((willSave) => {
         if (willSave) {
-          fetch(USERDATA_URL, {
-            method: "PATCH",
-            body: JSON.stringify({ email, firstName, surname, birthDate }),
-            headers: { "Content-Type": "application/json", Authorization: localToken, userId: localId },
-          })
-            .then(response => response.json())
-            .then(json => {
-              console.log(json);
-              storeCredentials(json);
-              dispatch(storeUserProfile(json));
-            })
-            .catch((error) => console.error(error));
+          dispatch(updateProfile(USERDATA_URL, localToken, localId, updatedProfile));
           toggleEditMode();
         }
       })

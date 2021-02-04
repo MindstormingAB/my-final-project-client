@@ -33,9 +33,6 @@ const App = () => {
           <Route path="/" exact>
             <Login LOGIN_URL={LOGIN_URL} USERDATA_URL={USERDATA_URL} USERS_URL={USERS_URL} />
           </Route>
-          <Route path="/login">
-            <Login LOGIN_URL={LOGIN_URL} />
-          </Route>
           <Route path="/dashboard">
             <Dashboard USERDATA_URL={USERDATA_URL} />
           </Route>

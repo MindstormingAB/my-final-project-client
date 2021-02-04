@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import swal from "sweetalert";
 
-import { user } from "../../reducers/user";
+import { updateContact } from "../../reducers/reusable";
 
 import { StyledCardSelect, StyledCard, StyledForm, StyledCardInput, StyledCardLabel, StyledGrid, StyledButton } from "../../lib/Styling";
 
@@ -40,22 +40,6 @@ const ContactForm = ({ CONTACTS_URL, contact, toggleEditMode }) => {
 
   const updatedContact = { contactId, type, firstName, surname, phoneNumber, category };
 
-  const updateContact = () => {
-    fetch(CONTACTS_URL, {
-      method: "PATCH",
-      body: JSON.stringify({
-        contactType: type,
-        contactFirstName: firstName,
-        contactSurname: surname,
-        contactPhoneNumer: phoneNumber,
-        contactCategory: category
-      }),
-      headers: { "Content-Type": "application/json", Authorization: localToken, userId: localId, contactId: updatedContact.contactId },
-    })
-      .then(response => response.json())
-      .then(json => dispatch(user.actions.updateContact(json)));
-  };
-
   const handleEdit = (event) => {
     event.preventDefault();
     swal({
@@ -67,7 +51,7 @@ const ContactForm = ({ CONTACTS_URL, contact, toggleEditMode }) => {
     })
       .then((willSave) => {
         if (willSave) {
-          updateContact();
+          dispatch(updateContact(CONTACTS_URL, localToken, localId, updatedContact));
           toggleEditMode();
         }
       })
