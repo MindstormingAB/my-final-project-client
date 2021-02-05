@@ -7,7 +7,7 @@ import { user } from "./reducers/user";
 
 import Header from "./components/Header";
 import Login from "./components/authentication/Login";
-import Dashboard from "./components/Dashboard";
+import Dashboard from "./components/dashboard/Dashboard";
 import Profile from "./components/profile/Profile";
 import Seizures from "./components/seizures/Seizures";
 import Contacts from "./components/contacts/Contacts";

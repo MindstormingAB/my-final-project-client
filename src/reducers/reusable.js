@@ -138,6 +138,7 @@ export const updateSeizure = (SEIZURES_URL, localToken, localId, updatedSeizure)
     fetch(SEIZURES_URL, {
       method: "PATCH",
       body: JSON.stringify({
+        seizureDate: updatedSeizure.date,
         seizureLength: {
           hours: updatedSeizure.lengthHours,
           minutes: updatedSeizure.lengthMinutes,
