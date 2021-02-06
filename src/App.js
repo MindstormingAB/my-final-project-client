@@ -5,7 +5,7 @@ import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 
 import { user } from "./reducers/user";
 
-import Header from "./components/Header";
+import Header from "./components/header/Header";
 import Login from "./components/authentication/Login";
 import Dashboard from "./components/dashboard/Dashboard";
 import Profile from "./components/profile/Profile";
@@ -25,6 +25,7 @@ const reducer = combineReducers({ user: user.reducer });
 const store = configureStore({ reducer });
 
 const App = () => {
+
   return (
     <BrowserRouter>
       <Header />

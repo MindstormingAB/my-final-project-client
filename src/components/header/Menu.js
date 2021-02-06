@@ -1,11 +1,11 @@
-import React from "react";
+import React from 'react';
 import { NavLink } from "react-router-dom";
 
-import { StyledNav } from "../lib/Styling";
+import { StyledMenu } from "../../lib/Styling";
 
-const Navbar = () => {
+const Menu = ({ open }) => {
   return (
-    <StyledNav>
+    <StyledMenu open={open}>
       <NavLink exact to="/">
         Home
       </NavLink>
@@ -21,8 +21,8 @@ const Navbar = () => {
       <NavLink to="/contacts" exact>
         Contacts
       </NavLink>
-    </StyledNav>
+    </StyledMenu>
   );
 };
 
-export default Navbar;
+export default Menu;

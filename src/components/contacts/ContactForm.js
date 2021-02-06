@@ -104,19 +104,41 @@ const ContactForm = ({ CONTACTS_URL, contact, toggleEditMode }) => {
             value={phoneNumber}
             onChange={event => setPhoneNumber(event.target.value)} >
           </StyledCardInput>
-          <StyledCardLabel htmlFor="relation">
-            Relation:
-        </StyledCardLabel>
-          <StyledCardSelect
-            id="relation"
-            required
-            value={category}
-            onChange={event => setCategory(event.target.value)} >
-            <option defaultValue={category} disabled>{category}</option>
-            {contactTypes.find(item => item.name === type).categories.map(category => {
-              return (<option key={category} value={category}>{category}</option>)
-            })}
-          </StyledCardSelect>
+          {(type !== contact.contactType)
+            ?
+            <>
+              <StyledCardLabel htmlFor="relation">
+                Relation:
+            </StyledCardLabel>
+              <StyledCardSelect
+                id="relation"
+                required
+                value={category}
+                onChange={event => setCategory(event.target.value)} >
+                <option value="" disabled>Choose a category</option>
+                {contactTypes.find(item => item.name === type).categories.map(category => {
+                  return (<option key={category} value={category}>{category}</option>)
+                })}
+              </StyledCardSelect>
+            </>
+            :
+            <>
+              <StyledCardLabel htmlFor="noChangeRelation">
+                Relation:
+              </StyledCardLabel>
+              <StyledCardSelect
+                id="noChangeRelation"
+                required
+                value={category}
+                onChange={event => setCategory(event.target.value)} >
+                <option value={category} disabled>{category}</option>
+                {contactTypes.find(item => item.name === type).categories.map(category => {
+                  return (<option key={category} value={category}>{category}</option>)
+                })}
+              </StyledCardSelect>
+            </>
+
+          }
         </StyledGrid>
         <StyledButton small accent onClick={toggleEditMode}>Cancel</StyledButton>
         <StyledButton small accent type="submit">Save</StyledButton>

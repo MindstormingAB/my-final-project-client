@@ -13,6 +13,58 @@ export const StyledHeader = styled.header`
   text-align: center;
 `;
 
+export const StyledBurger = styled.button`
+  position: absolute;
+  left: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 2rem;
+  height: 24px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  z-index: 1;
+  
+  &:focus {
+    outline: none;
+  }
+  
+  div {
+    width: 32px;
+    height: 4px;
+    background: ${PALETTE.color5};
+    border-radius: 10px;
+    position: relative;
+  }
+`;
+
+export const StyledMenu = styled.nav`
+  display: flex;
+  flex-direction: column;
+  background: #2b4b87; //PALETTE.color2
+  text-align: left;
+  padding: 45px 20px 20px 20px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition: opacity 0.3s ease-in-out;
+  opacity: ${props => props.open ? "1" : "0"};
+
+  a {
+    font-size: 16px;
+    margin-top: 10px;
+    color: white;
+    opacity: 0.5;
+    transition: color 0.3s linear;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+`;
+
 export const StyledNav = styled.nav`
   display: flex;
   align-items: center;
@@ -20,8 +72,8 @@ export const StyledNav = styled.nav`
   font-size: 16px;
   margin-top: 10px;
 
-  & a {
-    color: rgb(255, 255, 255);
+  a {
+    color: ${PALETTE.color5};
     opacity: 0.5;
 
     &:hover {
