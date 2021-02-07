@@ -12,14 +12,17 @@ const Menu = ({ open }) => {
       <NavLink to="/dashboard">
         Dashboard
       </NavLink>
-      <NavLink to="/profile">
-        Profile
-      </NavLink>
       <NavLink to="/seizures">
         Seizures
       </NavLink>
       <NavLink to="/contacts" exact>
         Contacts
+      </NavLink>
+      <NavLink to="/wallpaper">
+        Wallpaper
+      </NavLink>
+      <NavLink to="/profile">
+        Profile
       </NavLink>
     </StyledMenu>
   );

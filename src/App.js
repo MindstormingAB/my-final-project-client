@@ -1,16 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import { Provider } from "react-redux";
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 
 import { user } from "./reducers/user";
+// import { useToggle } from "./reducers/reusable";
 
 import Header from "./components/header/Header";
 import Login from "./components/authentication/Login";
 import Dashboard from "./components/dashboard/Dashboard";
-import Profile from "./components/profile/Profile";
 import Seizures from "./components/seizures/Seizures";
 import Contacts from "./components/contacts/Contacts";
+import Wallpaper from "./components/wallpaper/Wallpaper";
+import Profile from "./components/profile/Profile";
 import Footer from "./components/Footer";
 
 // const BASE_URL = "http://localhost:8080/";
@@ -25,26 +27,50 @@ const reducer = combineReducers({ user: user.reducer });
 const store = configureStore({ reducer });
 
 const App = () => {
+  // const [wallpaperMode, toggleWallpaperMode] = useToggle();
+  const [wallpaperStep, setWallpaperStep] = useState(0);
+
+  const progressWallpaperProcess = () => {
+    setWallpaperStep(wallpaperStep + 1);
+    console.log(wallpaperStep);
+  };
+
+  const reverseWallpaperProcess = () => {
+    setWallpaperStep(wallpaperStep - 1);
+    console.log(wallpaperStep);
+  };
 
   return (
     <BrowserRouter>
-      <Header />
+      {(wallpaperStep !== 2) && <Header />}
       <Provider store={store}>
         <Switch>
           <Route path="/" exact>
-            <Login LOGIN_URL={LOGIN_URL} USERDATA_URL={USERDATA_URL} USERS_URL={USERS_URL} />
+            <Login
+              LOGIN_URL={LOGIN_URL}
+              USERDATA_URL={USERDATA_URL}
+              USERS_URL={USERS_URL}
+            />
           </Route>
           <Route path="/dashboard">
             <Dashboard USERDATA_URL={USERDATA_URL} />
           </Route>
-          <Route path="/profile">
-            <Profile USERDATA_URL={USERDATA_URL} />
-          </Route>
           <Route path="/seizures">
             <Seizures SEIZURES_URL={SEIZURES_URL} USERDATA_URL={USERDATA_URL} />
           </Route>
-          <Route path="/contacts" exact>
+          <Route path="/contacts">
             <Contacts CONTACTS_URL={CONTACTS_URL} USERDATA_URL={USERDATA_URL} />
+          </Route>
+          <Route path="/wallpaper">
+            <Wallpaper
+              USERDATA_URL={USERDATA_URL}
+              wallpaperStep={wallpaperStep}
+              progressWallpaperProcess={progressWallpaperProcess}
+              reverseWallpaperProcess={reverseWallpaperProcess}
+            />
+          </Route>
+          <Route path="/profile">
+            <Profile USERDATA_URL={USERDATA_URL} />
           </Route>
           <Route path="/404">
             <Login LOGIN_URL={LOGIN_URL} USERDATA_URL={USERDATA_URL} />
@@ -52,7 +78,7 @@ const App = () => {
           <Redirect to="/404"></Redirect>
         </Switch>
       </Provider>
-      <Footer />
+      {(wallpaperStep !== 2) && <Footer />}
     </BrowserRouter>
   );
 }

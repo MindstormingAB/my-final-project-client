@@ -36,9 +36,9 @@ const Contacts = ({ CONTACTS_URL, USERDATA_URL }) => {
     <StyledSection>
       <StyledSubTitle>Contacts</StyledSubTitle>
       <StyledText>This is where you can store your important contacts</StyledText>
+      {!creationMode && <StyledButton onClick={toggleCreationMode}>Add</StyledButton>}
       <NavigationButton route="" label="Back" />
       {creationMode && <ContactRegistration toggleCreationMode={toggleCreationMode} CONTACTS_URL={CONTACTS_URL} />}
-      {!creationMode && <StyledButton onClick={toggleCreationMode}>Add</StyledButton>}
       {contacts.map(contact => {
         return (<Contact key={contact._id} contact={contact} CONTACTS_URL={CONTACTS_URL} ></Contact>)
       })}

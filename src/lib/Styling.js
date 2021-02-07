@@ -43,9 +43,10 @@ export const StyledBurger = styled.button`
 export const StyledMenu = styled.nav`
   display: flex;
   flex-direction: column;
-  background: #2b4b87; //PALETTE.color2
-  text-align: left;
+  background: ${PALETTE.color2};
+  height: 100%;
   padding: 45px 20px 20px 20px;
+  text-align: left;
   position: absolute;
   top: 0;
   left: 0;
@@ -55,26 +56,9 @@ export const StyledMenu = styled.nav`
   a {
     font-size: 16px;
     margin-top: 10px;
-    color: white;
-    opacity: 0.5;
-    transition: color 0.3s linear;
-
-    &:hover {
-      opacity: 1;
-    }
-  }
-`;
-
-export const StyledNav = styled.nav`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  font-size: 16px;
-  margin-top: 10px;
-
-  a {
     color: ${PALETTE.color5};
     opacity: 0.5;
+    transition: color 0.3s linear;
 
     &:hover {
       opacity: 1;

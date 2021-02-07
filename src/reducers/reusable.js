@@ -1,13 +1,12 @@
-import React from "react";
-import { useEffect } from "react";
+import { useEffect, useState, useCallback } from "react";
 
 import { user } from "./user";
 import { ui } from "./ui";
 
 export const useToggle = (initialValue = false) => {
-  const [value, setValue] = React.useState(initialValue);
+  const [value, setValue] = useState(initialValue);
 
-  const toggle = React.useCallback(() => {
+  const toggle = useCallback(() => {
     setValue(v => !v);
   }, []);
 

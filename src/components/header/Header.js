@@ -18,7 +18,7 @@ const Header = () => {
         <Burger open={open} setOpen={setOpen} />
         <Menu open={open} />
       </div>
-        Epilepsy App
+        The Epilepsy App
     </StyledHeader>
   );
 };
