@@ -19,8 +19,6 @@ const Wallpaper = ({ USERDATA_URL, wallpaperStep, progressWallpaperProcess, reve
   const localToken = localStorage.getItem("localToken");
   const localId = localStorage.getItem("localId");
   const storedId = useSelector((store) => store.user.profile.userId);
-  // const contacts = useSelector((store) => store.user.contacts);
-  // const emergencyContacts = contacts.filter(item => item.contactType === "Emergency");
 
   useEffect(() => {
     if (!localId) {
@@ -31,19 +29,6 @@ const Wallpaper = ({ USERDATA_URL, wallpaperStep, progressWallpaperProcess, reve
     }
     // eslint-disable-next-line
   }, []);
-
-  // const progressWallpaperProcess = () => {
-  //   setWallpaperStep(wallpaperStep + 1);
-  // };
-
-  // const reverseWallpaperProcess = () => {
-  //   setWallpaperStep(wallpaperStep - 1);
-  // };
-
-  // const handleContactCheck = event => {
-  //   setWallpaperContacts(...wallpaperContacts, event.target.value);
-  //   console.log(wallpaperContacts);
-  // };
 
   return (
     <>
@@ -60,13 +45,6 @@ const Wallpaper = ({ USERDATA_URL, wallpaperStep, progressWallpaperProcess, reve
           <NavigationButton route="" label="Back" />
         </StyledSection>
       )}
-      {/* {(wallpaperStep === 1) &&
-        <WallpaperContacts
-          emergencyContacts={emergencyContacts}
-          progressWallpaperProcess={progressWallpaperProcess}
-          reverseWallpaperProcess={reverseWallpaperProcess}
-          onContactCheck={handleContactCheck}
-        />} */}
       {(wallpaperStep === 1) &&
         <WallpaperPreview
           progressWallpaperProcess={progressWallpaperProcess}

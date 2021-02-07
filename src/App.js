@@ -4,7 +4,6 @@ import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 
 import { user } from "./reducers/user";
-// import { useToggle } from "./reducers/reusable";
 
 import Header from "./components/header/Header";
 import Login from "./components/authentication/Login";
@@ -27,7 +26,6 @@ const reducer = combineReducers({ user: user.reducer });
 const store = configureStore({ reducer });
 
 const App = () => {
-  // const [wallpaperMode, toggleWallpaperMode] = useToggle();
   const [wallpaperStep, setWallpaperStep] = useState(0);
 
   const progressWallpaperProcess = () => {

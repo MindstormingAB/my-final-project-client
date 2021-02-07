@@ -49,8 +49,7 @@ const Profile = ({ USERDATA_URL }) => {
             method: "DELETE",
             headers: { "Content-Type": "application/json", Authorization: localToken, userId: localId },
           });
-          dispatch(user.actions.deleteAccessToken());
-          dispatch(user.actions.deleteUserId());
+          dispatch(user.actions.restart());
           localStorage.clear();
           history.push("/");
           swal({

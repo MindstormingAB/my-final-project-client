@@ -1,4 +1,5 @@
 import { useEffect, useState, useCallback } from "react";
+import moment from "moment";
 
 import { user } from "./user";
 import { ui } from "./ui";
@@ -103,7 +104,7 @@ export const registerSeizure = (SEIZURES_URL, localToken, localId, newSeizure) =
     fetch(SEIZURES_URL, {
       method: "POST",
       body: JSON.stringify({
-        seizureDate: newSeizure.date,
+        seizureDate: moment(newSeizure.date),
         seizureLength: {
           hours: newSeizure.lengthHours,
           minutes: newSeizure.lengthMinutes,
@@ -153,7 +154,7 @@ export const updateSeizure = (SEIZURES_URL, localToken, localId, updatedSeizure)
     fetch(SEIZURES_URL, {
       method: "PATCH",
       body: JSON.stringify({
-        seizureDate: updatedSeizure.date,
+        seizureDate: moment(updatedSeizure.date),
         seizureLength: {
           hours: updatedSeizure.lengthHours,
           minutes: updatedSeizure.lengthMinutes,

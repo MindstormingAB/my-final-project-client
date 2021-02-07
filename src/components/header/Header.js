@@ -10,7 +10,7 @@ import { StyledHeader } from "../../lib/Styling";
 const Header = () => {
   const [open, setOpen] = useState(false);
   const node = useRef();
-  useOnClickOutside(node, () => setOpen(false))
+  useOnClickOutside(node, () => setOpen(false));
 
   return (
     <StyledHeader>

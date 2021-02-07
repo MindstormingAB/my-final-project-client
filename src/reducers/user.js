@@ -93,11 +93,8 @@ export const user = createSlice({
       const remainingContacts = state.contacts.filter((item) => item._id !== action.payload._id);
       state.contacts = remainingContacts;
     },
-    deleteAccessToken: (state, action) => {
-      state.profile.accessToken = "";
-    },
-    deleteUserId: (state, action) => {
-      state.profile.userId = "";
-    },
+    restart: () => {
+      return initialState
+    }
   }
 });
