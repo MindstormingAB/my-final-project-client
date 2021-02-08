@@ -4,6 +4,7 @@ import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 
 import { user } from "./reducers/user";
+import { ui } from "./reducers/ui";
 
 import Header from "./components/header/Header";
 import Login from "./components/authentication/Login";
@@ -22,7 +23,10 @@ const USERDATA_URL = `${BASE_URL}userdata`;
 const SEIZURES_URL = `${BASE_URL}seizures`;
 const CONTACTS_URL = `${BASE_URL}contacts`;
 
-const reducer = combineReducers({ user: user.reducer });
+const reducer = combineReducers({
+  user: user.reducer,
+  ui: ui.reducer,
+});
 const store = configureStore({ reducer });
 
 const App = () => {

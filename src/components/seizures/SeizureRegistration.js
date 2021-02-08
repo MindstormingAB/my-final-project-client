@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { registerSeizure } from "../../reducers/reusable";
 
@@ -7,44 +7,45 @@ import { StyledSection, StyledForm, StyledCardInput, StyledCardLabel, StyledCard
 
 const SeizureRegistration = ({ SEIZURES_URL, toggleCreationMode }) => {
   const dispatch = useDispatch();
-  const seizureTypes = [
-    {
-      name: "absence",
-      description: "generalized seizure formerly known as petit mal, can cause rapid blinking or a few seconds of staring into space"
-    },
-    {
-      name: "tonic-clonic/convulsive",
-      description: "generalized seizure formerly known as grand mal, can make a person cry out, lose consciousness, fall to the ground and have muscle jerks or spasms"
-    },
-    {
-      name: "atonic",
-      description: "generalized seizure also known as drop attacks, when muscles in the body relax"
-    },
-    {
-      name: "tonic",
-      description: "generalized seizure when muscles in the body become stiff"
-    },
-    {
-      name: "clonic",
-      description: "generalized seizure with periods of shaking or jerking parts on the body"
-    },
-    {
-      name: "myoclonic",
-      description: "generalized seizure with short jerking in parts of the body"
-    },
-    {
-      name: "simple focal",
-      description: "focal seizure with retained awareness that can cause twitching or a change in sensation, such as a strange taste or smell"
-    },
-    {
-      name: "complex focal",
-      description: "focal seizure with a loss awareness can make a person confused or dazed."
-    },
-    {
-      name: "secondary generalized",
-      description: "seizure starting in one part of the brain as a focal seizure but evolving into a generalized seizure when spreading to both sides of the brain"
-    }
-  ];
+  const storedSeizureTypes = useSelector((store) => store.user.seizureTypes);
+  // const seizureTypes = [
+  //   {
+  //     name: "absence",
+  //     description: "generalized seizure formerly known as petit mal, can cause rapid blinking or a few seconds of staring into space"
+  //   },
+  //   {
+  //     name: "tonic-clonic/convulsive",
+  //     description: "generalized seizure formerly known as grand mal, can make a person cry out, lose consciousness, fall to the ground and have muscle jerks or spasms"
+  //   },
+  //   {
+  //     name: "atonic",
+  //     description: "generalized seizure also known as drop attacks, when muscles in the body relax"
+  //   },
+  //   {
+  //     name: "tonic",
+  //     description: "generalized seizure when muscles in the body become stiff"
+  //   },
+  //   {
+  //     name: "clonic",
+  //     description: "generalized seizure with periods of shaking or jerking parts on the body"
+  //   },
+  //   {
+  //     name: "myoclonic",
+  //     description: "generalized seizure with short jerking in parts of the body"
+  //   },
+  //   {
+  //     name: "simple focal",
+  //     description: "focal seizure with retained awareness that can cause twitching or a change in sensation, such as a strange taste or smell"
+  //   },
+  //   {
+  //     name: "complex focal",
+  //     description: "focal seizure with a loss awareness can make a person confused or dazed."
+  //   },
+  //   {
+  //     name: "secondary generalized",
+  //     description: "seizure starting in one part of the brain as a focal seizure but evolving into a generalized seizure when spreading to both sides of the brain"
+  //   }
+  // ];
   const localToken = localStorage.getItem("localToken");
   const localId = localStorage.getItem("localId");
   const [date, setDate] = useState("");
@@ -113,7 +114,7 @@ const SeizureRegistration = ({ SEIZURES_URL, toggleCreationMode }) => {
               value={type}
               onChange={event => setType(event.target.value)} >
               <option value="" disabled>Choose a type</option>
-              {seizureTypes.map(type => {
+              {storedSeizureTypes.map(type => {
                 return (<option key={type.name} value={type.name}>{type.name}</option>)
               })}
             </StyledCardSelect>
