@@ -34,12 +34,10 @@ const App = () => {
 
   const progressWallpaperProcess = () => {
     setWallpaperStep(wallpaperStep + 1);
-    console.log(wallpaperStep);
   };
 
   const reverseWallpaperProcess = () => {
     setWallpaperStep(wallpaperStep - 1);
-    console.log(wallpaperStep);
   };
 
   return (

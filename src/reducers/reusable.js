@@ -70,7 +70,6 @@ export const fetchUserData = (USERDATA_URL, localToken, localId) => {
     })
       .then(response => response.json())
       .then(json => {
-        console.log(json);
         dispatch(storeUserData(json));
         dispatch(ui.actions.setLoading(false));
       })

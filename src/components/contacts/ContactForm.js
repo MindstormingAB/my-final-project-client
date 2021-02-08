@@ -12,19 +12,19 @@ const ContactForm = ({ CONTACTS_URL, contact, toggleEditMode }) => {
     {
       name: "Emergency",
       categories: [
-        "parent",
-        "partner",
-        "sibling",
-        "friend",
-        "relative"
+        "Parent",
+        "Partner",
+        "Sibling",
+        "Friend",
+        "Relative"
       ]
     },
     {
       name: "Healthcare",
       categories: [
-        "doctor",
-        "hospital",
-        "welfare center"
+        "Doctor",
+        "Hospital",
+        "Welfare center"
       ]
     }
   ];
@@ -37,6 +37,7 @@ const ContactForm = ({ CONTACTS_URL, contact, toggleEditMode }) => {
   const [surname, setSurname] = useState(contact.contactSurname);
   const [phoneNumber, setPhoneNumber] = useState(contact.contactPhoneNumber);
   const [category, setCategory] = useState(contact.contactCategory);
+  const [newType, setNewType] = useState("");
 
   const updatedContact = { contactId, type, firstName, surname, phoneNumber, category };
 
@@ -67,9 +68,13 @@ const ContactForm = ({ CONTACTS_URL, contact, toggleEditMode }) => {
           <StyledCardSelect
             id="type"
             required
-            value={type}
-            onChange={event => setType(event.target.value)} >
-            <option defaultValue={type} disabled>{type}</option>
+            defaultValue={type}
+            onChange={event => {
+              setType(event.target.value);
+              setNewType(event.target.value);
+            }
+            } >
+            <option value={type} disabled>{type}</option>
             {contactTypes.map(type => {
               return (<option key={type.name} value={type.name}>{type.name}</option>)
             })}
@@ -78,6 +83,7 @@ const ContactForm = ({ CONTACTS_URL, contact, toggleEditMode }) => {
             First name:
         </StyledCardLabel>
           <StyledCardInput
+            required
             id="firstname"
             minLength="2"
             type="text"
@@ -98,30 +104,14 @@ const ContactForm = ({ CONTACTS_URL, contact, toggleEditMode }) => {
             Phone Number:
         </StyledCardLabel>
           <StyledCardInput
+            required
             id="phonenumber"
             minLength="2"
             type="tel"
             value={phoneNumber}
             onChange={event => setPhoneNumber(event.target.value)} >
           </StyledCardInput>
-          {(type !== contact.contactType)
-            ?
-            <>
-              <StyledCardLabel htmlFor="relation">
-                Relation:
-            </StyledCardLabel>
-              <StyledCardSelect
-                id="relation"
-                required
-                value={category}
-                onChange={event => setCategory(event.target.value)} >
-                <option value="" disabled>Choose a category</option>
-                {contactTypes.find(item => item.name === type).categories.map(category => {
-                  return (<option key={category} value={category}>{category}</option>)
-                })}
-              </StyledCardSelect>
-            </>
-            :
+          {!newType && (
             <>
               <StyledCardLabel htmlFor="noChangeRelation">
                 Relation:
@@ -129,7 +119,7 @@ const ContactForm = ({ CONTACTS_URL, contact, toggleEditMode }) => {
               <StyledCardSelect
                 id="noChangeRelation"
                 required
-                value={category}
+                defaultValue={category}
                 onChange={event => setCategory(event.target.value)} >
                 <option value={category} disabled>{category}</option>
                 {contactTypes.find(item => item.name === type).categories.map(category => {
@@ -137,8 +127,24 @@ const ContactForm = ({ CONTACTS_URL, contact, toggleEditMode }) => {
                 })}
               </StyledCardSelect>
             </>
-
-          }
+          )}
+          {newType && (
+            <>
+              <StyledCardLabel htmlFor="changeRelation">
+                Relation:
+              </StyledCardLabel>
+              <StyledCardSelect
+                id="changeRelation"
+                required
+                defaultValue=""
+                onChange={event => setCategory(event.target.value)} >
+                <option value="" disabled>Choose a category</option>
+                {contactTypes.find(item => item.name === type).categories.map(category => {
+                  return (<option key={category} value={category}>{category}</option>)
+                })}
+              </StyledCardSelect>
+            </>
+          )}
         </StyledGrid>
         <StyledButton small accent onClick={toggleEditMode}>Cancel</StyledButton>
         <StyledButton small accent type="submit">Save</StyledButton>

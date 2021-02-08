@@ -11,19 +11,19 @@ const ContactRegistration = ({ CONTACTS_URL, toggleCreationMode }) => {
     {
       name: "Emergency",
       categories: [
-        "parent",
-        "partner",
-        "sibling",
-        "friend",
-        "relative"
+        "Parent",
+        "Partner",
+        "Sibling",
+        "Friend",
+        "Relative"
       ]
     },
     {
       name: "Healthcare",
       categories: [
-        "doctor",
-        "hospital",
-        "welfare center"
+        "Doctor",
+        "Hospital",
+        "Welfare center"
       ]
     }
   ];
@@ -54,7 +54,7 @@ const ContactRegistration = ({ CONTACTS_URL, toggleCreationMode }) => {
             <StyledCardSelect
               id="type"
               required
-              value={type}
+              defaultValue=""
               onChange={event => setType(event.target.value)} >
               <option value="" disabled>Choose a type</option>
               {contactTypes.map(type => {
@@ -65,6 +65,7 @@ const ContactRegistration = ({ CONTACTS_URL, toggleCreationMode }) => {
               First name:
           </StyledCardLabel>
             <StyledCardInput
+              required
               id="firstname"
               minLength="2"
               type="text"
@@ -85,6 +86,7 @@ const ContactRegistration = ({ CONTACTS_URL, toggleCreationMode }) => {
               Phone Number:
           </StyledCardLabel>
             <StyledCardInput
+              required
               id="phonenumber"
               minLength="2"
               type="tel"
@@ -99,7 +101,7 @@ const ContactRegistration = ({ CONTACTS_URL, toggleCreationMode }) => {
                 <StyledCardSelect
                   id="norelation"
                   required
-                  value={category}
+                  defaultValue=""
                   onChange={event => setCategory(event.target.value)} >
                   <option value="" disabled>Choose a type first!</option>
                 </StyledCardSelect>
@@ -113,7 +115,7 @@ const ContactRegistration = ({ CONTACTS_URL, toggleCreationMode }) => {
                 <StyledCardSelect
                   id="relation"
                   required
-                  value={category}
+                  defaultValue=""
                   onChange={event => setCategory(event.target.value)} >
                   <option value="" disabled>Choose a category</option>
                   {contactTypes.find(item => item.name === type).categories.map(category => {
