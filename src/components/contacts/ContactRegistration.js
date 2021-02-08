@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { registerContact } from "../../reducers/reusable";
 
@@ -7,26 +7,7 @@ import { StyledSection, StyledButton, StyledForm, StyledCardInput, StyledCardLab
 
 const ContactRegistration = ({ CONTACTS_URL, toggleCreationMode }) => {
   const dispatch = useDispatch();
-  const contactTypes = [
-    {
-      name: "Emergency",
-      categories: [
-        "Parent",
-        "Partner",
-        "Sibling",
-        "Friend",
-        "Relative"
-      ]
-    },
-    {
-      name: "Healthcare",
-      categories: [
-        "Doctor",
-        "Hospital",
-        "Welfare center"
-      ]
-    }
-  ];
+  const storedContactTypes = useSelector((store) => store.user.contactTypes);
   const localToken = localStorage.getItem("localToken");
   const localId = localStorage.getItem("localId");
   const [type, setType] = useState("");
@@ -57,7 +38,7 @@ const ContactRegistration = ({ CONTACTS_URL, toggleCreationMode }) => {
               defaultValue=""
               onChange={event => setType(event.target.value)} >
               <option value="" disabled>Choose a type</option>
-              {contactTypes.map(type => {
+              {storedContactTypes.map(type => {
                 return (<option key={type.name} value={type.name}>{type.name}</option>)
               })}
             </StyledCardSelect>
@@ -118,7 +99,7 @@ const ContactRegistration = ({ CONTACTS_URL, toggleCreationMode }) => {
                   defaultValue=""
                   onChange={event => setCategory(event.target.value)} >
                   <option value="" disabled>Choose a category</option>
-                  {contactTypes.find(item => item.name === type).categories.map(category => {
+                  {storedContactTypes.find(item => item.name === type).categories.map(category => {
                     return (<option key={category} value={category}>{category}</option>)
                   })}
                 </StyledCardSelect>

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import swal from "sweetalert";
 
 import { updateContact } from "../../reducers/reusable";
@@ -8,26 +8,7 @@ import { StyledCardSelect, StyledCard, StyledForm, StyledCardInput, StyledCardLa
 
 const ContactForm = ({ CONTACTS_URL, contact, toggleEditMode }) => {
   const dispatch = useDispatch()
-  const contactTypes = [
-    {
-      name: "Emergency",
-      categories: [
-        "Parent",
-        "Partner",
-        "Sibling",
-        "Friend",
-        "Relative"
-      ]
-    },
-    {
-      name: "Healthcare",
-      categories: [
-        "Doctor",
-        "Hospital",
-        "Welfare center"
-      ]
-    }
-  ];
+  const storedContactTypes = useSelector((store) => store.user.contactTypes);
   const localToken = localStorage.getItem("localToken");
   const localId = localStorage.getItem("localId");
   const contactId = contact._id;
@@ -75,7 +56,7 @@ const ContactForm = ({ CONTACTS_URL, contact, toggleEditMode }) => {
             }
             } >
             <option value={type} disabled>{type}</option>
-            {contactTypes.map(type => {
+            {storedContactTypes.map(type => {
               return (<option key={type.name} value={type.name}>{type.name}</option>)
             })}
           </StyledCardSelect>
@@ -122,7 +103,7 @@ const ContactForm = ({ CONTACTS_URL, contact, toggleEditMode }) => {
                 defaultValue={category}
                 onChange={event => setCategory(event.target.value)} >
                 <option value={category} disabled>{category}</option>
-                {contactTypes.find(item => item.name === type).categories.map(category => {
+                {storedContactTypes.find(item => item.name === type).categories.map(category => {
                   return (<option key={category} value={category}>{category}</option>)
                 })}
               </StyledCardSelect>
@@ -139,7 +120,7 @@ const ContactForm = ({ CONTACTS_URL, contact, toggleEditMode }) => {
                 defaultValue=""
                 onChange={event => setCategory(event.target.value)} >
                 <option value="" disabled>Choose a category</option>
-                {contactTypes.find(item => item.name === type).categories.map(category => {
+                {storedContactTypes.find(item => item.name === type).categories.map(category => {
                   return (<option key={category} value={category}>{category}</option>)
                 })}
               </StyledCardSelect>
