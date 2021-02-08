@@ -40,6 +40,7 @@ const Diagram = () => {
     todayMinus5Number,
     todayMinus6Number,
   ];
+  const maxNumber = Math.max(...dataAxisY) + 1
 
   return (
     <Bar
@@ -54,25 +55,25 @@ const Diagram = () => {
               borderColor: `${PALETTE.color2}`,
               borderWidth: 1
             },
-          ],
-          options: {
-            scales: {
-              yAxes: [
-                {
-                  ticks: {
-                    beginAtZero: true,
-                    stepSize: 1
-                  }
-                }
-              ]
-            }
-          }
+          ]
         }
       }
       height={5}
       width={10}
       options={{
-        // maintainAspectRatio: false
+        // maintainAspectRatio: false,
+        scales: {
+          yAxes: [
+            {
+              ticks: {
+                beginAtZero: true,
+                min: 0,
+                max: maxNumber,
+                stepSize: 1
+              }
+            }
+          ]
+        }
       }}
     >
     </Bar >
