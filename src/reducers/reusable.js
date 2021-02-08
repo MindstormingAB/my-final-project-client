@@ -56,6 +56,8 @@ export const storeUserData = (json) => {
     dispatch(user.actions.setBirthDate({ birthDate: json.birthDate }));
     dispatch(user.actions.setSeizures({ seizures: json.seizures }));
     dispatch(user.actions.setContacts({ contacts: json.contacts }));
+    dispatch(user.actions.setSeizureTypes({ seizureTypes: json.seizureTypes }));
+    dispatch(user.actions.setContactTypes({ contactTypes: json.contactTypes }));
   }
 };
 
@@ -68,6 +70,7 @@ export const fetchUserData = (USERDATA_URL, localToken, localId) => {
     })
       .then(response => response.json())
       .then(json => {
+        console.log(json);
         dispatch(storeUserData(json));
         dispatch(ui.actions.setLoading(false));
       })

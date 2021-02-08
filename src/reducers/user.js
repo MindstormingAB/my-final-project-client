@@ -10,7 +10,9 @@ const initialState = {
     birthDate: null
   },
   seizures: [],
-  contacts: []
+  contacts: [],
+  seizureTypes: [],
+  contactTypes: []
 };
 
 export const user = createSlice({
@@ -47,7 +49,18 @@ export const user = createSlice({
     },
     setContacts: (state, action) => {
       const { contacts } = action.payload;
+      console.log(action.payload);
       state.contacts = contacts;
+    },
+    setSeizureTypes: (state, action) => {
+      const { seizureTypes } = action.payload;
+      console.log(action.payload);
+      state.seizureTypes = seizureTypes;
+    },
+    setContactTypes: (state, action) => {
+      const { contactTypes } = action.payload;
+      console.log(action.payload);
+      state.contactTypes = contactTypes;
     },
     addSeizure: (state, action) => {
       const newSeizure = action.payload;
