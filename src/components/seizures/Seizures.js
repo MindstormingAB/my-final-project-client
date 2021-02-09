@@ -21,6 +21,7 @@ const Seizures = ({ SEIZURES_URL, USERDATA_URL }) => {
   const localId = localStorage.getItem("localId");
   const storedId = useSelector((store) => store.user.profile.userId);
   const seizures = useSelector((store) => store.user.seizures);
+  const isLoading = useSelector((store) => store.ui.isLoading)
 
   useEffect(() => {
     if (!localId) {
@@ -33,16 +34,20 @@ const Seizures = ({ SEIZURES_URL, USERDATA_URL }) => {
   }, []);
 
   return (
-    <StyledSection>
-      <StyledSubTitle>Seizures</StyledSubTitle>
-      <StyledText>This is where you can keep track of your seizures</StyledText>
-      {!creationMode && <StyledButton onClick={toggleCreationMode}>Add</StyledButton>}
-      <NavigationButton route="" label="Back" />
-      {creationMode && <SeizureRegistration toggleCreationMode={toggleCreationMode} SEIZURES_URL={SEIZURES_URL} />}
-      {seizures.map(seizure => {
-        return (<Seizure key={seizure._id} seizure={seizure} SEIZURES_URL={SEIZURES_URL}></Seizure>)
-      })}
-    </StyledSection>
+    <>
+      {!isLoading &&
+        <StyledSection>
+          <StyledSubTitle>Seizures</StyledSubTitle>
+          <StyledText>This is where you can keep track of your seizures</StyledText>
+          {!creationMode && <StyledButton onClick={toggleCreationMode}>Add</StyledButton>}
+          <NavigationButton route="" label="Back" />
+          {creationMode && <SeizureRegistration toggleCreationMode={toggleCreationMode} SEIZURES_URL={SEIZURES_URL} />}
+          {seizures.map(seizure => {
+            return (<Seizure key={seizure._id} seizure={seizure} SEIZURES_URL={SEIZURES_URL}></Seizure>)
+          })}
+        </StyledSection>
+      }
+    </>
   )
 };
 

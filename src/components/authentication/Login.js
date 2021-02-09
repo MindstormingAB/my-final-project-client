@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { fetchUserData } from "../../reducers/reusable";
 import { storeCredentials } from "../../reducers/reusable";
@@ -23,6 +22,7 @@ const Login = ({ LOGIN_URL, USERDATA_URL, USERS_URL }) => {
   const localId = localStorage.getItem("localId");
   const localFirstName = localStorage.getItem("localFirstName");
   const storedId = useSelector((store) => store.user.profile.userId);
+  const isLoading = useSelector((store) => store.ui.isLoading)
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -90,49 +90,53 @@ const Login = ({ LOGIN_URL, USERDATA_URL, USERS_URL }) => {
   };
 
   return (
-    <StyledSection>
-      <StyledTitle>
-        {localFirstName
-          ? `Welcome ${localFirstName}!`
-          : "Welcome!"}
-      </StyledTitle>
-      {!localToken
-        ? (
-          <>
-            <StyledText>Start monitoring your seizures and take control over your epilepsy!</StyledText>
-            <StyledSubTitle>Please enter your credentials below.</StyledSubTitle>
-            <StyledForm >
-              <StyledLabel>
-                Email:
+    <>
+      {!isLoading &&
+        <StyledSection>
+          <StyledTitle>
+            {localFirstName
+              ? `Welcome ${localFirstName}!`
+              : "Welcome!"}
+          </StyledTitle>
+          {!localToken
+            ? (
+              <>
+                <StyledText>Start monitoring your seizures and take control over your epilepsy!</StyledText>
+                <StyledSubTitle>Please enter your credentials below.</StyledSubTitle>
+                <StyledForm >
+                  <StyledLabel>
+                    Email:
                   <StyledInput
-                  required
-                  minLength="5"
-                  type="email"
-                  value={email}
-                  name="email"
-                  onChange={event => setEmail(event.target.value)} >
-                </StyledInput>
-              </StyledLabel>
-              <StyledLabel>
-                Password:
+                      required
+                      minLength="5"
+                      type="email"
+                      value={email}
+                      name="email"
+                      onChange={event => setEmail(event.target.value)} >
+                    </StyledInput>
+                  </StyledLabel>
+                  <StyledLabel>
+                    Password:
                   <StyledInput
-                  required
-                  minLength="5"
-                  type="password"
-                  value={password}
-                  onChange={event => setPassword(event.target.value)} >
-                </StyledInput>
-              </StyledLabel>
-              <StyledButton type="submit" onClick={handleLogin}>Login</StyledButton>
-              {(!response && !signUpMode) && <StyledText>Incorrect credentials, please try again.</StyledText>}
-              <StyledText>Not registered yet? Please sign up below.</StyledText>
-              <StyledButton type="submit" onClick={handleSignUp}>Sign up</StyledButton>
-              {(!response && signUpMode) && <StyledText>You are already registered, please login above.</StyledText>}
-            </StyledForm>
-          </>
-        )
-        : <StartPage USERDATA_URL={USERDATA_URL} />}
-    </StyledSection>
+                      required
+                      minLength="5"
+                      type="password"
+                      value={password}
+                      onChange={event => setPassword(event.target.value)} >
+                    </StyledInput>
+                  </StyledLabel>
+                  <StyledButton type="submit" onClick={handleLogin}>Login</StyledButton>
+                  {(!response && !signUpMode) && <StyledText>Incorrect credentials, please try again.</StyledText>}
+                  <StyledText>Not registered yet? Please sign up below.</StyledText>
+                  <StyledButton type="submit" onClick={handleSignUp}>Sign up</StyledButton>
+                  {(!response && signUpMode) && <StyledText>You are already registered, please login above.</StyledText>}
+                </StyledForm>
+              </>
+            )
+            : <StartPage USERDATA_URL={USERDATA_URL} />}
+        </StyledSection>
+      }
+    </>
   );
 };
 

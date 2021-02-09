@@ -7,6 +7,7 @@ import { user } from "./reducers/user";
 import { ui } from "./reducers/ui";
 
 import Header from "./components/header/Header";
+import LoaderPage from "./components/LoaderPage";
 import Login from "./components/authentication/Login";
 import Dashboard from "./components/dashboard/Dashboard";
 import Seizures from "./components/seizures/Seizures";
@@ -51,15 +52,19 @@ const App = () => {
               USERDATA_URL={USERDATA_URL}
               USERS_URL={USERS_URL}
             />
+            <LoaderPage />
           </Route>
           <Route path="/dashboard">
             <Dashboard USERDATA_URL={USERDATA_URL} />
+            <LoaderPage />
           </Route>
           <Route path="/seizures">
             <Seizures SEIZURES_URL={SEIZURES_URL} USERDATA_URL={USERDATA_URL} />
+            <LoaderPage />
           </Route>
           <Route path="/contacts">
             <Contacts CONTACTS_URL={CONTACTS_URL} USERDATA_URL={USERDATA_URL} />
+            <LoaderPage />
           </Route>
           <Route path="/wallpaper">
             <Wallpaper
@@ -71,6 +76,7 @@ const App = () => {
           </Route>
           <Route path="/profile">
             <Profile USERDATA_URL={USERDATA_URL} />
+            <LoaderPage />
           </Route>
           <Route path="/404">
             <Login LOGIN_URL={LOGIN_URL} USERDATA_URL={USERDATA_URL} />

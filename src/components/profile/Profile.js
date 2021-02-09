@@ -22,6 +22,8 @@ const Profile = ({ USERDATA_URL }) => {
   const localToken = localStorage.getItem("localToken");
   const localId = localStorage.getItem("localId");
   const storedId = useSelector((store) => store.user.profile.userId);
+  const isLoading = useSelector((store) => store.ui.isLoading);
+
   const [editMode, toggleEditMode] = useToggle();
 
   useEffect(() => {
@@ -62,20 +64,24 @@ const Profile = ({ USERDATA_URL }) => {
 
   return (
     <>
-      <StyledSection>
-        <StyledSubTitle>Profile</StyledSubTitle>
-        <StyledText>This is where you can update your profile</StyledText>
-        {editMode
-          ? <ProfileForm USERDATA_URL={USERDATA_URL} toggleEditMode={toggleEditMode} />
-          : (
-            <>
-              <ProfileCard />
-              <StyledButton onClick={toggleEditMode}>Edit</StyledButton>
-              <NavigationButton route="" label="Back" />
-            </>
-          )}
-      </StyledSection>
-      {!editMode && <StyledButton accent onClick={handleDeleteUser}>Delete account</StyledButton>}
+      {!isLoading &&
+        <>
+          <StyledSection>
+            <StyledSubTitle>Profile</StyledSubTitle>
+            <StyledText>This is where you can update your profile</StyledText>
+            {editMode
+              ? <ProfileForm USERDATA_URL={USERDATA_URL} toggleEditMode={toggleEditMode} />
+              : (
+                <>
+                  <ProfileCard />
+                  <StyledButton onClick={toggleEditMode}>Edit</StyledButton>
+                  <NavigationButton route="" label="Back" />
+                </>
+              )}
+          </StyledSection>
+          {!editMode && <StyledButton accent onClick={handleDeleteUser}>Delete account</StyledButton>}
+        </>
+      }
     </>
   )
 };

@@ -21,6 +21,7 @@ const Contacts = ({ CONTACTS_URL, USERDATA_URL }) => {
   const localId = localStorage.getItem("localId");
   const storedId = useSelector((store) => store.user.profile.userId);
   const contacts = useSelector((store) => store.user.contacts);
+  const isLoading = useSelector((store) => store.ui.isLoading)
 
   useEffect(() => {
     if (!localId) {
@@ -33,16 +34,20 @@ const Contacts = ({ CONTACTS_URL, USERDATA_URL }) => {
   }, []);
 
   return (
-    <StyledSection>
-      <StyledSubTitle>Contacts</StyledSubTitle>
-      <StyledText>This is where you can store your important contacts</StyledText>
-      {!creationMode && <StyledButton onClick={toggleCreationMode}>Add</StyledButton>}
-      <NavigationButton route="" label="Back" />
-      {creationMode && <ContactRegistration toggleCreationMode={toggleCreationMode} CONTACTS_URL={CONTACTS_URL} />}
-      {contacts.map(contact => {
-        return (<Contact key={contact._id} contact={contact} CONTACTS_URL={CONTACTS_URL} ></Contact>)
-      })}
-    </StyledSection>
+    <>
+      {!isLoading &&
+        <StyledSection>
+          <StyledSubTitle>Contacts</StyledSubTitle>
+          <StyledText>This is where you can store your important contacts</StyledText>
+          {!creationMode && <StyledButton onClick={toggleCreationMode}>Add</StyledButton>}
+          <NavigationButton route="" label="Back" />
+          {creationMode && <ContactRegistration toggleCreationMode={toggleCreationMode} CONTACTS_URL={CONTACTS_URL} />}
+          {contacts.map(contact => {
+            return (<Contact key={contact._id} contact={contact} CONTACTS_URL={CONTACTS_URL} ></Contact>)
+          })}
+        </StyledSection>
+      }
+    </>
   )
 };
 

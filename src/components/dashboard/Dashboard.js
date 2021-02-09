@@ -16,6 +16,7 @@ const Dashboard = ({ USERDATA_URL }) => {
   const localToken = localStorage.getItem("localToken");
   const localId = localStorage.getItem("localId");
   const storedId = useSelector((store) => store.user.profile.userId);
+  const isLoading = useSelector((store) => store.ui.isLoading)
 
   useEffect(() => {
     if (!localId) {
@@ -28,12 +29,16 @@ const Dashboard = ({ USERDATA_URL }) => {
   }, []);
 
   return (
-    <StyledSection>
-      <StyledSubTitle>Dashboard</StyledSubTitle>
-      <StyledText>This is your dashboard</StyledText>
-      <Diagram />
-      <NavigationButton route="" label="Back" />
-    </StyledSection>
+    <>
+      {!isLoading &&
+        <StyledSection>
+          <StyledSubTitle>Dashboard</StyledSubTitle>
+          <StyledText>This is your dashboard</StyledText>
+          <Diagram />
+          <NavigationButton route="" label="Back" />
+        </StyledSection>
+      }
+    </>
   );
 };
 

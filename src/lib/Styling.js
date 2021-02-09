@@ -25,7 +25,7 @@ export const StyledBurger = styled.button`
   border: none;
   cursor: pointer;
   padding: 0;
-  z-index: 1;
+  z-index: 2;
   
   &:focus {
     outline: none;
@@ -50,8 +50,9 @@ export const StyledMenu = styled.nav`
   position: absolute;
   top: 0;
   left: 0;
-  transition: opacity 0.3s ease-in-out;
-  opacity: ${props => props.open ? "1" : "0"};
+  transition: transform 0.3s ease-in-out;
+  transform: ${props => props.open ? "translateX(0)" : "translateX(-100%)"};
+  z-index: 1;
 
   a {
     font-size: 16px;
@@ -75,6 +76,7 @@ export const StyledSection = styled.section`
 
 export const StyledFooter = styled.footer`
   flex-shrink: 0;
+  justify-self: center;
   width: 100%;
   padding: 8px;
   background: ${PALETTE.color2};
@@ -82,6 +84,24 @@ export const StyledFooter = styled.footer`
   font-size: 12px;
   color: white;
   text-align: center;
+`;
+
+export const StyledLoaderSection = styled(StyledSection)`
+  justify-content: center;
+`;
+
+export const StyledLoader = styled.div`
+  border: 16px solid ${PALETTE.color7};
+  border-top: 16px solid ${PALETTE.color2};
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  animation: spin 2s linear infinite;
+
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
 `;
 
 export const StyledTitle = styled.h1`
