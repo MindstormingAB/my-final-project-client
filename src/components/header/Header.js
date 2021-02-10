@@ -1,4 +1,5 @@
 import React, { useState, useRef } from "react";
+import { useSelector } from "react-redux";
 
 import { useOnClickOutside } from "../../reducers/reusable";
 
@@ -8,6 +9,7 @@ import Menu from "./Menu";
 import { StyledHeader } from "../../lib/Styling";
 
 const Header = () => {
+  const isFullScreen = useSelector((store) => store.ui.isFullScreen);
   const [open, setOpen] = useState(false);
   const node = useRef();
   useOnClickOutside(node, () => {
@@ -16,13 +18,16 @@ const Header = () => {
   });
 
   return (
-    <StyledHeader>
-      <div ref={node}>
-        <Burger open={open} setOpen={setOpen} />
-        <Menu open={open} />
-      </div>
+    <>{!isFullScreen &&
+      <StyledHeader>
+        <div ref={node}>
+          <Burger open={open} setOpen={setOpen} />
+          <Menu open={open} />
+        </div>
         The Epilepsy App
-    </StyledHeader>
+      </StyledHeader>
+    }
+    </>
   );
 };
 

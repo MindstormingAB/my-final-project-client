@@ -15,8 +15,8 @@ import Contacts from "./components/contacts/Contacts";
 import Wallpaper from "./components/wallpaper/Wallpaper";
 import Profile from "./components/profile/Profile";
 import Footer from "./components/Footer";
+import WallpaperFinal from "./components/wallpaper/WallpaperFinal";
 
-// const BASE_URL = "http://localhost:8080/";
 const BASE_URL = "https://ep-app-api.herokuapp.com/";
 const USERS_URL = `${BASE_URL}users`;
 const LOGIN_URL = `${BASE_URL}sessions`;
@@ -43,8 +43,8 @@ const App = () => {
 
   return (
     <BrowserRouter>
-      {(wallpaperStep !== 2) && <Header />}
       <Provider store={store}>
+        <Header />
         <Switch>
           <Route path="/" exact>
             <Login
@@ -66,13 +66,16 @@ const App = () => {
             <Contacts CONTACTS_URL={CONTACTS_URL} USERDATA_URL={USERDATA_URL} />
             <LoaderPage />
           </Route>
-          <Route path="/wallpaper">
+          <Route path="/wallpaper" exact>
             <Wallpaper
               USERDATA_URL={USERDATA_URL}
               wallpaperStep={wallpaperStep}
               progressWallpaperProcess={progressWallpaperProcess}
               reverseWallpaperProcess={reverseWallpaperProcess}
             />
+          </Route>
+          <Route path="/wallpaper/preview">
+            <WallpaperFinal USERDATA_URL={USERDATA_URL} />
           </Route>
           <Route path="/profile">
             <Profile USERDATA_URL={USERDATA_URL} />
@@ -83,8 +86,8 @@ const App = () => {
           </Route>
           <Redirect to="/404"></Redirect>
         </Switch>
+        <Footer />
       </Provider>
-      {(wallpaperStep !== 2) && <Footer />}
     </BrowserRouter>
   );
 }

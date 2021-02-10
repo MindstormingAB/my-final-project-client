@@ -225,3 +225,38 @@ export const StyledDurationInput = styled(StyledCardInput)`
     margin: 0 2px 0 0;
   }
 `;
+
+export const StyledWallpaper = styled.div`
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-rows: 48% 10% 10% 10% auto;
+
+  @media (min-width: 768px) {
+    width: 414px;
+    height: 736px;
+    border: 1px solid ${PALETTE.color6};
+    border-radius: 25px;
+    box-shadow: 5px 5px 5px ${PALETTE.color6};
+  }
+`;
+
+export const StyledImage = styled.img`
+  width: 35%;
+  place-self: end center;
+`;
+
+export const StyledWallpaperSubTitle = styled(StyledSubTitle)`
+  font-size: 30px;
+  margin: 5px;
+`;
+
+export const StyledWallpaperText = styled(StyledText)`
+  font-size: 18px;
+  margin-bottom: 5px;
+  place-self: end center;
+`;
+
+export const EmergencyContactsContainer = styled.div`
+  place-self: start center;
+`;

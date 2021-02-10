@@ -61,14 +61,13 @@ const Diagram = () => {
       height={5}
       width={10}
       options={{
-        // maintainAspectRatio: false,
         scales: {
           yAxes: [
             {
               ticks: {
                 beginAtZero: true,
                 min: 0,
-                max: maxNumber,
+                max: maxNumber < 5 ? 5 : maxNumber,
                 stepSize: 1
               }
             }
