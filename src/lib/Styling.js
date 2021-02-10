@@ -72,6 +72,7 @@ export const StyledSection = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 0 10px;
   `;
 
 export const StyledFooter = styled.footer`
