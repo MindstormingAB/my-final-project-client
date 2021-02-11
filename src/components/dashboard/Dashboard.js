@@ -7,8 +7,7 @@ import { fetchUserData } from "../../reducers/reusable";
 import Diagram from "./Diagram";
 import NavigationButton from "../buttons/NavigationButton";
 
-import { StyledSection, StyledText } from "../../lib/Styling";
-import { StyledSubTitle } from "../../lib/Styling";
+import { StyledTitle, StyledSection, StyledText } from "../../lib/Styling";
 
 const Dashboard = ({ USERDATA_URL }) => {
   const dispatch = useDispatch();
@@ -32,8 +31,8 @@ const Dashboard = ({ USERDATA_URL }) => {
     <>
       {!isLoading &&
         <StyledSection>
-          <StyledSubTitle>Dashboard</StyledSubTitle>
-          <StyledText>This is your dashboard</StyledText>
+          <StyledTitle>Dashboard</StyledTitle>
+          <StyledText>This is your epileptic activity during the last 7 days.</StyledText>
           <Diagram />
           <NavigationButton route="" label="Back" />
         </StyledSection>

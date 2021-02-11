@@ -58,7 +58,7 @@ const Diagram = () => {
           ]
         }
       }
-      height={5}
+      height={8}
       width={10}
       options={{
         scales: {
@@ -72,6 +72,14 @@ const Diagram = () => {
               }
             }
           ]
+        },
+        layout: {
+          padding: {
+            left: 10,
+            right: 10,
+            top: 10,
+            bottom: 30
+          }
         }
       }}
     >

@@ -11,10 +11,7 @@ import ProfileCard from "./ProfileCard";
 import ProfileForm from "./ProfileForm";
 import NavigationButton from "../buttons/NavigationButton";
 
-import { StyledSection } from "../../lib/Styling";
-import { StyledSubTitle } from "../../lib/Styling";
-import { StyledText } from "../../lib/Styling";
-import { StyledButton } from "../../lib/Styling";
+import { StyledTitle, StyledButton, StyledSection, StyledText } from "../../lib/Styling";
 
 const Profile = ({ USERDATA_URL }) => {
   const dispatch = useDispatch();
@@ -67,7 +64,7 @@ const Profile = ({ USERDATA_URL }) => {
       {!isLoading &&
         <>
           <StyledSection>
-            <StyledSubTitle>Profile</StyledSubTitle>
+            <StyledTitle>Profile</StyledTitle>
             <StyledText>This is where you can update your profile</StyledText>
             {editMode
               ? <ProfileForm USERDATA_URL={USERDATA_URL} toggleEditMode={toggleEditMode} />

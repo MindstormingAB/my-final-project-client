@@ -7,13 +7,7 @@ import { storeUserData } from "../../reducers/reusable";
 import { storeUserProfile } from "../../reducers/reusable";
 import { useToggle } from "../../reducers/reusable";
 
-import { StyledSection, StyledTitle } from "../../lib/Styling";
-import { StyledSubTitle } from "../../lib/Styling";
-import { StyledText } from "../../lib/Styling";
-import { StyledForm } from "../../lib/Styling";
-import { StyledLabel } from "../../lib/Styling";
-import { StyledInput } from "../../lib/Styling";
-import { StyledButton } from "../../lib/Styling";
+import { StyledButton, StyledForm, StyledInput, StyledLabel, StyledLink, StyledSection, StyledSubTitle, StyledText, StyledTitle } from "../../lib/Styling";
 import StartPage from "../StartPage";
 
 const Login = ({ LOGIN_URL, USERDATA_URL, USERS_URL }) => {
@@ -35,6 +29,11 @@ const Login = ({ LOGIN_URL, USERDATA_URL, USERS_URL }) => {
     }
     // eslint-disable-next-line
   }, []);
+
+  const switchMode = () => {
+    toggleSignUpMode();
+    setResponse(true);
+  };
 
   const handleLogin = (event) => {
     event.preventDefault();
@@ -64,7 +63,6 @@ const Login = ({ LOGIN_URL, USERDATA_URL, USERS_URL }) => {
 
   const handleSignUp = (event) => {
     event.preventDefault();
-    toggleSignUpMode();
     fetch(USERS_URL, {
       method: "POST",
       body: JSON.stringify({ email, password }),
@@ -102,8 +100,11 @@ const Login = ({ LOGIN_URL, USERDATA_URL, USERS_URL }) => {
             ? (
               <>
                 <StyledText>Start monitoring your seizures and take control over your epilepsy!</StyledText>
-                <StyledSubTitle>Please enter your credentials below.</StyledSubTitle>
-                <StyledForm >
+                {!signUpMode
+                  ? <StyledSubTitle>Please enter your credentials below.</StyledSubTitle>
+                  : <StyledSubTitle>Please sign up below.</StyledSubTitle>
+                }
+                <StyledForm>
                   <StyledLabel>
                     Email:
                   <StyledInput
@@ -125,12 +126,21 @@ const Login = ({ LOGIN_URL, USERDATA_URL, USERS_URL }) => {
                       onChange={event => setPassword(event.target.value)} >
                     </StyledInput>
                   </StyledLabel>
-                  <StyledButton type="submit" onClick={handleLogin}>Login</StyledButton>
-                  {(!response && !signUpMode) && <StyledText>Incorrect credentials, please try again.</StyledText>}
-                  <StyledText>Not registered yet? Please sign up below.</StyledText>
-                  <StyledButton type="submit" onClick={handleSignUp}>Sign up</StyledButton>
-                  {(!response && signUpMode) && <StyledText>You are already registered, please login above.</StyledText>}
+                  {!signUpMode
+                    ? <StyledButton type="submit" onClick={handleLogin}>Login</StyledButton>
+                    : <StyledButton type="submit" onClick={handleSignUp}>Sign up</StyledButton>
+                  }
                 </StyledForm>
+                {!signUpMode
+                  ? <>
+                    <StyledText>Not registered yet? Please sign up <StyledLink onClick={switchMode}>here</StyledLink>.</StyledText>
+                    {!response && <StyledText>Incorrect credentials, please try again.</StyledText>}
+                  </>
+                  : <>
+                    {response && <StyledText>Already registered? Please login <StyledLink onClick={switchMode}>here</StyledLink>.</StyledText>}
+                    {!response && <StyledText>You are already registered, please login <StyledLink onClick={switchMode}>here</StyledLink>.</StyledText>}
+                  </>
+                }
               </>
             )
             : <StartPage USERDATA_URL={USERDATA_URL} />}

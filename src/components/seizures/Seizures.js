@@ -9,9 +9,7 @@ import Seizure from "./Seizure";
 import SeizureRegistration from "./SeizureRegistration";
 import NavigationButton from "../buttons/NavigationButton";
 
-import { StyledButton, StyledSection } from "../../lib/Styling";
-import { StyledSubTitle } from "../../lib/Styling";
-import { StyledText } from "../../lib/Styling";
+import { StyledTitle, StyledButton, StyledSection, StyledText } from "../../lib/Styling";
 
 const Seizures = ({ SEIZURES_URL, USERDATA_URL }) => {
   const dispatch = useDispatch();
@@ -37,8 +35,8 @@ const Seizures = ({ SEIZURES_URL, USERDATA_URL }) => {
     <>
       {!isLoading &&
         <StyledSection>
-          <StyledSubTitle>Seizures</StyledSubTitle>
-          <StyledText>This is where you can keep track of your seizures</StyledText>
+          <StyledTitle>Seizures</StyledTitle>
+          <StyledText>You can keep track of your seizures in this section.</StyledText>
           {!creationMode && <StyledButton onClick={toggleCreationMode}>Add</StyledButton>}
           <NavigationButton route="" label="Back" />
           {creationMode && <SeizureRegistration toggleCreationMode={toggleCreationMode} SEIZURES_URL={SEIZURES_URL} />}

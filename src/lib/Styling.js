@@ -7,7 +7,7 @@ export const StyledHeader = styled.header`
   width: 100%;
   padding: 10px;
   font-family: "Lato", sans-serif;
-  font-size: 20px;
+  font-size: 1.5em;
   background: ${PALETTE.color2};
   color: white;
   text-align: center;
@@ -55,11 +55,28 @@ export const StyledMenu = styled.nav`
   z-index: 1;
 
   a {
-    font-size: 16px;
-    margin-top: 10px;
+    font-size: 0.85em;
+    margin-top: 0.85em;
     color: ${PALETTE.color5};
     opacity: 0.5;
     transition: color 0.3s linear;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+
+  button {
+    font-size: 0.85em;
+    margin-top: 0.85em;
+    color: ${PALETTE.color5};
+    opacity: 0.5;
+    transition: color 0.3s linear;
+    cursor: pointer;
+    padding: 0;
+    background: none;
+    border: none;
+    text-align: left;
 
     &:hover {
       opacity: 1;
@@ -79,7 +96,7 @@ export const StyledFooter = styled.footer`
   flex-shrink: 0;
   justify-self: center;
   width: 100%;
-  padding: 8px;
+  padding: 10px;
   background: ${PALETTE.color2};
   font-family: "Lato", sans-serif;
   font-size: 12px;
@@ -107,10 +124,12 @@ export const StyledLoader = styled.div`
 
 export const StyledTitle = styled.h1`
   text-align: center;
-`;
+  font-size: 1.5em;
+  `;
 
-export const StyledSubTitle = styled.h3`
+export const StyledSubTitle = styled.h2`
   text-align: center;
+  font-size: 1.17em;
 `;
 
 export const StyledText = styled.p`
@@ -136,8 +155,6 @@ export const StyledInput = styled.input`
 `;
 
 export const StyledButton = styled.button`
-  font-family: inherit;
-  font-size: inherit;
   width: ${props => props.small ? "100px" : "150px"};
   height: 30px;
   justify-self: center;
@@ -158,6 +175,14 @@ export const StyledButton = styled.button`
     ? `linear-gradient(${PALETTE.color8} 45%, ${PALETTE.color3} 55%)`
     : `linear-gradient(${PALETTE.color2} 45%, ${PALETTE.color1} 55%)`};
   }
+`;
+
+export const StyledLink = styled.button`
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    color: ${PALETTE.color8};
+    text-decoration-line: underline;
 `;
 
 export const StyledCardButton = styled(StyledButton)`
@@ -189,6 +214,19 @@ export const StyledCardText = styled.p`
   margin: 5px;
   color: ${props => props.left ? `${PALETTE.color9}` : `${PALETTE.color1}`};
 `;
+
+export const StyledCardLink = styled.button`
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    color: ${PALETTE.color1};
+    font-size: 12px;
+    width: 172px;
+    margin: 5px;
+    text-align: left;
+    padding-bottom: 5px;
+`;
+
 
 export const StyledCardLabel = styled.label`
   font-size: 12px;
@@ -226,6 +264,15 @@ export const StyledDurationInput = styled(StyledCardInput)`
   }
 `;
 
+export const StyledWallpaperSection = styled.div`
+  flex: 1 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-self: center;
+  height: 100%;
+`;
+
 export const StyledWallpaper = styled.div`
   width: 100%;
   height: 100%;
@@ -235,6 +282,7 @@ export const StyledWallpaper = styled.div`
   @media (min-width: 768px) {
     width: 414px;
     height: 736px;
+    align-self: center;
     border: 1px solid ${PALETTE.color6};
     border-radius: 25px;
     box-shadow: 5px 5px 5px ${PALETTE.color6};

@@ -5,7 +5,7 @@ import { useHistory } from 'react-router-dom';
 import { fetchUserData } from "../../reducers/reusable";
 import { ui } from "../../reducers/ui";
 
-import { EmergencyContactsContainer, StyledImage, StyledLoaderSection, StyledWallpaper, StyledWallpaperSubTitle, StyledWallpaperText } from "../../lib/Styling";
+import { EmergencyContactsContainer, StyledImage, StyledWallpaperSection, StyledWallpaper, StyledWallpaperSubTitle, StyledWallpaperText } from "../../lib/Styling";
 
 import logo from "../../assets/epilepsy-SE.jpg";
 
@@ -31,13 +31,12 @@ const WallpaperFinal = ({ USERDATA_URL }) => {
     }
     return () => {
       dispatch(ui.actions.setFullScreen(false));
-      console.log("Unmount");
     }
     // eslint-disable-next-line
   }, []);
 
   return (
-    <StyledLoaderSection>
+    <StyledWallpaperSection>
       <StyledWallpaper>
         <StyledImage src={logo} alt="Epilepsy symbol" />
         <StyledWallpaperSubTitle>Epilepsy</StyledWallpaperSubTitle>
@@ -49,7 +48,7 @@ const WallpaperFinal = ({ USERDATA_URL }) => {
           })}
         </EmergencyContactsContainer>
       </StyledWallpaper>
-    </StyledLoaderSection>
+    </StyledWallpaperSection>
   );
 };
 

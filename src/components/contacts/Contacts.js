@@ -2,16 +2,13 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from 'react-router-dom';
 
-import { fetchUserData } from "../../reducers/reusable";
-import { useToggle } from "../../reducers/reusable";
+import { fetchUserData, useToggle } from "../../reducers/reusable";
 
 import Contact from "./Contact";
 import ContactRegistration from "./ContactRegistration";
 import NavigationButton from "../buttons/NavigationButton";
 
-import { StyledButton, StyledSection } from "../../lib/Styling";
-import { StyledSubTitle } from "../../lib/Styling";
-import { StyledText } from "../../lib/Styling";
+import { StyledTitle, StyledButton, StyledSection, StyledText } from "../../lib/Styling";
 
 const Contacts = ({ CONTACTS_URL, USERDATA_URL }) => {
   const dispatch = useDispatch();
@@ -37,8 +34,9 @@ const Contacts = ({ CONTACTS_URL, USERDATA_URL }) => {
     <>
       {!isLoading &&
         <StyledSection>
-          <StyledSubTitle>Contacts</StyledSubTitle>
-          <StyledText>This is where you can store your important contacts</StyledText>
+          <StyledTitle>Contacts</StyledTitle>
+          <StyledText>In this section, you can store your important contacts.</StyledText>
+          <StyledText>Your 2 latest emergency contacts are used in the Wallpaper tool.</StyledText>
           {!creationMode && <StyledButton onClick={toggleCreationMode}>Add</StyledButton>}
           <NavigationButton route="" label="Back" />
           {creationMode && <ContactRegistration toggleCreationMode={toggleCreationMode} CONTACTS_URL={CONTACTS_URL} />}

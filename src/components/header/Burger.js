@@ -5,6 +5,7 @@ import { StyledBurger } from "../../lib/Styling";
 const Burger = ({ open, setOpen }) => {
   return (
     <StyledBurger
+      aria-label="Menu"
       open={open}
       onClick={() => {
         setOpen(!open);

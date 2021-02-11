@@ -6,7 +6,7 @@ import { fetchUserData } from "../../reducers/reusable";
 
 import NavigationButton from "../buttons/NavigationButton";
 
-import { StyledSection, StyledSubTitle, StyledText } from "../../lib/Styling";
+import { StyledSection, StyledTitle, StyledText } from "../../lib/Styling";
 
 const Wallpaper = ({ USERDATA_URL, wallpaperStep, progressWallpaperProcess, reverseWallpaperProcess }) => {
   const dispatch = useDispatch();
@@ -27,11 +27,9 @@ const Wallpaper = ({ USERDATA_URL, wallpaperStep, progressWallpaperProcess, reve
 
   return (
     <StyledSection>
-      <StyledSubTitle>Wallpaper</StyledSubTitle>
-      <StyledText>In the Epilepsy App, you can create a wallpaper for your mobile phone.</StyledText>
-      <StyledText>This wallpaper will tell people that you are an epileptic and who to contact in case of seizure.</StyledText>
-      <StyledText>Click on Preview to generate a wallpaper image with your 2 most recent emergency contacts.</StyledText>
-      <StyledText>If you are satisfied with the preview, take a screen shot of the result. The image will be saved on your mobile phone, available to be used as wallpaper.</StyledText>
+      <StyledTitle>Wallpaper</StyledTitle>
+      <StyledText>In the Epilepsy App, you can create a wallpaper for your mobile phone. This wallpaper will tell people that you are an epileptic and who to contact in case of seizure.</StyledText>
+      <StyledText>Click on Preview to generate a wallpaper image with your 2 most recent emergency contacts. If you are satisfied with the preview, take a screen shot of the result. The image will be saved on your mobile phone, available to be used as wallpaper.</StyledText>
       <StyledText>Swipe back to this page when you are done to get back to the application.</StyledText>
       <NavigationButton route="wallpaper/preview" label="Preview" />
       <NavigationButton route="" label="Back" />

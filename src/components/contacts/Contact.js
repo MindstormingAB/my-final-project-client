@@ -7,8 +7,7 @@ import { useToggle } from "../../reducers/reusable";
 
 import ContactForm from "./ContactForm";
 
-import { StyledButton, StyledCard, StyledGrid } from "../../lib/Styling";
-import { StyledCardText } from "../../lib/Styling";
+import { StyledButton, StyledCard, StyledGrid, StyledCardLink, StyledCardText } from "../../lib/Styling";
 
 const Contact = ({ contact, CONTACTS_URL }) => {
   const dispatch = useDispatch()
@@ -37,6 +36,10 @@ const Contact = ({ contact, CONTACTS_URL }) => {
       });
   };
 
+  const callHandler = phoneNumber => {
+    window.open(`tel:${phoneNumber}`, "_self")
+  }
+
   return (
     <>
       {editMode
@@ -51,7 +54,7 @@ const Contact = ({ contact, CONTACTS_URL }) => {
               <StyledCardText left>Surname:</StyledCardText>
               <StyledCardText>{contact.contactSurname}</StyledCardText>
               <StyledCardText left>Phone Number:</StyledCardText>
-              <StyledCardText>{contact.contactPhoneNumber}</StyledCardText>
+              <StyledCardLink onClick={() => callHandler(contact.contactPhoneNumber)}>{contact.contactPhoneNumber}</StyledCardLink>
               <StyledCardText left>Relation:</StyledCardText>
               <StyledCardText>{contact.contactCategory}</StyledCardText>
             </StyledGrid>
