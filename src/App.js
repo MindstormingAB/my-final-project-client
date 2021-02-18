@@ -18,6 +18,7 @@ import Footer from "./components/Footer";
 import WallpaperFinal from "./components/wallpaper/WallpaperFinal";
 
 const BASE_URL = "https://ep-app-api.herokuapp.com/";
+// const BASE_URL = "http://localhost:8080/";
 const USERS_URL = `${BASE_URL}users`;
 const LOGIN_URL = `${BASE_URL}sessions`;
 const USERDATA_URL = `${BASE_URL}userdata`;

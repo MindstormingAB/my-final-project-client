@@ -37,6 +37,8 @@ const SeizureRegistration = ({ SEIZURES_URL, toggleCreationMode }) => {
             <StyledCardInput
               id="date"
               type="datetime-local"
+              placeholder="yyyy-mm-ddThh:mm"
+              pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}"
               value={date}
               onChange={event => setDate(event.target.value)} >
             </StyledCardInput>

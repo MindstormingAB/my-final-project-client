@@ -76,10 +76,10 @@ const ProfileForm = ({ USERDATA_URL, toggleEditMode }) => {
             Birth Date:
           </StyledCardLabel>
           <StyledCardInput
-            required
             id="birthdate"
-            minLength="2"
             type="date"
+            placeholder="yyyy-mm-dd"
+            pattern="\d{4}-\d{2}-\d{2}"
             value={birthDate}
             onChange={event => setBirthDate(event.target.value)} >
           </StyledCardInput>
