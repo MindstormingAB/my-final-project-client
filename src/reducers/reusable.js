@@ -103,27 +103,50 @@ export const updateProfile = (USERDATA_URL, localToken, localId, updatedProfile)
 export const registerSeizure = (SEIZURES_URL, localToken, localId, newSeizure) => {
   return (dispatch) => {
     dispatch(ui.actions.setLoading(true));
-    fetch(SEIZURES_URL, {
-      method: "POST",
-      body: JSON.stringify({
-        seizureDate: moment(newSeizure.date),
-        seizureLength: {
-          hours: newSeizure.lengthHours,
-          minutes: newSeizure.lengthMinutes,
-          seconds: newSeizure.lengthSeconds
-        },
-        seizureType: newSeizure.type,
-        seizureTrigger: newSeizure.trigger,
-        seizureComment: newSeizure.comment
-      }),
-      headers: { "Content-Type": "application/json", Authorization: localToken, userId: localId },
-    })
-      .then(response => response.json())
-      .then(json => {
-        dispatch(user.actions.addSeizure(json));
-        dispatch(ui.actions.setLoading(false));
+    if (newSeizure.date) {
+      fetch(SEIZURES_URL, {
+        method: "POST",
+        body: JSON.stringify({
+          seizureDate: moment(newSeizure.date),
+          seizureLength: {
+            hours: newSeizure.lengthHours,
+            minutes: newSeizure.lengthMinutes,
+            seconds: newSeizure.lengthSeconds
+          },
+          seizureType: newSeizure.type,
+          seizureTrigger: newSeizure.trigger,
+          seizureComment: newSeizure.comment
+        }),
+        headers: { "Content-Type": "application/json", Authorization: localToken, userId: localId },
       })
-      .catch(error => console.error(error));
+        .then(response => response.json())
+        .then(json => {
+          dispatch(user.actions.addSeizure(json));
+          dispatch(ui.actions.setLoading(false));
+        })
+        .catch(error => console.error(error));
+    } else {
+      fetch(SEIZURES_URL, {
+        method: "POST",
+        body: JSON.stringify({
+          seizureLength: {
+            hours: newSeizure.lengthHours,
+            minutes: newSeizure.lengthMinutes,
+            seconds: newSeizure.lengthSeconds
+          },
+          seizureType: newSeizure.type,
+          seizureTrigger: newSeizure.trigger,
+          seizureComment: newSeizure.comment
+        }),
+        headers: { "Content-Type": "application/json", Authorization: localToken, userId: localId },
+      })
+        .then(response => response.json())
+        .then(json => {
+          dispatch(user.actions.addSeizure(json));
+          dispatch(ui.actions.setLoading(false));
+        })
+        .catch(error => console.error(error));
+    }
   };
 };
 

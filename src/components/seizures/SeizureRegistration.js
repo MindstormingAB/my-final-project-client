@@ -33,10 +33,12 @@ const SeizureRegistration = ({ SEIZURES_URL, toggleCreationMode }) => {
           <StyledGrid>
             <StyledCardLabel htmlFor="date">
               Date:
-          </StyledCardLabel>
+            </StyledCardLabel>
             <StyledCardInput
               id="date"
               type="datetime-local"
+              placeholder="yyyy-mm-ddThh:mm"
+              pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}"
               value={date}
               onChange={event => setDate(event.target.value)} >
             </StyledCardInput>
