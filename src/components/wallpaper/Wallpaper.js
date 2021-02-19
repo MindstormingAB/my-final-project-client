@@ -8,7 +8,7 @@ import NavigationButton from "../buttons/NavigationButton";
 
 import { StyledSection, StyledTitle, StyledText } from "../../lib/Styling";
 
-const Wallpaper = ({ USERDATA_URL, wallpaperStep, progressWallpaperProcess, reverseWallpaperProcess }) => {
+const Wallpaper = ({ USERDATA_URL }) => {
   const dispatch = useDispatch();
   const history = useHistory();
   const localToken = localStorage.getItem("localToken");

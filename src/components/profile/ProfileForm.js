@@ -56,6 +56,7 @@ const ProfileForm = ({ USERDATA_URL, toggleEditMode }) => {
             First name:
           </StyledCardLabel>
           <StyledCardInput
+            required
             id="firstname"
             minLength="2"
             type="text"
@@ -66,6 +67,7 @@ const ProfileForm = ({ USERDATA_URL, toggleEditMode }) => {
             Surname:
           </StyledCardLabel>
           <StyledCardInput
+            required
             id="surname"
             minLength="2"
             type="text"
@@ -76,6 +78,7 @@ const ProfileForm = ({ USERDATA_URL, toggleEditMode }) => {
             Birth Date:
           </StyledCardLabel>
           <StyledCardInput
+            required
             id="birthdate"
             type="date"
             placeholder="yyyy-mm-dd"

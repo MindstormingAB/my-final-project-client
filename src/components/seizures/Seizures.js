@@ -9,7 +9,7 @@ import Seizure from "./Seizure";
 import SeizureRegistration from "./SeizureRegistration";
 import NavigationButton from "../buttons/NavigationButton";
 
-import { StyledTitle, StyledButton, StyledSection, StyledText } from "../../lib/Styling";
+import { StyledTitle, StyledButton, StyledSection, StyledText, StyledSmallText } from "../../lib/Styling";
 
 const Seizures = ({ SEIZURES_URL, USERDATA_URL }) => {
   const dispatch = useDispatch();
@@ -37,6 +37,7 @@ const Seizures = ({ SEIZURES_URL, USERDATA_URL }) => {
         <StyledSection>
           <StyledTitle>Seizures</StyledTitle>
           <StyledText>You can keep track of your seizures in this section.</StyledText>
+          <StyledSmallText>Some web browsers may not display a calender tool when you click on the date field. Here is a tip if you are using one of these browsers: leave the date blank when you register a new seizure, editing an existing date is easier than writing it.</StyledSmallText>
           {!creationMode && <StyledButton onClick={toggleCreationMode}>Add</StyledButton>}
           <NavigationButton route="" label="Back" />
           {creationMode && <SeizureRegistration toggleCreationMode={toggleCreationMode} SEIZURES_URL={SEIZURES_URL} />}

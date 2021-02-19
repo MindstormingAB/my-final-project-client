@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Provider } from "react-redux";
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
@@ -31,16 +31,6 @@ const reducer = combineReducers({
 const store = configureStore({ reducer });
 
 const App = () => {
-  const [wallpaperStep, setWallpaperStep] = useState(0);
-
-  const progressWallpaperProcess = () => {
-    setWallpaperStep(wallpaperStep + 1);
-  };
-
-  const reverseWallpaperProcess = () => {
-    setWallpaperStep(wallpaperStep - 1);
-  };
-
   return (
     <BrowserRouter>
       <Provider store={store}>
@@ -67,12 +57,7 @@ const App = () => {
             <LoaderPage />
           </Route>
           <Route path="/wallpaper" exact>
-            <Wallpaper
-              USERDATA_URL={USERDATA_URL}
-              wallpaperStep={wallpaperStep}
-              progressWallpaperProcess={progressWallpaperProcess}
-              reverseWallpaperProcess={reverseWallpaperProcess}
-            />
+            <Wallpaper USERDATA_URL={USERDATA_URL} />
           </Route>
           <Route path="/wallpaper/preview">
             <WallpaperFinal USERDATA_URL={USERDATA_URL} />

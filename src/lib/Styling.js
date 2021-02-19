@@ -137,6 +137,10 @@ export const StyledText = styled.p`
   text-align: center;
 `;
 
+export const StyledSmallText = styled(StyledText)`
+  font-size: 12px;
+`;
+
 export const StyledForm = styled.form`
   display: flex;
   flex-direction: column;

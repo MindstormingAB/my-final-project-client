@@ -1,70 +1,102 @@
-# Getting Started with Create React App
+# Final project - The Epilepsy App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+I built this application during the final sprint of the Technigo Bootcamp for frontend developers (fall 2020 edition). The purpose of this project was to wrap up everything I learnt during the program and to build one bigger application.
 
-## Available Scripts
+My son was diagnosed with epilepsy 8 years ago. He is still looking for an adapted treatment and our family is quite affected by the disease. We have been testing different apps in our try to identify seizure patterns but we have not found a tool that fits us yet.
 
-In the project directory, you can run:
+During the Technigo Bootcamp, I have come in contact with powerful techniques, frameworks and libraries and discovered a new world of possibilities. I'd like to use my new knowledge to develop the app epileptics need. This application is my first step in this journey.
 
-### `npm start`
+## What it does
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+In this application, you can:
+- register a new account
+- log in as an existing user
+- access your data after login/signup (as authorized user)
+- log out or reload your data in section Home
+- add, edit and delete seizure information in section Seizures
+- visualize the past week's epileptic activity in section Dashboard
+- add, edit, delete and call emergency and healthcare contacts in section Contacts
+- create a wallpaper for your mobile with your emergency contact information in section Wallpaper
+- log out
+- delete your account
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## The approach
 
-### `npm test`
+I started the project by created a backend, see https://github.com/MindstormingAB/my-final-project-server for more information.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+The following step consisted in creating the content in frontend.
 
-### `npm run build`
+I first created the different routes (using React Router) and their components:
+- `/` for login, signup, home page and reload function 
+- `/dashboard` for dashboard and diagram
+- `/seizures` for seizure registration, edition and deletion
+- `/contacts` for contact registration, edition and deletion
+- `/wallpaper` and `/wallpaper/preview` for the wallpaper tool
+- `/profile` for profile edition and account deletion
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+I created Styled Components for all recurrent design and stored them in `lib/Styling.js`, along with a color palette in `lib/constants.js`.
+The diagram in section Dashboard required some data manipulation and the usage of the Chart.js library and its React wrapper react-chartjs-2.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+I set up a Redux store to save the data fetched from the database with the [Epilepsy App's API](https://ep-app-api.herokuapp.com/) and wrote thunks for most of the fetches in `reducers/reusable.js`.
+In addition to the reducer `user.js`, I created the reducer `ui.js` to take care of the loading and wallpaper modes.
+Access token, user Id and first name are stored both in redux store and local storage for a better user experience. Access token and user Id are used in all requests to increase security level.
+I made sure that the data was fetched at signup/login and reload and updated in both Redux store and database when edited/added/deleted.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Then, I created an animated hamburger menu mainly based on React Router hook Navlink.
 
-### `npm run eject`
+Finally, I made a copy of this repository and converted it to a Progressive Web Application. See https://github.com/MindstormingAB/my-final-project-client-pwa for more information
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## Limitations
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+If I had more time, I would have:
+- added a seizure registration button in sections Home and Dashboard
+- solved the compatiblity issue with input fields date and datetime-local in MacOS Safari and Firefox in a better way (see description under Compatibility)
+- made the dashboard look better on desktops
+- made it possible to choose which emergency contacts to be displayed on wallpaper
+- added a section Medication
+- created different diagrams to choose between
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## Responsiveness
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Since the application is by nature aimed for mobile devices, it has been developed with a mobile first approach. Though the application is responsive "by default", its design is therefore more adapted for mobiles and tablets than for desktops. The responsiveness has been tested in dev tools in Safari, Chrome, Firefox and Edge: everything works as expected but the diagram looks better in taller windows.
 
-## Learn More
+## Compatiblity
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+The application has been tested in Chrome, iOS Safari, Edge, Firefox and MacOS Safari. It works overall as expected except for some input fields that are not cross-browser compatible:
+- datetime-local input field is rendered as a text box in Firefox and MacOS Safari. To overcome the problem, I added a pattern validation and a placeholder showing what format should be used in seizure form. In addition to that, a new seizure created without date and time will be stored with current time; it is easier to edit an existing seizure time than entering date and time manually from scratch.
+- date input field is rendered as a text box in MacOS Safari. To overcome the problem, I added a pattern validation and a placeholder showing what format should be used in profile form.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Accessibility
 
-### Code Splitting
+The application has been optimized for screen readers and gets an 96% accessibility score in LightHouse.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## Tech used
 
-### Analyzing the Bundle Size
+- [Create React App](https://github.com/facebook/create-react-app)
+- HTML5
+- CSS3
+- JavaScript ES6
+- React
+- Redux
+- React Router
+- Chart.js/react-chartjs-2
+- Styled components
+- Sweet Alert
+- Moment
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+On the backend side of the project (see https://github.com/MindstormingAB/my-final-project-server for more information):
+- Node.js
+- Express
+- MongoDB
+- Mongoose
+- bcrypt
+- CORS
+- express-list-endpoints
 
-### Making a Progressive Web App
+## View it live
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+This repository is located on https://github.com/MindstormingAB/my-final-project-client.
+You can take a look at the result on https://epilepsy-app.netlify.app/.
+The API can be found on https://ep-app-api.herokuapp.com/.
+There is also a Progressive Web App version on https://epilepsy-app-pwa.netlify.app/ and you can find more information about it on https://github.com/MindstormingAB/my-final-project-client-pwa. 
+Enjoy!
