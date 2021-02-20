@@ -44,7 +44,7 @@ I made sure that the data was fetched at signup/login and reload and updated in 
 
 Then, I created an animated hamburger menu mainly based on React Router hook Navlink.
 
-Finally, I made a copy of this repository and converted it to a Progressive Web Application. See https://github.com/MindstormingAB/my-final-project-client-pwa for more information
+Finally, I made a copy of this repository and converted it to a Progressive Web Application. See https://github.com/MindstormingAB/my-final-project-client-pwa for more information.
 
 ## Limitations
 
@@ -96,7 +96,11 @@ On the backend side of the project (see https://github.com/MindstormingAB/my-fin
 ## View it live
 
 This repository is located on https://github.com/MindstormingAB/my-final-project-client.
+
 You can take a look at the result on https://epilepsy-app.netlify.app/.
+
 The API can be found on https://ep-app-api.herokuapp.com/.
-There is also a Progressive Web App version on https://epilepsy-app-pwa.netlify.app/ and you can find more information about it on https://github.com/MindstormingAB/my-final-project-client-pwa. 
+
+There is also a Progressive Web App version on https://epilepsy-app-pwa.netlify.app/ and you can find more information about it on https://github.com/MindstormingAB/my-final-project-client-pwa.
+
 Enjoy!

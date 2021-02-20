@@ -43,6 +43,8 @@ export const storeUserProfile = (json) => {
     dispatch(user.actions.setFirstName({ firstName: json.firstName }));
     dispatch(user.actions.setSurname({ surname: json.surname }));
     dispatch(user.actions.setBirthDate({ birthDate: json.birthDate }));
+    dispatch(user.actions.setSeizureTypes({ seizureTypes: json.seizureTypes }));
+    dispatch(user.actions.setContactTypes({ contactTypes: json.contactTypes }));
   }
 };
 
